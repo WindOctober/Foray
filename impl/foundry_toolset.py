@@ -250,7 +250,7 @@ class LazyStorage:
             print(compiled_file)
             source_output = path.join(
                 ".cache",
-                compiled_file,
+                compiled_file['path'],
             )
             with open(source_output, "r") as f:
                 compile_output = json.load(f)
