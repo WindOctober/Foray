@@ -259,19 +259,12 @@ contract DiscoverTestBase is Test, BlockLoader {
     // }
 
     function test_gt() public {
-        // uint256 amt0 = 286731.0 ether;
-        // uint256 amt1 = 286730.93549271865 ether;
-        // uint256 amt2 = 15715.55428566465 ether;
-        // uint256 amt3 = 8272.55428566465 ether;
-        // uint256 amt4 = 287667.50893094507 ether ;
-        // uint256 amt5 = 287666.573438226 ether;
-
-        uint256 amt0 = 0x13f306a2409fc0000;
-        uint256 amt1 = 0x1314fb37062980000;
-        uint256 amt2 = 0x1ef397157d0304000;
-        uint256 amt3 = 0x168d28e3f0028000;
-        uint256 amt4 = 0x31032416fca78e000;
-        uint256 amt5 = 0x14d1120d7b1600000;
+        uint256 amt0 = 0x728bc400d8a064000;
+        uint256 amt1 = 0x727de34a24f900000;
+        uint256 amt2 = 0xb827516bda8b88000;
+        uint256 amt3 = 0xb748ccf2b1bbb0000;
+        uint256 amt4 = 0x72d5e5e0cd4d10000;
+        uint256 amt5 = 0x72e3bfa7259aa0000;
 
         vm.startPrank(attacker);
         vm.assume(amt5 >= amt0);
