@@ -125,7 +125,9 @@ contract HCTTest is Test, BlockLoader {
         emit log_string("");
     }
 
-    function attackGoal() public view returns (bool) {
+    function attackGoal() public returns (bool) {
+        emit log_named_uint("StartBalance", balanceOfwbnbattacker);
+        emit log_named_uint("FinalBalance", wbnb.balanceOf(attacker));
         return wbnb.balanceOf(attacker) >= 1e12 + balanceOfwbnbattacker;
     }
 
@@ -188,7 +190,7 @@ contract HCTTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_hct(amt1, amt2);
         swap_pair_attacker_hct_wbnb(amt3, amt4);
         payback_wbnb_owner(amt5);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -208,7 +210,7 @@ contract HCTTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_hct(amt2, amt3);
         swap_pair_attacker_hct_wbnb(amt4, amt5);
         payback_wbnb_owner(amt6);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -228,7 +230,7 @@ contract HCTTest is Test, BlockLoader {
         burn_hct_pair(amt3);
         swap_pair_attacker_hct_wbnb(amt4, amt5);
         payback_wbnb_owner(amt6);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -246,7 +248,7 @@ contract HCTTest is Test, BlockLoader {
         swap_pair_attacker_hct_wbnb(amt1, amt2);
         swap_pair_attacker_wbnb_hct(amt3, amt4);
         payback_hct_owner(amt5);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -266,7 +268,7 @@ contract HCTTest is Test, BlockLoader {
         swap_pair_attacker_hct_wbnb(amt2, amt3);
         swap_pair_attacker_wbnb_hct(amt4, amt5);
         payback_hct_owner(amt6);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -286,7 +288,7 @@ contract HCTTest is Test, BlockLoader {
         burn_hct_pair(amt3);
         swap_pair_attacker_wbnb_hct(amt4, amt5);
         payback_hct_owner(amt6);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -310,7 +312,7 @@ contract HCTTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_hct(amt5, amt6);
         swap_pair_attacker_hct_wbnb(amt7, amt8);
         payback_wbnb_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -336,7 +338,7 @@ contract HCTTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_hct(amt6, amt7);
         swap_pair_attacker_hct_wbnb(amt8, amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -362,7 +364,7 @@ contract HCTTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_hct(amt6, amt7);
         swap_pair_attacker_hct_wbnb(amt8, amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -388,7 +390,7 @@ contract HCTTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_hct(amt6, amt7);
         swap_pair_attacker_hct_wbnb(amt8, amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -414,7 +416,7 @@ contract HCTTest is Test, BlockLoader {
         burn_hct_pair(amt7);
         swap_pair_attacker_hct_wbnb(amt8, amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -438,7 +440,7 @@ contract HCTTest is Test, BlockLoader {
         swap_pair_attacker_hct_wbnb(amt5, amt6);
         swap_pair_attacker_wbnb_hct(amt7, amt8);
         payback_hct_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -464,7 +466,7 @@ contract HCTTest is Test, BlockLoader {
         swap_pair_attacker_hct_wbnb(amt6, amt7);
         swap_pair_attacker_wbnb_hct(amt8, amt9);
         payback_hct_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -490,7 +492,7 @@ contract HCTTest is Test, BlockLoader {
         swap_pair_attacker_hct_wbnb(amt6, amt7);
         swap_pair_attacker_wbnb_hct(amt8, amt9);
         payback_hct_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -516,7 +518,7 @@ contract HCTTest is Test, BlockLoader {
         swap_pair_attacker_hct_wbnb(amt6, amt7);
         swap_pair_attacker_wbnb_hct(amt8, amt9);
         payback_hct_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -542,7 +544,7 @@ contract HCTTest is Test, BlockLoader {
         burn_hct_pair(amt7);
         swap_pair_attacker_wbnb_hct(amt8, amt9);
         payback_hct_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -599,7 +601,7 @@ contract HCTTest is Test, BlockLoader {
         burn_hct_pair(amt3);
         swap_pair_attacker_hct_wbnb(amt4, amt5);
         payback_wbnb_owner(amt6);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 

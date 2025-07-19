@@ -201,7 +201,9 @@ contract SellTokenTestBase is Test, BlockLoader {
         emit log_string("");
     }
 
-    function attackGoal() public view returns (bool) {
+    function attackGoal() public returns (bool) {
+        emit log_named_uint("StartBalance", balanceOfwbnbattacker);
+        emit log_named_uint("FinalBalance", wbnb.balanceOf(attacker));
         return wbnb.balanceOf(attacker) >= 1e6 + balanceOfwbnbattacker;
     }
 
@@ -339,7 +341,7 @@ contract SellTokenTestBase is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt4, amt5);
         withdraw_srouter_sellc_wbnb(amt6);
         payback_wbnb_owner(amt7);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 

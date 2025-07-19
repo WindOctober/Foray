@@ -135,7 +135,9 @@ contract MUMUGTest is Test, BlockLoader {
         emit log_string("");
     }
 
-    function attackGoal() public view returns (bool) {
+    function attackGoal() public returns (bool) {
+        emit log_named_uint("StartBalance", balanceOfusdceattacker);
+        emit log_named_uint("FinalBalance", usdce.balanceOf(attacker));
         return usdce.balanceOf(attacker) >= 1e6 + balanceOfusdceattacker;
     }
 
@@ -221,7 +223,7 @@ contract MUMUGTest is Test, BlockLoader {
         swap_pair_attacker_usdce_mu(amt1, amt2);
         swap_pair_attacker_mu_usdce(amt3, amt4);
         payback_usdce_owner(amt5);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -239,7 +241,7 @@ contract MUMUGTest is Test, BlockLoader {
         swap_mubank_attacker_usdce_mu(amt1, amt2);
         swap_pair_attacker_mu_usdce(amt3, amt4);
         payback_usdce_owner(amt5);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -257,7 +259,7 @@ contract MUMUGTest is Test, BlockLoader {
         swap_pair_attacker_mu_usdce(amt1, amt2);
         swap_pair_attacker_usdce_mu(amt3, amt4);
         payback_mu_owner(amt5);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -278,7 +280,7 @@ contract MUMUGTest is Test, BlockLoader {
         swap_pair_attacker_usdce_mu(amt3, amt4);
         swap_mubank_attacker_usdce_mu(amt5, amt6);
         payback_mu_owner(amt7);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -296,7 +298,7 @@ contract MUMUGTest is Test, BlockLoader {
         swap_pair_attacker_mu_usdce(amt1, amt2);
         swap_mubank_attacker_usdce_mu(amt3, amt4);
         payback_mu_owner(amt5);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -317,7 +319,7 @@ contract MUMUGTest is Test, BlockLoader {
         swap_mubank_attacker_usdce_mu(amt3, amt4);
         swap_pair_attacker_usdce_mu(amt5, amt6);
         payback_mu_owner(amt7);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -341,7 +343,7 @@ contract MUMUGTest is Test, BlockLoader {
         swap_pair_attacker_usdce_mu(amt5, amt6);
         swap_pair_attacker_mu_usdce(amt7, amt8);
         payback_usdce_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -365,7 +367,7 @@ contract MUMUGTest is Test, BlockLoader {
         swap_mubank_attacker_usdce_mu(amt5, amt6);
         swap_pair_attacker_mu_usdce(amt7, amt8);
         payback_usdce_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -389,7 +391,7 @@ contract MUMUGTest is Test, BlockLoader {
         swap_pair_attacker_usdce_mu(amt5, amt6);
         swap_pair_attacker_mu_usdce(amt7, amt8);
         payback_usdce_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -413,7 +415,7 @@ contract MUMUGTest is Test, BlockLoader {
         swap_mubank_attacker_usdce_mu(amt5, amt6);
         swap_pair_attacker_mu_usdce(amt7, amt8);
         payback_usdce_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -437,7 +439,7 @@ contract MUMUGTest is Test, BlockLoader {
         swap_pair_attacker_mu_usdce(amt5, amt6);
         swap_pair_attacker_usdce_mu(amt7, amt8);
         payback_mu_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -464,7 +466,7 @@ contract MUMUGTest is Test, BlockLoader {
         swap_pair_attacker_usdce_mu(amt7, amt8);
         swap_mubank_attacker_usdce_mu(amt9, amt10);
         payback_mu_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -488,7 +490,7 @@ contract MUMUGTest is Test, BlockLoader {
         swap_pair_attacker_mu_usdce(amt5, amt6);
         swap_mubank_attacker_usdce_mu(amt7, amt8);
         payback_mu_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -512,7 +514,7 @@ contract MUMUGTest is Test, BlockLoader {
         swap_pair_attacker_mu_usdce(amt5, amt6);
         swap_pair_attacker_usdce_mu(amt7, amt8);
         payback_mu_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -536,7 +538,7 @@ contract MUMUGTest is Test, BlockLoader {
         swap_pair_attacker_mu_usdce(amt5, amt6);
         swap_mubank_attacker_usdce_mu(amt7, amt8);
         payback_mu_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -563,7 +565,7 @@ contract MUMUGTest is Test, BlockLoader {
         swap_mubank_attacker_usdce_mu(amt7, amt8);
         swap_pair_attacker_usdce_mu(amt9, amt10);
         payback_mu_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -601,7 +603,7 @@ contract MUMUGTest is Test, BlockLoader {
         swap_pair_attacker_mu_usdce(amt1, amt2);
         swap_mubank_attacker_usdce_mu(amt3, amt4);
         payback_mu_owner(amt5);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 

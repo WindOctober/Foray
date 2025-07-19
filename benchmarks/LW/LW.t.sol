@@ -137,7 +137,9 @@ contract LWTestBase is Test, BlockLoader {
         emit log_string("");
     }
 
-    function attackGoal() public view returns (bool) {
+    function attackGoal() public returns (bool) {
+        emit log_named_uint("StartBalance", balanceOfusdtattacker);
+        emit log_named_uint("FinalBalance", usdt.balanceOf(attacker));
         return usdt.balanceOf(attacker) >= 1e6 + balanceOfusdtattacker;
     }
 
@@ -244,7 +246,7 @@ contract LWTestBase is Test, BlockLoader {
         burn_lw_pair(amt3);
         swap_pair_attacker_lw_usdt(amt4, amt5);
         payback_usdt_owner(amt6);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 

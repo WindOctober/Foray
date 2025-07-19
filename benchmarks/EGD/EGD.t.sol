@@ -143,7 +143,9 @@ contract EGDTestBase is Test, BlockLoader {
         emit log_string("");
     }
 
-    function attackGoal() public view returns (bool) {
+    function attackGoal() public returns (bool) {
+        emit log_named_uint("StartBalance", balanceOfusdtattacker);
+        emit log_named_uint("FinalBalance", usdt.balanceOf(attacker));
         return usdt.balanceOf(attacker) >= 1e18 + balanceOfusdtattacker;
     }
 
@@ -274,7 +276,7 @@ contract EGDTestBase is Test, BlockLoader {
         payback_usdt_pair(amt4);
         swap_pair_attacker_egd_usdt(amt5, amt6);
         payback_usdt_owner(amt7);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 

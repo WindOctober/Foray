@@ -201,7 +201,9 @@ contract SellTokenTest is Test, BlockLoader {
         emit log_string("");
     }
 
-    function attackGoal() public view returns (bool) {
+    function attackGoal() public returns (bool) {
+        emit log_named_uint("StartBalance", balanceOfwbnbattacker);
+        emit log_named_uint("FinalBalance", wbnb.balanceOf(attacker));
         return wbnb.balanceOf(attacker) >= 1e6 + balanceOfwbnbattacker;
     }
 
@@ -280,7 +282,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt1, amt2);
         swap_pair_attacker_sellc_wbnb(amt3, amt4);
         payback_wbnb_owner(amt5);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -302,7 +304,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt2, amt3);
         swap_pair_attacker_sellc_wbnb(amt4, amt5);
         payback_wbnb_owner(amt6);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -324,7 +326,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt3);
         swap_pair_attacker_sellc_wbnb(amt4, amt5);
         payback_wbnb_owner(amt6);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -343,7 +345,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt1, amt2);
         withdraw_srouter_sellc_wbnb(amt3);
         payback_wbnb_owner(amt4);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -364,7 +366,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt2, amt3);
         withdraw_srouter_sellc_wbnb(amt4);
         payback_wbnb_owner(amt5);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -386,7 +388,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt3);
         swap_pair_attacker_sellc_wbnb(amt4, amt5);
         payback_wbnb_owner(amt6);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -405,7 +407,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt1);
         swap_pair_attacker_sellc_wbnb(amt2, amt3);
         payback_wbnb_owner(amt4);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -426,7 +428,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt2);
         swap_pair_attacker_sellc_wbnb(amt3, amt4);
         payback_wbnb_owner(amt5);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -444,7 +446,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt1);
         withdraw_srouter_sellc_wbnb(amt2);
         payback_wbnb_owner(amt3);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -465,7 +467,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt2, amt3);
         withdraw_srouter_sellc_wbnb(amt4);
         payback_wbnb_owner(amt5);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -486,7 +488,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt2, amt3);
         withdraw_srouter_sellc_wbnb(amt4);
         payback_wbnb_owner(amt5);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -507,7 +509,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt2);
         swap_pair_attacker_sellc_wbnb(amt3, amt4);
         payback_wbnb_owner(amt5);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -527,7 +529,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt1, amt2);
         swap_pair_attacker_wbnb_sellc(amt3, amt4);
         payback_sellc_owner(amt5);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -549,7 +551,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt2, amt3);
         swap_pair_attacker_wbnb_sellc(amt4, amt5);
         payback_sellc_owner(amt6);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -571,7 +573,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt3);
         swap_pair_attacker_wbnb_sellc(amt4, amt5);
         payback_sellc_owner(amt6);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -590,7 +592,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt1, amt2);
         deposit_srouter_wbnb_sellc(amt3);
         payback_sellc_owner(amt4);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -611,7 +613,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt2, amt3);
         deposit_srouter_wbnb_sellc(amt4);
         payback_sellc_owner(amt5);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -633,7 +635,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt3);
         swap_pair_attacker_wbnb_sellc(amt4, amt5);
         payback_sellc_owner(amt6);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -652,7 +654,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt1);
         swap_pair_attacker_wbnb_sellc(amt2, amt3);
         payback_sellc_owner(amt4);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -673,7 +675,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt2);
         swap_pair_attacker_wbnb_sellc(amt3, amt4);
         payback_sellc_owner(amt5);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -691,7 +693,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt1);
         deposit_srouter_wbnb_sellc(amt2);
         payback_sellc_owner(amt3);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -712,7 +714,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt2);
         swap_pair_attacker_wbnb_sellc(amt3, amt4);
         payback_sellc_owner(amt5);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -738,7 +740,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt5, amt6);
         swap_pair_attacker_sellc_wbnb(amt7, amt8);
         payback_wbnb_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -766,7 +768,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt6, amt7);
         swap_pair_attacker_sellc_wbnb(amt8, amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -794,7 +796,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt6, amt7);
         swap_pair_attacker_sellc_wbnb(amt8, amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -822,7 +824,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt6, amt7);
         swap_pair_attacker_sellc_wbnb(amt8, amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -850,7 +852,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt7);
         swap_pair_attacker_sellc_wbnb(amt8, amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -875,7 +877,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt5, amt6);
         withdraw_srouter_sellc_wbnb(amt7);
         payback_wbnb_owner(amt8);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -902,7 +904,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt6, amt7);
         withdraw_srouter_sellc_wbnb(amt8);
         payback_wbnb_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -929,7 +931,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt6, amt7);
         withdraw_srouter_sellc_wbnb(amt8);
         payback_wbnb_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -956,7 +958,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt6, amt7);
         withdraw_srouter_sellc_wbnb(amt8);
         payback_wbnb_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -981,7 +983,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt5);
         swap_pair_attacker_sellc_wbnb(amt6, amt7);
         payback_wbnb_owner(amt8);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -1008,7 +1010,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt6);
         swap_pair_attacker_sellc_wbnb(amt7, amt8);
         payback_wbnb_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -1035,7 +1037,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt6);
         swap_pair_attacker_sellc_wbnb(amt7, amt8);
         payback_wbnb_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -1062,7 +1064,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt6);
         swap_pair_attacker_sellc_wbnb(amt7, amt8);
         payback_wbnb_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -1086,7 +1088,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt5);
         withdraw_srouter_sellc_wbnb(amt6);
         payback_wbnb_owner(amt7);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -1112,7 +1114,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt6);
         withdraw_srouter_sellc_wbnb(amt7);
         payback_wbnb_owner(amt8);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -1138,7 +1140,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt6);
         withdraw_srouter_sellc_wbnb(amt7);
         payback_wbnb_owner(amt8);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -1165,7 +1167,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt6, amt7);
         withdraw_srouter_sellc_wbnb(amt8);
         payback_wbnb_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -1192,7 +1194,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt6, amt7);
         withdraw_srouter_sellc_wbnb(amt8);
         payback_wbnb_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -1217,7 +1219,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt4, amt5);
         swap_pair_attacker_sellc_wbnb(amt6, amt7);
         payback_wbnb_owner(amt8);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -1244,7 +1246,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt5, amt6);
         swap_pair_attacker_sellc_wbnb(amt7, amt8);
         payback_wbnb_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -1271,7 +1273,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt5, amt6);
         swap_pair_attacker_sellc_wbnb(amt7, amt8);
         payback_wbnb_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -1298,7 +1300,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt6);
         swap_pair_attacker_sellc_wbnb(amt7, amt8);
         payback_wbnb_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -1322,7 +1324,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt4, amt5);
         withdraw_srouter_sellc_wbnb(amt6);
         payback_wbnb_owner(amt7);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -1348,7 +1350,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt5, amt6);
         withdraw_srouter_sellc_wbnb(amt7);
         payback_wbnb_owner(amt8);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -1374,7 +1376,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt5, amt6);
         withdraw_srouter_sellc_wbnb(amt7);
         payback_wbnb_owner(amt8);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -1401,7 +1403,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt6);
         swap_pair_attacker_sellc_wbnb(amt7, amt8);
         payback_wbnb_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -1425,7 +1427,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt4);
         swap_pair_attacker_sellc_wbnb(amt5, amt6);
         payback_wbnb_owner(amt7);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -1451,7 +1453,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt5);
         swap_pair_attacker_sellc_wbnb(amt6, amt7);
         payback_wbnb_owner(amt8);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -1477,7 +1479,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt5);
         swap_pair_attacker_sellc_wbnb(amt6, amt7);
         payback_wbnb_owner(amt8);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -1500,7 +1502,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt4);
         withdraw_srouter_sellc_wbnb(amt5);
         payback_wbnb_owner(amt6);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -1525,7 +1527,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt5);
         withdraw_srouter_sellc_wbnb(amt6);
         payback_wbnb_owner(amt7);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -1551,7 +1553,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt5, amt6);
         withdraw_srouter_sellc_wbnb(amt7);
         payback_wbnb_owner(amt8);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -1577,7 +1579,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt5, amt6);
         withdraw_srouter_sellc_wbnb(amt7);
         payback_wbnb_owner(amt8);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -1603,7 +1605,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt5);
         swap_pair_attacker_sellc_wbnb(amt6, amt7);
         payback_wbnb_owner(amt8);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -1628,7 +1630,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt4, amt5);
         swap_pair_attacker_sellc_wbnb(amt6, amt7);
         payback_wbnb_owner(amt8);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -1655,7 +1657,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt5, amt6);
         swap_pair_attacker_sellc_wbnb(amt7, amt8);
         payback_wbnb_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -1682,7 +1684,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt5, amt6);
         swap_pair_attacker_sellc_wbnb(amt7, amt8);
         payback_wbnb_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -1709,7 +1711,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt6);
         swap_pair_attacker_sellc_wbnb(amt7, amt8);
         payback_wbnb_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -1733,7 +1735,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt4, amt5);
         withdraw_srouter_sellc_wbnb(amt6);
         payback_wbnb_owner(amt7);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -1759,7 +1761,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt5, amt6);
         withdraw_srouter_sellc_wbnb(amt7);
         payback_wbnb_owner(amt8);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -1785,7 +1787,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt5, amt6);
         withdraw_srouter_sellc_wbnb(amt7);
         payback_wbnb_owner(amt8);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -1809,7 +1811,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt4);
         swap_pair_attacker_sellc_wbnb(amt5, amt6);
         payback_wbnb_owner(amt7);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -1835,7 +1837,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt5);
         swap_pair_attacker_sellc_wbnb(amt6, amt7);
         payback_wbnb_owner(amt8);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -1861,7 +1863,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt5);
         swap_pair_attacker_sellc_wbnb(amt6, amt7);
         payback_wbnb_owner(amt8);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -1884,7 +1886,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt4);
         withdraw_srouter_sellc_wbnb(amt5);
         payback_wbnb_owner(amt6);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -1909,7 +1911,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt5);
         withdraw_srouter_sellc_wbnb(amt6);
         payback_wbnb_owner(amt7);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -1935,7 +1937,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt5, amt6);
         withdraw_srouter_sellc_wbnb(amt7);
         payback_wbnb_owner(amt8);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -1961,7 +1963,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt5, amt6);
         withdraw_srouter_sellc_wbnb(amt7);
         payback_wbnb_owner(amt8);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -1985,7 +1987,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt3, amt4);
         swap_pair_attacker_sellc_wbnb(amt5, amt6);
         payback_wbnb_owner(amt7);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -2012,7 +2014,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt5, amt6);
         swap_pair_attacker_sellc_wbnb(amt7, amt8);
         payback_wbnb_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -2039,7 +2041,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt5, amt6);
         swap_pair_attacker_sellc_wbnb(amt7, amt8);
         payback_wbnb_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -2065,7 +2067,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt4, amt5);
         swap_pair_attacker_sellc_wbnb(amt6, amt7);
         payback_wbnb_owner(amt8);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -2091,7 +2093,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt5);
         swap_pair_attacker_sellc_wbnb(amt6, amt7);
         payback_wbnb_owner(amt8);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -2114,7 +2116,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt3, amt4);
         withdraw_srouter_sellc_wbnb(amt5);
         payback_wbnb_owner(amt6);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -2140,7 +2142,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt5, amt6);
         withdraw_srouter_sellc_wbnb(amt7);
         payback_wbnb_owner(amt8);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -2166,7 +2168,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt5, amt6);
         withdraw_srouter_sellc_wbnb(amt7);
         payback_wbnb_owner(amt8);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -2191,7 +2193,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt4, amt5);
         withdraw_srouter_sellc_wbnb(amt6);
         payback_wbnb_owner(amt7);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -2217,7 +2219,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt5);
         swap_pair_attacker_sellc_wbnb(amt6, amt7);
         payback_wbnb_owner(amt8);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -2240,7 +2242,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt3);
         swap_pair_attacker_sellc_wbnb(amt4, amt5);
         payback_wbnb_owner(amt6);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -2266,7 +2268,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt5);
         swap_pair_attacker_sellc_wbnb(amt6, amt7);
         payback_wbnb_owner(amt8);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -2292,7 +2294,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt5);
         swap_pair_attacker_sellc_wbnb(amt6, amt7);
         payback_wbnb_owner(amt8);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -2317,7 +2319,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt4);
         swap_pair_attacker_sellc_wbnb(amt5, amt6);
         payback_wbnb_owner(amt7);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -2339,7 +2341,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt3);
         withdraw_srouter_sellc_wbnb(amt4);
         payback_wbnb_owner(amt5);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -2364,7 +2366,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt5);
         withdraw_srouter_sellc_wbnb(amt6);
         payback_wbnb_owner(amt7);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -2389,7 +2391,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt5);
         withdraw_srouter_sellc_wbnb(amt6);
         payback_wbnb_owner(amt7);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -2414,7 +2416,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt4, amt5);
         withdraw_srouter_sellc_wbnb(amt6);
         payback_wbnb_owner(amt7);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -2439,7 +2441,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt4, amt5);
         withdraw_srouter_sellc_wbnb(amt6);
         payback_wbnb_owner(amt7);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -2464,7 +2466,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt4);
         swap_pair_attacker_sellc_wbnb(amt5, amt6);
         payback_wbnb_owner(amt7);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -2490,7 +2492,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt5, amt6);
         swap_pair_attacker_wbnb_sellc(amt7, amt8);
         payback_sellc_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -2518,7 +2520,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt6, amt7);
         swap_pair_attacker_wbnb_sellc(amt8, amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -2546,7 +2548,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt6, amt7);
         swap_pair_attacker_wbnb_sellc(amt8, amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -2574,7 +2576,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt6, amt7);
         swap_pair_attacker_wbnb_sellc(amt8, amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -2602,7 +2604,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt7);
         swap_pair_attacker_wbnb_sellc(amt8, amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -2627,7 +2629,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt5, amt6);
         deposit_srouter_wbnb_sellc(amt7);
         payback_sellc_owner(amt8);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -2654,7 +2656,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt6, amt7);
         deposit_srouter_wbnb_sellc(amt8);
         payback_sellc_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -2681,7 +2683,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt6, amt7);
         deposit_srouter_wbnb_sellc(amt8);
         payback_sellc_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -2708,7 +2710,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt6, amt7);
         deposit_srouter_wbnb_sellc(amt8);
         payback_sellc_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -2733,7 +2735,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt5);
         swap_pair_attacker_wbnb_sellc(amt6, amt7);
         payback_sellc_owner(amt8);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -2760,7 +2762,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt6);
         swap_pair_attacker_wbnb_sellc(amt7, amt8);
         payback_sellc_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -2787,7 +2789,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt6);
         swap_pair_attacker_wbnb_sellc(amt7, amt8);
         payback_sellc_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -2814,7 +2816,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt6);
         swap_pair_attacker_wbnb_sellc(amt7, amt8);
         payback_sellc_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -2838,7 +2840,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt5);
         deposit_srouter_wbnb_sellc(amt6);
         payback_sellc_owner(amt7);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -2864,7 +2866,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt6);
         deposit_srouter_wbnb_sellc(amt7);
         payback_sellc_owner(amt8);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -2890,7 +2892,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt6);
         deposit_srouter_wbnb_sellc(amt7);
         payback_sellc_owner(amt8);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -2915,7 +2917,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt4, amt5);
         swap_pair_attacker_wbnb_sellc(amt6, amt7);
         payback_sellc_owner(amt8);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -2942,7 +2944,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt5, amt6);
         swap_pair_attacker_wbnb_sellc(amt7, amt8);
         payback_sellc_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -2969,7 +2971,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt5, amt6);
         swap_pair_attacker_wbnb_sellc(amt7, amt8);
         payback_sellc_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -2996,7 +2998,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt6);
         swap_pair_attacker_wbnb_sellc(amt7, amt8);
         payback_sellc_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -3020,7 +3022,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt4, amt5);
         deposit_srouter_wbnb_sellc(amt6);
         payback_sellc_owner(amt7);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -3046,7 +3048,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt5, amt6);
         deposit_srouter_wbnb_sellc(amt7);
         payback_sellc_owner(amt8);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -3072,7 +3074,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt5, amt6);
         deposit_srouter_wbnb_sellc(amt7);
         payback_sellc_owner(amt8);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -3099,7 +3101,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt6);
         swap_pair_attacker_wbnb_sellc(amt7, amt8);
         payback_sellc_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -3123,7 +3125,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt4);
         swap_pair_attacker_wbnb_sellc(amt5, amt6);
         payback_sellc_owner(amt7);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -3149,7 +3151,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt5);
         swap_pair_attacker_wbnb_sellc(amt6, amt7);
         payback_sellc_owner(amt8);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -3176,7 +3178,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt6);
         swap_pair_attacker_wbnb_sellc(amt7, amt8);
         payback_sellc_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -3203,7 +3205,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt6);
         swap_pair_attacker_wbnb_sellc(amt7, amt8);
         payback_sellc_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -3229,7 +3231,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt5);
         swap_pair_attacker_wbnb_sellc(amt6, amt7);
         payback_sellc_owner(amt8);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -3252,7 +3254,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt4);
         deposit_srouter_wbnb_sellc(amt5);
         payback_sellc_owner(amt6);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -3277,7 +3279,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt5);
         deposit_srouter_wbnb_sellc(amt6);
         payback_sellc_owner(amt7);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -3303,7 +3305,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt6);
         deposit_srouter_wbnb_sellc(amt7);
         payback_sellc_owner(amt8);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -3329,7 +3331,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt6);
         deposit_srouter_wbnb_sellc(amt7);
         payback_sellc_owner(amt8);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -3355,7 +3357,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt5);
         swap_pair_attacker_wbnb_sellc(amt6, amt7);
         payback_sellc_owner(amt8);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -3380,7 +3382,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt4, amt5);
         swap_pair_attacker_wbnb_sellc(amt6, amt7);
         payback_sellc_owner(amt8);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -3407,7 +3409,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt5, amt6);
         swap_pair_attacker_wbnb_sellc(amt7, amt8);
         payback_sellc_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -3434,7 +3436,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt5, amt6);
         swap_pair_attacker_wbnb_sellc(amt7, amt8);
         payback_sellc_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -3461,7 +3463,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt6);
         swap_pair_attacker_wbnb_sellc(amt7, amt8);
         payback_sellc_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -3485,7 +3487,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt4, amt5);
         deposit_srouter_wbnb_sellc(amt6);
         payback_sellc_owner(amt7);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -3511,7 +3513,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt5, amt6);
         deposit_srouter_wbnb_sellc(amt7);
         payback_sellc_owner(amt8);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -3537,7 +3539,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt5, amt6);
         deposit_srouter_wbnb_sellc(amt7);
         payback_sellc_owner(amt8);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -3561,7 +3563,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt4);
         swap_pair_attacker_wbnb_sellc(amt5, amt6);
         payback_sellc_owner(amt7);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -3587,7 +3589,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt5);
         swap_pair_attacker_wbnb_sellc(amt6, amt7);
         payback_sellc_owner(amt8);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -3613,7 +3615,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt5);
         swap_pair_attacker_wbnb_sellc(amt6, amt7);
         payback_sellc_owner(amt8);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -3636,7 +3638,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt4);
         deposit_srouter_wbnb_sellc(amt5);
         payback_sellc_owner(amt6);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -3661,7 +3663,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt5);
         deposit_srouter_wbnb_sellc(amt6);
         payback_sellc_owner(amt7);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -3685,7 +3687,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt3, amt4);
         swap_pair_attacker_wbnb_sellc(amt5, amt6);
         payback_sellc_owner(amt7);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -3711,7 +3713,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt4, amt5);
         swap_pair_attacker_wbnb_sellc(amt6, amt7);
         payback_sellc_owner(amt8);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -3737,7 +3739,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt5);
         swap_pair_attacker_wbnb_sellc(amt6, amt7);
         payback_sellc_owner(amt8);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -3760,7 +3762,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt3, amt4);
         deposit_srouter_wbnb_sellc(amt5);
         payback_sellc_owner(amt6);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -3785,7 +3787,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt4, amt5);
         deposit_srouter_wbnb_sellc(amt6);
         payback_sellc_owner(amt7);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -3811,7 +3813,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt5);
         swap_pair_attacker_wbnb_sellc(amt6, amt7);
         payback_sellc_owner(amt8);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -3834,7 +3836,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt3);
         swap_pair_attacker_wbnb_sellc(amt4, amt5);
         payback_sellc_owner(amt6);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -3860,7 +3862,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt5);
         swap_pair_attacker_wbnb_sellc(amt6, amt7);
         payback_sellc_owner(amt8);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -3886,7 +3888,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt5);
         swap_pair_attacker_wbnb_sellc(amt6, amt7);
         payback_sellc_owner(amt8);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -3911,7 +3913,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt4);
         swap_pair_attacker_wbnb_sellc(amt5, amt6);
         payback_sellc_owner(amt7);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -3933,7 +3935,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt3);
         deposit_srouter_wbnb_sellc(amt4);
         payback_sellc_owner(amt5);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -3958,7 +3960,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt5);
         deposit_srouter_wbnb_sellc(amt6);
         payback_sellc_owner(amt7);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -3983,7 +3985,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt5);
         deposit_srouter_wbnb_sellc(amt6);
         payback_sellc_owner(amt7);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -4008,7 +4010,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt4);
         swap_pair_attacker_wbnb_sellc(amt5, amt6);
         payback_sellc_owner(amt7);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -4038,7 +4040,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt9);
         withdraw_srouter_sellc_wbnb(amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -4068,7 +4070,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt8, amt9);
         withdraw_srouter_sellc_wbnb(amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -4098,7 +4100,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt8);
         swap_pair_attacker_sellc_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -4127,7 +4129,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt8);
         withdraw_srouter_sellc_wbnb(amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -4158,7 +4160,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt9);
         withdraw_srouter_sellc_wbnb(amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -4189,7 +4191,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt9);
         withdraw_srouter_sellc_wbnb(amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -4220,7 +4222,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt9);
         withdraw_srouter_sellc_wbnb(amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -4250,7 +4252,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt8, amt9);
         withdraw_srouter_sellc_wbnb(amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -4280,7 +4282,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt8);
         swap_pair_attacker_sellc_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -4309,7 +4311,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt8);
         withdraw_srouter_sellc_wbnb(amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -4340,7 +4342,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt9);
         withdraw_srouter_sellc_wbnb(amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -4371,7 +4373,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt9);
         withdraw_srouter_sellc_wbnb(amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -4402,7 +4404,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt9);
         withdraw_srouter_sellc_wbnb(amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -4432,7 +4434,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt7, amt8);
         swap_pair_attacker_sellc_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -4461,7 +4463,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt7, amt8);
         withdraw_srouter_sellc_wbnb(amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -4492,7 +4494,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt8, amt9);
         withdraw_srouter_sellc_wbnb(amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -4523,7 +4525,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt8, amt9);
         withdraw_srouter_sellc_wbnb(amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -4554,7 +4556,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt8, amt9);
         withdraw_srouter_sellc_wbnb(amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -4583,7 +4585,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt7);
         swap_pair_attacker_sellc_wbnb(amt8, amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -4614,7 +4616,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt8);
         swap_pair_attacker_sellc_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -4645,7 +4647,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt8);
         swap_pair_attacker_sellc_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -4676,7 +4678,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         swap_pair_attacker_sellc_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -4704,7 +4706,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt7);
         withdraw_srouter_sellc_wbnb(amt8);
         payback_wbnb_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -4734,7 +4736,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt8);
         withdraw_srouter_sellc_wbnb(amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -4764,7 +4766,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt8);
         withdraw_srouter_sellc_wbnb(amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -4795,7 +4797,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt9);
         withdraw_srouter_sellc_wbnb(amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -4826,7 +4828,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt9);
         withdraw_srouter_sellc_wbnb(amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -4857,7 +4859,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt8, amt9);
         withdraw_srouter_sellc_wbnb(amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -4888,7 +4890,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt8, amt9);
         withdraw_srouter_sellc_wbnb(amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -4918,7 +4920,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt8, amt9);
         withdraw_srouter_sellc_wbnb(amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -4948,7 +4950,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt8);
         swap_pair_attacker_sellc_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -4977,7 +4979,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt8);
         withdraw_srouter_sellc_wbnb(amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -5008,7 +5010,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt9);
         withdraw_srouter_sellc_wbnb(amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -5039,7 +5041,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt9);
         withdraw_srouter_sellc_wbnb(amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -5070,7 +5072,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt9);
         withdraw_srouter_sellc_wbnb(amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -5100,7 +5102,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt7, amt8);
         swap_pair_attacker_sellc_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -5129,7 +5131,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt7, amt8);
         withdraw_srouter_sellc_wbnb(amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -5160,7 +5162,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt8, amt9);
         withdraw_srouter_sellc_wbnb(amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -5191,7 +5193,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt8, amt9);
         withdraw_srouter_sellc_wbnb(amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -5222,7 +5224,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt8, amt9);
         withdraw_srouter_sellc_wbnb(amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -5251,7 +5253,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt7);
         swap_pair_attacker_sellc_wbnb(amt8, amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -5282,7 +5284,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt8);
         swap_pair_attacker_sellc_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -5313,7 +5315,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt8);
         swap_pair_attacker_sellc_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -5344,7 +5346,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         swap_pair_attacker_sellc_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -5372,7 +5374,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt7);
         withdraw_srouter_sellc_wbnb(amt8);
         payback_wbnb_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -5402,7 +5404,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt8);
         withdraw_srouter_sellc_wbnb(amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -5432,7 +5434,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt8);
         withdraw_srouter_sellc_wbnb(amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -5463,7 +5465,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt8, amt9);
         withdraw_srouter_sellc_wbnb(amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -5494,7 +5496,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt8, amt9);
         withdraw_srouter_sellc_wbnb(amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -5525,7 +5527,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         swap_pair_attacker_sellc_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -5555,7 +5557,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt7, amt8);
         swap_pair_attacker_sellc_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -5584,7 +5586,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt7, amt8);
         withdraw_srouter_sellc_wbnb(amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -5615,7 +5617,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt8, amt9);
         withdraw_srouter_sellc_wbnb(amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -5646,7 +5648,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt8, amt9);
         withdraw_srouter_sellc_wbnb(amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -5677,7 +5679,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt8, amt9);
         withdraw_srouter_sellc_wbnb(amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -5706,7 +5708,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt7);
         swap_pair_attacker_sellc_wbnb(amt8, amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -5737,7 +5739,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt8);
         swap_pair_attacker_sellc_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -5768,7 +5770,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt8);
         swap_pair_attacker_sellc_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -5799,7 +5801,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         swap_pair_attacker_sellc_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -5827,7 +5829,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt7);
         withdraw_srouter_sellc_wbnb(amt8);
         payback_wbnb_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -5857,7 +5859,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt8);
         withdraw_srouter_sellc_wbnb(amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -5887,7 +5889,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt8);
         withdraw_srouter_sellc_wbnb(amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -5918,7 +5920,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt8, amt9);
         withdraw_srouter_sellc_wbnb(amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -5949,7 +5951,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt8, amt9);
         withdraw_srouter_sellc_wbnb(amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -5978,7 +5980,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt6, amt7);
         swap_pair_attacker_sellc_wbnb(amt8, amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -6009,7 +6011,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt7, amt8);
         swap_pair_attacker_sellc_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -6040,7 +6042,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt7, amt8);
         swap_pair_attacker_sellc_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -6071,7 +6073,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         swap_pair_attacker_sellc_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -6099,7 +6101,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt6, amt7);
         withdraw_srouter_sellc_wbnb(amt8);
         payback_wbnb_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -6129,7 +6131,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt7, amt8);
         withdraw_srouter_sellc_wbnb(amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -6160,7 +6162,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt8, amt9);
         withdraw_srouter_sellc_wbnb(amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -6191,7 +6193,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt8, amt9);
         withdraw_srouter_sellc_wbnb(amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -6221,7 +6223,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt7, amt8);
         withdraw_srouter_sellc_wbnb(amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -6252,7 +6254,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         swap_pair_attacker_sellc_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -6280,7 +6282,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt6);
         swap_pair_attacker_sellc_wbnb(amt7, amt8);
         payback_wbnb_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -6310,7 +6312,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt7);
         swap_pair_attacker_sellc_wbnb(amt8, amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -6341,7 +6343,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt8);
         swap_pair_attacker_sellc_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -6372,7 +6374,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt8);
         swap_pair_attacker_sellc_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -6402,7 +6404,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt7);
         swap_pair_attacker_sellc_wbnb(amt8, amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -6429,7 +6431,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt6);
         withdraw_srouter_sellc_wbnb(amt7);
         payback_wbnb_owner(amt8);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -6458,7 +6460,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt7);
         withdraw_srouter_sellc_wbnb(amt8);
         payback_wbnb_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -6488,7 +6490,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt8);
         withdraw_srouter_sellc_wbnb(amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -6518,7 +6520,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt8);
         withdraw_srouter_sellc_wbnb(amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -6548,7 +6550,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt7, amt8);
         withdraw_srouter_sellc_wbnb(amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -6578,7 +6580,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt7, amt8);
         withdraw_srouter_sellc_wbnb(amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -6608,7 +6610,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt7);
         swap_pair_attacker_sellc_wbnb(amt8, amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -6638,7 +6640,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt8, amt9);
         withdraw_srouter_sellc_wbnb(amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -6668,7 +6670,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt8);
         swap_pair_attacker_sellc_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -6697,7 +6699,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt8);
         withdraw_srouter_sellc_wbnb(amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -6728,7 +6730,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt9);
         withdraw_srouter_sellc_wbnb(amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -6759,7 +6761,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt9);
         withdraw_srouter_sellc_wbnb(amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -6790,7 +6792,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt9);
         withdraw_srouter_sellc_wbnb(amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -6820,7 +6822,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt7, amt8);
         swap_pair_attacker_sellc_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -6849,7 +6851,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt7, amt8);
         withdraw_srouter_sellc_wbnb(amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -6880,7 +6882,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt8, amt9);
         withdraw_srouter_sellc_wbnb(amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -6911,7 +6913,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt8, amt9);
         withdraw_srouter_sellc_wbnb(amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -6942,7 +6944,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt8, amt9);
         withdraw_srouter_sellc_wbnb(amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -6971,7 +6973,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt7);
         swap_pair_attacker_sellc_wbnb(amt8, amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -7002,7 +7004,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt8);
         swap_pair_attacker_sellc_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -7033,7 +7035,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt8);
         swap_pair_attacker_sellc_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -7064,7 +7066,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         swap_pair_attacker_sellc_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -7092,7 +7094,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt7);
         withdraw_srouter_sellc_wbnb(amt8);
         payback_wbnb_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -7122,7 +7124,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt8);
         withdraw_srouter_sellc_wbnb(amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -7152,7 +7154,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt8);
         withdraw_srouter_sellc_wbnb(amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -7183,7 +7185,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt8, amt9);
         withdraw_srouter_sellc_wbnb(amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -7214,7 +7216,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt8, amt9);
         withdraw_srouter_sellc_wbnb(amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -7244,7 +7246,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt7, amt8);
         swap_pair_attacker_sellc_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -7273,7 +7275,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt7, amt8);
         withdraw_srouter_sellc_wbnb(amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -7304,7 +7306,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt8, amt9);
         withdraw_srouter_sellc_wbnb(amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -7335,7 +7337,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt8, amt9);
         withdraw_srouter_sellc_wbnb(amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -7366,7 +7368,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt8, amt9);
         withdraw_srouter_sellc_wbnb(amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -7395,7 +7397,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt7);
         swap_pair_attacker_sellc_wbnb(amt8, amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -7426,7 +7428,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt8);
         swap_pair_attacker_sellc_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -7457,7 +7459,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt8);
         swap_pair_attacker_sellc_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -7488,7 +7490,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         swap_pair_attacker_sellc_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -7516,7 +7518,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt7);
         withdraw_srouter_sellc_wbnb(amt8);
         payback_wbnb_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -7546,7 +7548,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt8);
         withdraw_srouter_sellc_wbnb(amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -7576,7 +7578,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt8);
         withdraw_srouter_sellc_wbnb(amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -7607,7 +7609,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt8, amt9);
         withdraw_srouter_sellc_wbnb(amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -7638,7 +7640,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt8, amt9);
         withdraw_srouter_sellc_wbnb(amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -7667,7 +7669,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt6, amt7);
         swap_pair_attacker_sellc_wbnb(amt8, amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -7698,7 +7700,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt7, amt8);
         swap_pair_attacker_sellc_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -7729,7 +7731,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt7, amt8);
         swap_pair_attacker_sellc_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -7760,7 +7762,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         swap_pair_attacker_sellc_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -7788,7 +7790,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt6, amt7);
         withdraw_srouter_sellc_wbnb(amt8);
         payback_wbnb_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -7818,7 +7820,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt7, amt8);
         withdraw_srouter_sellc_wbnb(amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -7849,7 +7851,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt8, amt9);
         withdraw_srouter_sellc_wbnb(amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -7880,7 +7882,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt8, amt9);
         withdraw_srouter_sellc_wbnb(amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -7910,7 +7912,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt7, amt8);
         withdraw_srouter_sellc_wbnb(amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -7938,7 +7940,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt6);
         swap_pair_attacker_sellc_wbnb(amt7, amt8);
         payback_wbnb_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -7968,7 +7970,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt7);
         swap_pair_attacker_sellc_wbnb(amt8, amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -7999,7 +8001,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt8);
         swap_pair_attacker_sellc_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -8030,7 +8032,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt8);
         swap_pair_attacker_sellc_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -8060,7 +8062,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt7);
         swap_pair_attacker_sellc_wbnb(amt8, amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -8087,7 +8089,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt6);
         withdraw_srouter_sellc_wbnb(amt7);
         payback_wbnb_owner(amt8);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -8116,7 +8118,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt7);
         withdraw_srouter_sellc_wbnb(amt8);
         payback_wbnb_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -8146,7 +8148,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt8);
         withdraw_srouter_sellc_wbnb(amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -8176,7 +8178,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt8);
         withdraw_srouter_sellc_wbnb(amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -8206,7 +8208,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt7, amt8);
         withdraw_srouter_sellc_wbnb(amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -8236,7 +8238,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt7, amt8);
         withdraw_srouter_sellc_wbnb(amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -8266,7 +8268,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt7, amt8);
         swap_pair_attacker_sellc_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -8295,7 +8297,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt7, amt8);
         withdraw_srouter_sellc_wbnb(amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -8326,7 +8328,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt8, amt9);
         withdraw_srouter_sellc_wbnb(amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -8357,7 +8359,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt8, amt9);
         withdraw_srouter_sellc_wbnb(amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -8388,7 +8390,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt8, amt9);
         withdraw_srouter_sellc_wbnb(amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -8417,7 +8419,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt7);
         swap_pair_attacker_sellc_wbnb(amt8, amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -8448,7 +8450,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt8);
         swap_pair_attacker_sellc_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -8479,7 +8481,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt8);
         swap_pair_attacker_sellc_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -8510,7 +8512,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         swap_pair_attacker_sellc_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -8538,7 +8540,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt7);
         withdraw_srouter_sellc_wbnb(amt8);
         payback_wbnb_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -8569,7 +8571,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt9);
         withdraw_srouter_sellc_wbnb(amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -8600,7 +8602,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt9);
         withdraw_srouter_sellc_wbnb(amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -8630,7 +8632,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt8);
         withdraw_srouter_sellc_wbnb(amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -8660,7 +8662,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt8);
         withdraw_srouter_sellc_wbnb(amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -8691,7 +8693,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt8, amt9);
         withdraw_srouter_sellc_wbnb(amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -8722,7 +8724,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt8, amt9);
         withdraw_srouter_sellc_wbnb(amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -8751,7 +8753,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt6, amt7);
         swap_pair_attacker_sellc_wbnb(amt8, amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -8782,7 +8784,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt7, amt8);
         swap_pair_attacker_sellc_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -8813,7 +8815,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt7, amt8);
         swap_pair_attacker_sellc_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -8844,7 +8846,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         swap_pair_attacker_sellc_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -8872,7 +8874,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt6, amt7);
         withdraw_srouter_sellc_wbnb(amt8);
         payback_wbnb_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -8903,7 +8905,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt8, amt9);
         withdraw_srouter_sellc_wbnb(amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -8934,7 +8936,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt8, amt9);
         withdraw_srouter_sellc_wbnb(amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -8964,7 +8966,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt7, amt8);
         withdraw_srouter_sellc_wbnb(amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -8994,7 +8996,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt7, amt8);
         withdraw_srouter_sellc_wbnb(amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -9025,7 +9027,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         swap_pair_attacker_sellc_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -9053,7 +9055,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt6);
         swap_pair_attacker_sellc_wbnb(amt7, amt8);
         payback_wbnb_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -9084,7 +9086,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt8);
         swap_pair_attacker_sellc_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -9115,7 +9117,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt8);
         swap_pair_attacker_sellc_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -9145,7 +9147,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt7);
         swap_pair_attacker_sellc_wbnb(amt8, amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -9175,7 +9177,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt7);
         swap_pair_attacker_sellc_wbnb(amt8, amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -9202,7 +9204,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt6);
         withdraw_srouter_sellc_wbnb(amt7);
         payback_wbnb_owner(amt8);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -9232,7 +9234,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt8);
         withdraw_srouter_sellc_wbnb(amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -9262,7 +9264,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt8);
         withdraw_srouter_sellc_wbnb(amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -9291,7 +9293,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt7);
         withdraw_srouter_sellc_wbnb(amt8);
         payback_wbnb_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -9321,7 +9323,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt7, amt8);
         withdraw_srouter_sellc_wbnb(amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -9351,7 +9353,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt7, amt8);
         withdraw_srouter_sellc_wbnb(amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -9381,7 +9383,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt7);
         swap_pair_attacker_sellc_wbnb(amt8, amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -9410,7 +9412,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt6, amt7);
         swap_pair_attacker_sellc_wbnb(amt8, amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -9441,7 +9443,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt7, amt8);
         swap_pair_attacker_sellc_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -9472,7 +9474,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt7, amt8);
         swap_pair_attacker_sellc_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -9503,7 +9505,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         swap_pair_attacker_sellc_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -9531,7 +9533,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt6, amt7);
         withdraw_srouter_sellc_wbnb(amt8);
         payback_wbnb_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -9562,7 +9564,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt8, amt9);
         withdraw_srouter_sellc_wbnb(amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -9593,7 +9595,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt8, amt9);
         withdraw_srouter_sellc_wbnb(amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -9623,7 +9625,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt7, amt8);
         withdraw_srouter_sellc_wbnb(amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -9653,7 +9655,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt7, amt8);
         withdraw_srouter_sellc_wbnb(amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -9681,7 +9683,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt6);
         swap_pair_attacker_sellc_wbnb(amt7, amt8);
         payback_wbnb_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -9712,7 +9714,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt8);
         swap_pair_attacker_sellc_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -9743,7 +9745,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt8);
         swap_pair_attacker_sellc_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -9773,7 +9775,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt7);
         swap_pair_attacker_sellc_wbnb(amt8, amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -9803,7 +9805,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt7);
         swap_pair_attacker_sellc_wbnb(amt8, amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -9830,7 +9832,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt6);
         withdraw_srouter_sellc_wbnb(amt7);
         payback_wbnb_owner(amt8);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -9860,7 +9862,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt8);
         withdraw_srouter_sellc_wbnb(amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -9890,7 +9892,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt8);
         withdraw_srouter_sellc_wbnb(amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -9919,7 +9921,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt7);
         withdraw_srouter_sellc_wbnb(amt8);
         payback_wbnb_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -9949,7 +9951,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt7, amt8);
         withdraw_srouter_sellc_wbnb(amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -9979,7 +9981,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt7, amt8);
         withdraw_srouter_sellc_wbnb(amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -10007,7 +10009,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt5, amt6);
         swap_pair_attacker_sellc_wbnb(amt7, amt8);
         payback_wbnb_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -10038,7 +10040,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt7, amt8);
         swap_pair_attacker_sellc_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -10069,7 +10071,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt7, amt8);
         swap_pair_attacker_sellc_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -10100,7 +10102,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt7, amt8);
         swap_pair_attacker_sellc_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -10131,7 +10133,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt7, amt8);
         swap_pair_attacker_sellc_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -10161,7 +10163,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt6, amt7);
         swap_pair_attacker_sellc_wbnb(amt8, amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -10191,7 +10193,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt7);
         swap_pair_attacker_sellc_wbnb(amt8, amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -10218,7 +10220,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt5, amt6);
         withdraw_srouter_sellc_wbnb(amt7);
         payback_wbnb_owner(amt8);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -10248,7 +10250,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt7, amt8);
         withdraw_srouter_sellc_wbnb(amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -10278,7 +10280,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt7, amt8);
         withdraw_srouter_sellc_wbnb(amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -10308,7 +10310,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt7, amt8);
         withdraw_srouter_sellc_wbnb(amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -10338,7 +10340,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt7, amt8);
         withdraw_srouter_sellc_wbnb(amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -10367,7 +10369,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt6, amt7);
         withdraw_srouter_sellc_wbnb(amt8);
         payback_wbnb_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -10397,7 +10399,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt7);
         swap_pair_attacker_sellc_wbnb(amt8, amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -10424,7 +10426,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt5);
         swap_pair_attacker_sellc_wbnb(amt6, amt7);
         payback_wbnb_owner(amt8);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -10454,7 +10456,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt7);
         swap_pair_attacker_sellc_wbnb(amt8, amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -10484,7 +10486,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt7);
         swap_pair_attacker_sellc_wbnb(amt8, amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -10514,7 +10516,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt7);
         swap_pair_attacker_sellc_wbnb(amt8, amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -10544,7 +10546,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt7);
         swap_pair_attacker_sellc_wbnb(amt8, amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -10573,7 +10575,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt6);
         swap_pair_attacker_sellc_wbnb(amt7, amt8);
         payback_wbnb_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -10599,7 +10601,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt5);
         withdraw_srouter_sellc_wbnb(amt6);
         payback_wbnb_owner(amt7);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -10628,7 +10630,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt7);
         withdraw_srouter_sellc_wbnb(amt8);
         payback_wbnb_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -10657,7 +10659,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt7);
         withdraw_srouter_sellc_wbnb(amt8);
         payback_wbnb_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -10686,7 +10688,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt7);
         withdraw_srouter_sellc_wbnb(amt8);
         payback_wbnb_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -10715,7 +10717,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt7);
         withdraw_srouter_sellc_wbnb(amt8);
         payback_wbnb_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -10744,7 +10746,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt6, amt7);
         withdraw_srouter_sellc_wbnb(amt8);
         payback_wbnb_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -10773,7 +10775,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sellc(amt6, amt7);
         withdraw_srouter_sellc_wbnb(amt8);
         payback_wbnb_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -10802,7 +10804,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt6);
         swap_pair_attacker_sellc_wbnb(amt7, amt8);
         payback_wbnb_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -10832,7 +10834,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt9);
         deposit_srouter_wbnb_sellc(amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -10862,7 +10864,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt8, amt9);
         deposit_srouter_wbnb_sellc(amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -10892,7 +10894,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         swap_pair_attacker_wbnb_sellc(amt9, amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -10921,7 +10923,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         deposit_srouter_wbnb_sellc(amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -10952,7 +10954,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt9);
         deposit_srouter_wbnb_sellc(amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -10983,7 +10985,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt9);
         deposit_srouter_wbnb_sellc(amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -11014,7 +11016,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt9);
         deposit_srouter_wbnb_sellc(amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -11044,7 +11046,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt8, amt9);
         deposit_srouter_wbnb_sellc(amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -11074,7 +11076,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         swap_pair_attacker_wbnb_sellc(amt9, amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -11103,7 +11105,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         deposit_srouter_wbnb_sellc(amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -11134,7 +11136,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt9);
         deposit_srouter_wbnb_sellc(amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -11165,7 +11167,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt9);
         deposit_srouter_wbnb_sellc(amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -11196,7 +11198,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt9);
         deposit_srouter_wbnb_sellc(amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -11226,7 +11228,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt7, amt8);
         swap_pair_attacker_wbnb_sellc(amt9, amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -11255,7 +11257,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt7, amt8);
         deposit_srouter_wbnb_sellc(amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -11286,7 +11288,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt8, amt9);
         deposit_srouter_wbnb_sellc(amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -11317,7 +11319,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt8, amt9);
         deposit_srouter_wbnb_sellc(amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -11348,7 +11350,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt8, amt9);
         deposit_srouter_wbnb_sellc(amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -11377,7 +11379,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt7);
         swap_pair_attacker_wbnb_sellc(amt8, amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -11408,7 +11410,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         swap_pair_attacker_wbnb_sellc(amt9, amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -11439,7 +11441,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         swap_pair_attacker_wbnb_sellc(amt9, amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -11470,7 +11472,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         swap_pair_attacker_wbnb_sellc(amt9, amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -11498,7 +11500,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt7);
         deposit_srouter_wbnb_sellc(amt8);
         payback_sellc_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -11528,7 +11530,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         deposit_srouter_wbnb_sellc(amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -11558,7 +11560,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         deposit_srouter_wbnb_sellc(amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -11589,7 +11591,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt9);
         deposit_srouter_wbnb_sellc(amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -11620,7 +11622,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt9);
         deposit_srouter_wbnb_sellc(amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -11650,7 +11652,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt8, amt9);
         deposit_srouter_wbnb_sellc(amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -11680,7 +11682,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         swap_pair_attacker_wbnb_sellc(amt9, amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -11709,7 +11711,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         deposit_srouter_wbnb_sellc(amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -11740,7 +11742,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt9);
         deposit_srouter_wbnb_sellc(amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -11771,7 +11773,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt9);
         deposit_srouter_wbnb_sellc(amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -11802,7 +11804,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt9);
         deposit_srouter_wbnb_sellc(amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -11832,7 +11834,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt7, amt8);
         swap_pair_attacker_wbnb_sellc(amt9, amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -11861,7 +11863,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt7, amt8);
         deposit_srouter_wbnb_sellc(amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -11892,7 +11894,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt8, amt9);
         deposit_srouter_wbnb_sellc(amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -11923,7 +11925,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt8, amt9);
         deposit_srouter_wbnb_sellc(amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -11954,7 +11956,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt8, amt9);
         deposit_srouter_wbnb_sellc(amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -11983,7 +11985,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt7);
         swap_pair_attacker_wbnb_sellc(amt8, amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -12014,7 +12016,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         swap_pair_attacker_wbnb_sellc(amt9, amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -12045,7 +12047,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         swap_pair_attacker_wbnb_sellc(amt9, amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -12076,7 +12078,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         swap_pair_attacker_wbnb_sellc(amt9, amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -12104,7 +12106,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt7);
         deposit_srouter_wbnb_sellc(amt8);
         payback_sellc_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -12134,7 +12136,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         deposit_srouter_wbnb_sellc(amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -12164,7 +12166,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         deposit_srouter_wbnb_sellc(amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -12195,7 +12197,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt9);
         deposit_srouter_wbnb_sellc(amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -12226,7 +12228,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt9);
         deposit_srouter_wbnb_sellc(amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -12257,7 +12259,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt8);
         swap_pair_attacker_wbnb_sellc(amt9, amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -12287,7 +12289,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt7, amt8);
         swap_pair_attacker_wbnb_sellc(amt9, amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -12316,7 +12318,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt7, amt8);
         deposit_srouter_wbnb_sellc(amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -12347,7 +12349,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt8, amt9);
         deposit_srouter_wbnb_sellc(amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -12378,7 +12380,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt8, amt9);
         deposit_srouter_wbnb_sellc(amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -12409,7 +12411,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt8, amt9);
         deposit_srouter_wbnb_sellc(amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -12438,7 +12440,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt7);
         swap_pair_attacker_wbnb_sellc(amt8, amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -12469,7 +12471,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         swap_pair_attacker_wbnb_sellc(amt9, amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -12500,7 +12502,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         swap_pair_attacker_wbnb_sellc(amt9, amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -12531,7 +12533,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         swap_pair_attacker_wbnb_sellc(amt9, amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -12559,7 +12561,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt7);
         deposit_srouter_wbnb_sellc(amt8);
         payback_sellc_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -12589,7 +12591,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         deposit_srouter_wbnb_sellc(amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -12620,7 +12622,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt9);
         deposit_srouter_wbnb_sellc(amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -12651,7 +12653,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt9);
         deposit_srouter_wbnb_sellc(amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -12681,7 +12683,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         deposit_srouter_wbnb_sellc(amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -12710,7 +12712,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt6, amt7);
         swap_pair_attacker_wbnb_sellc(amt8, amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -12741,7 +12743,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt7, amt8);
         swap_pair_attacker_wbnb_sellc(amt9, amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -12772,7 +12774,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt7, amt8);
         swap_pair_attacker_wbnb_sellc(amt9, amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -12803,7 +12805,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         swap_pair_attacker_wbnb_sellc(amt9, amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -12831,7 +12833,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt6, amt7);
         deposit_srouter_wbnb_sellc(amt8);
         payback_sellc_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -12861,7 +12863,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt7, amt8);
         deposit_srouter_wbnb_sellc(amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -12892,7 +12894,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt8, amt9);
         deposit_srouter_wbnb_sellc(amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -12923,7 +12925,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt8, amt9);
         deposit_srouter_wbnb_sellc(amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -12953,7 +12955,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt7, amt8);
         deposit_srouter_wbnb_sellc(amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -12984,7 +12986,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt8);
         swap_pair_attacker_wbnb_sellc(amt9, amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -13012,7 +13014,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt6);
         swap_pair_attacker_wbnb_sellc(amt7, amt8);
         payback_sellc_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -13042,7 +13044,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt7);
         swap_pair_attacker_wbnb_sellc(amt8, amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -13073,7 +13075,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         swap_pair_attacker_wbnb_sellc(amt9, amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -13104,7 +13106,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         swap_pair_attacker_wbnb_sellc(amt9, amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -13135,7 +13137,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         swap_pair_attacker_wbnb_sellc(amt9, amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -13166,7 +13168,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         swap_pair_attacker_wbnb_sellc(amt9, amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -13196,7 +13198,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt7);
         swap_pair_attacker_wbnb_sellc(amt8, amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -13223,7 +13225,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt6);
         deposit_srouter_wbnb_sellc(amt7);
         payback_sellc_owner(amt8);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -13252,7 +13254,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt7);
         deposit_srouter_wbnb_sellc(amt8);
         payback_sellc_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -13282,7 +13284,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         deposit_srouter_wbnb_sellc(amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -13312,7 +13314,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         deposit_srouter_wbnb_sellc(amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -13342,7 +13344,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         deposit_srouter_wbnb_sellc(amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -13372,7 +13374,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         deposit_srouter_wbnb_sellc(amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -13402,7 +13404,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt7);
         swap_pair_attacker_wbnb_sellc(amt8, amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -13432,7 +13434,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt8, amt9);
         deposit_srouter_wbnb_sellc(amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -13462,7 +13464,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         swap_pair_attacker_wbnb_sellc(amt9, amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -13491,7 +13493,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         deposit_srouter_wbnb_sellc(amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -13522,7 +13524,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt9);
         deposit_srouter_wbnb_sellc(amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -13553,7 +13555,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt9);
         deposit_srouter_wbnb_sellc(amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -13584,7 +13586,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt9);
         deposit_srouter_wbnb_sellc(amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -13614,7 +13616,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt7, amt8);
         swap_pair_attacker_wbnb_sellc(amt9, amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -13643,7 +13645,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt7, amt8);
         deposit_srouter_wbnb_sellc(amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -13674,7 +13676,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt8, amt9);
         deposit_srouter_wbnb_sellc(amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -13705,7 +13707,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt8, amt9);
         deposit_srouter_wbnb_sellc(amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -13736,7 +13738,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt8, amt9);
         deposit_srouter_wbnb_sellc(amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -13765,7 +13767,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt7);
         swap_pair_attacker_wbnb_sellc(amt8, amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -13796,7 +13798,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         swap_pair_attacker_wbnb_sellc(amt9, amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -13827,7 +13829,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         swap_pair_attacker_wbnb_sellc(amt9, amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -13858,7 +13860,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         swap_pair_attacker_wbnb_sellc(amt9, amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -13886,7 +13888,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt7);
         deposit_srouter_wbnb_sellc(amt8);
         payback_sellc_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -13916,7 +13918,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         deposit_srouter_wbnb_sellc(amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -13946,7 +13948,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         deposit_srouter_wbnb_sellc(amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -13977,7 +13979,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt9);
         deposit_srouter_wbnb_sellc(amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -14008,7 +14010,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt9);
         deposit_srouter_wbnb_sellc(amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -14038,7 +14040,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt7, amt8);
         swap_pair_attacker_wbnb_sellc(amt9, amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -14067,7 +14069,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt7, amt8);
         deposit_srouter_wbnb_sellc(amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -14098,7 +14100,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt8, amt9);
         deposit_srouter_wbnb_sellc(amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -14129,7 +14131,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt8, amt9);
         deposit_srouter_wbnb_sellc(amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -14160,7 +14162,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt8, amt9);
         deposit_srouter_wbnb_sellc(amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -14189,7 +14191,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt7);
         swap_pair_attacker_wbnb_sellc(amt8, amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -14220,7 +14222,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         swap_pair_attacker_wbnb_sellc(amt9, amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -14251,7 +14253,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         swap_pair_attacker_wbnb_sellc(amt9, amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -14282,7 +14284,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         swap_pair_attacker_wbnb_sellc(amt9, amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -14310,7 +14312,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt7);
         deposit_srouter_wbnb_sellc(amt8);
         payback_sellc_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -14340,7 +14342,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         deposit_srouter_wbnb_sellc(amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -14370,7 +14372,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         deposit_srouter_wbnb_sellc(amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -14399,7 +14401,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt6, amt7);
         swap_pair_attacker_wbnb_sellc(amt8, amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -14430,7 +14432,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt7, amt8);
         swap_pair_attacker_wbnb_sellc(amt9, amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -14461,7 +14463,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt7, amt8);
         swap_pair_attacker_wbnb_sellc(amt9, amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -14492,7 +14494,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         swap_pair_attacker_wbnb_sellc(amt9, amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -14520,7 +14522,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt6, amt7);
         deposit_srouter_wbnb_sellc(amt8);
         payback_sellc_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -14550,7 +14552,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt7, amt8);
         deposit_srouter_wbnb_sellc(amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -14580,7 +14582,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt7, amt8);
         deposit_srouter_wbnb_sellc(amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -14608,7 +14610,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt6);
         swap_pair_attacker_wbnb_sellc(amt7, amt8);
         payback_sellc_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -14638,7 +14640,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt7);
         swap_pair_attacker_wbnb_sellc(amt8, amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -14669,7 +14671,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         swap_pair_attacker_wbnb_sellc(amt9, amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -14700,7 +14702,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         swap_pair_attacker_wbnb_sellc(amt9, amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -14730,7 +14732,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt7);
         swap_pair_attacker_wbnb_sellc(amt8, amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -14757,7 +14759,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt6);
         deposit_srouter_wbnb_sellc(amt7);
         payback_sellc_owner(amt8);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -14786,7 +14788,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt7);
         deposit_srouter_wbnb_sellc(amt8);
         payback_sellc_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -14816,7 +14818,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         deposit_srouter_wbnb_sellc(amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -14846,7 +14848,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         deposit_srouter_wbnb_sellc(amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -14876,7 +14878,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt7, amt8);
         swap_pair_attacker_wbnb_sellc(amt9, amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -14905,7 +14907,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt7, amt8);
         deposit_srouter_wbnb_sellc(amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -14936,7 +14938,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt8, amt9);
         deposit_srouter_wbnb_sellc(amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -14967,7 +14969,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt8, amt9);
         deposit_srouter_wbnb_sellc(amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -14998,7 +15000,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt8, amt9);
         deposit_srouter_wbnb_sellc(amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -15027,7 +15029,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt7);
         swap_pair_attacker_wbnb_sellc(amt8, amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -15058,7 +15060,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         swap_pair_attacker_wbnb_sellc(amt9, amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -15089,7 +15091,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         swap_pair_attacker_wbnb_sellc(amt9, amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -15120,7 +15122,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         swap_pair_attacker_wbnb_sellc(amt9, amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -15148,7 +15150,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt7);
         deposit_srouter_wbnb_sellc(amt8);
         payback_sellc_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -15178,7 +15180,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         deposit_srouter_wbnb_sellc(amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -15208,7 +15210,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         deposit_srouter_wbnb_sellc(amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -15237,7 +15239,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt6, amt7);
         swap_pair_attacker_wbnb_sellc(amt8, amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -15268,7 +15270,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt7, amt8);
         swap_pair_attacker_wbnb_sellc(amt9, amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -15299,7 +15301,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt7, amt8);
         swap_pair_attacker_wbnb_sellc(amt9, amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -15330,7 +15332,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         swap_pair_attacker_wbnb_sellc(amt9, amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -15358,7 +15360,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt6, amt7);
         deposit_srouter_wbnb_sellc(amt8);
         payback_sellc_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -15388,7 +15390,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt7, amt8);
         deposit_srouter_wbnb_sellc(amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -15418,7 +15420,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt7, amt8);
         deposit_srouter_wbnb_sellc(amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -15449,7 +15451,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt8);
         swap_pair_attacker_wbnb_sellc(amt9, amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -15477,7 +15479,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt6);
         swap_pair_attacker_wbnb_sellc(amt7, amt8);
         payback_sellc_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -15507,7 +15509,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt7);
         swap_pair_attacker_wbnb_sellc(amt8, amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -15538,7 +15540,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         swap_pair_attacker_wbnb_sellc(amt9, amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -15569,7 +15571,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         swap_pair_attacker_wbnb_sellc(amt9, amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -15599,7 +15601,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt7);
         swap_pair_attacker_wbnb_sellc(amt8, amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -15626,7 +15628,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt6);
         deposit_srouter_wbnb_sellc(amt7);
         payback_sellc_owner(amt8);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -15655,7 +15657,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt7);
         deposit_srouter_wbnb_sellc(amt8);
         payback_sellc_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -15685,7 +15687,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         deposit_srouter_wbnb_sellc(amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -15715,7 +15717,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         deposit_srouter_wbnb_sellc(amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -15745,7 +15747,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt7);
         swap_pair_attacker_wbnb_sellc(amt8, amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -15774,7 +15776,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt6, amt7);
         swap_pair_attacker_wbnb_sellc(amt8, amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -15805,7 +15807,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt7, amt8);
         swap_pair_attacker_wbnb_sellc(amt9, amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -15836,7 +15838,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt7, amt8);
         swap_pair_attacker_wbnb_sellc(amt9, amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -15867,7 +15869,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         swap_pair_attacker_wbnb_sellc(amt9, amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -15895,7 +15897,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt6, amt7);
         deposit_srouter_wbnb_sellc(amt8);
         payback_sellc_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -15926,7 +15928,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt8, amt9);
         deposit_srouter_wbnb_sellc(amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -15957,7 +15959,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt8, amt9);
         deposit_srouter_wbnb_sellc(amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -15987,7 +15989,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt7, amt8);
         deposit_srouter_wbnb_sellc(amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -16017,7 +16019,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt7, amt8);
         deposit_srouter_wbnb_sellc(amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -16045,7 +16047,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt6);
         swap_pair_attacker_wbnb_sellc(amt7, amt8);
         payback_sellc_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -16076,7 +16078,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         swap_pair_attacker_wbnb_sellc(amt9, amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -16107,7 +16109,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         swap_pair_attacker_wbnb_sellc(amt9, amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -16137,7 +16139,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt7);
         swap_pair_attacker_wbnb_sellc(amt8, amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -16167,7 +16169,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt7);
         swap_pair_attacker_wbnb_sellc(amt8, amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -16194,7 +16196,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt6);
         deposit_srouter_wbnb_sellc(amt7);
         payback_sellc_owner(amt8);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -16224,7 +16226,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         deposit_srouter_wbnb_sellc(amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -16254,7 +16256,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt8);
         deposit_srouter_wbnb_sellc(amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -16283,7 +16285,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt7);
         deposit_srouter_wbnb_sellc(amt8);
         payback_sellc_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -16311,7 +16313,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt5, amt6);
         swap_pair_attacker_wbnb_sellc(amt7, amt8);
         payback_sellc_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -16342,7 +16344,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt7, amt8);
         swap_pair_attacker_wbnb_sellc(amt9, amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -16373,7 +16375,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt7, amt8);
         swap_pair_attacker_wbnb_sellc(amt9, amt10);
         payback_sellc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -16403,7 +16405,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt6, amt7);
         swap_pair_attacker_wbnb_sellc(amt8, amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -16433,7 +16435,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt7);
         swap_pair_attacker_wbnb_sellc(amt8, amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -16460,7 +16462,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt5, amt6);
         deposit_srouter_wbnb_sellc(amt7);
         payback_sellc_owner(amt8);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -16490,7 +16492,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt7, amt8);
         deposit_srouter_wbnb_sellc(amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -16520,7 +16522,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt7, amt8);
         deposit_srouter_wbnb_sellc(amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -16549,7 +16551,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt6, amt7);
         deposit_srouter_wbnb_sellc(amt8);
         payback_sellc_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -16579,7 +16581,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt7);
         swap_pair_attacker_wbnb_sellc(amt8, amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -16606,7 +16608,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt5);
         swap_pair_attacker_wbnb_sellc(amt6, amt7);
         payback_sellc_owner(amt8);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -16636,7 +16638,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt7);
         swap_pair_attacker_wbnb_sellc(amt8, amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -16666,7 +16668,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt7);
         swap_pair_attacker_wbnb_sellc(amt8, amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -16696,7 +16698,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt7);
         swap_pair_attacker_wbnb_sellc(amt8, amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -16726,7 +16728,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt7);
         swap_pair_attacker_wbnb_sellc(amt8, amt9);
         payback_sellc_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -16755,7 +16757,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt6);
         swap_pair_attacker_wbnb_sellc(amt7, amt8);
         payback_sellc_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -16781,7 +16783,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt5);
         deposit_srouter_wbnb_sellc(amt6);
         payback_sellc_owner(amt7);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -16810,7 +16812,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt7);
         deposit_srouter_wbnb_sellc(amt8);
         payback_sellc_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -16839,7 +16841,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt7);
         deposit_srouter_wbnb_sellc(amt8);
         payback_sellc_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -16868,7 +16870,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt7);
         deposit_srouter_wbnb_sellc(amt8);
         payback_sellc_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -16897,7 +16899,7 @@ contract SellTokenTest is Test, BlockLoader {
         withdraw_srouter_sellc_wbnb(amt7);
         deposit_srouter_wbnb_sellc(amt8);
         payback_sellc_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -16926,7 +16928,7 @@ contract SellTokenTest is Test, BlockLoader {
         deposit_srouter_wbnb_sellc(amt6);
         swap_pair_attacker_wbnb_sellc(amt7, amt8);
         payback_sellc_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -17005,7 +17007,7 @@ contract SellTokenTest is Test, BlockLoader {
         swap_pair_attacker_sellc_wbnb(amt4, amt5);
         withdraw_srouter_sellc_wbnb(amt6);
         payback_wbnb_owner(amt7);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 

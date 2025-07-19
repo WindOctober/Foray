@@ -142,7 +142,9 @@ contract AxiomaTestBase is Test, BlockLoader {
         emit log_string("");
     }
 
-    function attackGoal() public view returns (bool) {
+    function attackGoal() public returns (bool) {
+        emit log_named_uint("StartBalance", balanceOfwbnbattacker);
+        emit log_named_uint("FinalBalance", wbnb.balanceOf(attacker));
         return wbnb.balanceOf(attacker) >= 1e18 + balanceOfwbnbattacker;
     }
 
@@ -270,7 +272,7 @@ contract AxiomaTestBase is Test, BlockLoader {
         swap_axiomaPresale_attacker_wbnb_axt(amt1, amt2);
         swap_pair_attacker_axt_wbnb(amt3, amt4);
         payback_wbnb_owner(amt5);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 

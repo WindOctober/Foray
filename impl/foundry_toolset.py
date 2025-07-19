@@ -393,6 +393,15 @@ def verify_model_on_anvil(ctrt_name2addr: Dict[str, str], func_name: str, params
         print("0x4e487b710000000000000000000000000000000000000000000000000000000000000001 is the special string used to indicate a successful transaction.")
     return feasible
 
+def parse_balances(output: str):
+    start = final = 0
+    for m in re.finditer(r'(StartBalance|FinalBalance)\s*:\s*(\d+)', output):
+        key, val = m.group(1), int(m.group(2))
+        if key == 'StartBalance':
+            start = val
+        else:
+            final = val
+    return start, final
 
 def verify_model_on_forge_debug(bmk_dir: str, bmk_name: str, func_name: str, params: List[str]) -> bool:
     param_types = ",".join(["uint256"] * len(params))
@@ -412,5 +421,8 @@ def verify_model_on_forge_debug(bmk_dir: str, bmk_name: str, func_name: str, par
     except Exception as err:
         print(err)
         return False
+    
     feasible = "Attack succeed!" in out.stderr
-    return feasible
+    start, final = parse_balances(out.stdout)
+    profit = final - start
+    return feasible, profit

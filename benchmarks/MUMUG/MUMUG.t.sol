@@ -135,7 +135,9 @@ contract MUMUGTestBase is Test, BlockLoader {
         emit log_string("");
     }
 
-    function attackGoal() public view returns (bool) {
+    function attackGoal() public returns (bool) {
+        emit log_named_uint("StartBalance", balanceOfusdceattacker);
+        emit log_named_uint("FinalBalance", usdce.balanceOf(attacker));
         return usdce.balanceOf(attacker) >= 1e6 + balanceOfusdceattacker;
     }
 
@@ -241,7 +243,7 @@ contract MUMUGTestBase is Test, BlockLoader {
         swap_pair_attacker_mu_usdce(amt1, amt2);
         swap_mubank_attacker_usdce_mu(amt3, amt4);
         payback_mu_owner(amt5);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 

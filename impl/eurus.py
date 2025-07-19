@@ -324,9 +324,9 @@ def eurus_solve(
         # There is a bug in anvil, this solution is tested in foundry test.
         # if "BXH" in bmk_dir and func_name == "check_cand003":
         #     feasible = True
-        feasible = verify_model_on_forge_debug(bmk_dir, resolve_project_name(bmk_dir), func_name, param_strs)
+        feasible, profit = verify_model_on_forge_debug(bmk_dir, resolve_project_name(bmk_dir), func_name, param_strs)
         if feasible:
-            print(f"Result for {func_name} is feasible in realworld!")
+            print(f"Result for {func_name} is feasible in realworld! Profit: {profit}")
         else:
             print(f"Result for {func_name} is NOT feasible in realworld!")
         result = {
@@ -339,6 +339,7 @@ def eurus_solve(
                         "time": [timecost, 0, timecost],
                         "feasible": feasible,
                         "refine_loop": refine_loop,
+                        "profit": profit,
                     }
                 ]
             }

@@ -233,7 +233,9 @@ contract LUSDTestBase is Test, BlockLoader {
         emit log_string("");
     }
 
-    function attackGoal() public view returns (bool) {
+    function attackGoal() public returns (bool) {
+        emit log_named_uint("StartBalance", balanceOfusdtattacker);
+        emit log_named_uint("FinalBalance", usdt.balanceOf(attacker));
         return usdt.balanceOf(attacker) >= 8000 + balanceOfusdtattacker;
     }
 
@@ -354,7 +356,7 @@ contract LUSDTestBase is Test, BlockLoader {
         withdraw_lusdpool_lusd_usdt(amt5);
         swap_pairub_attacker_btcb_usdt(amt6, amt7);
         payback_usdt_owner(amt8);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 

@@ -1,5 +1,5 @@
 {
-    "sketchgen_timecost": 0.0008215000270865858,
+    "sketchgen_timecost": 0.0009011660004034638,
     "candidates": [
         [
             "borrow_wbnb_owner",
@@ -130,6 +130,6 @@
             "payback_bamboo_owner"
         ]
     ],
-    "eurus__solve_timecost": 0.035173708107322454,
-    "eurus__all_timecost": 0.03681725010392256
+    "eurus__solve_timecost": 0.02135079214349389,
+    "eurus__all_timecost": 0.022251958143897355
 }

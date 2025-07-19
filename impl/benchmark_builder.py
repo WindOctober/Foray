@@ -287,7 +287,9 @@ class BenchmarkBuilder:
         # Attack goal
         token, amount = self.attack_goal
         attack_goal_func = [
-            "function attackGoal() public view returns (bool) {",
+            "function attackGoal() public returns (bool) {",
+            f'emit log_named_uint("StartBalance", balanceOf{token}attacker);',
+            f'emit log_named_uint("FinalBalance", {token}.balanceOf(attacker));',
             f"return {token}.balanceOf(attacker) >= {amount} + balanceOf{token}attacker;",
             "}",
         ]

@@ -233,7 +233,9 @@ contract LUSDTest is Test, BlockLoader {
         emit log_string("");
     }
 
-    function attackGoal() public view returns (bool) {
+    function attackGoal() public returns (bool) {
+        emit log_named_uint("StartBalance", balanceOfusdtattacker);
+        emit log_named_uint("FinalBalance", usdt.balanceOf(attacker));
         return usdt.balanceOf(attacker) >= 8000 + balanceOfusdtattacker;
     }
 
@@ -313,7 +315,7 @@ contract LUSDTest is Test, BlockLoader {
         swap_pairub_attacker_usdt_btcb(amt1, amt2);
         swap_pairub_attacker_btcb_usdt(amt3, amt4);
         payback_usdt_owner(amt5);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -331,7 +333,7 @@ contract LUSDTest is Test, BlockLoader {
         swap_pairub_attacker_btcb_usdt(amt1, amt2);
         swap_pairub_attacker_usdt_btcb(amt3, amt4);
         payback_btcb_owner(amt5);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -351,7 +353,7 @@ contract LUSDTest is Test, BlockLoader {
         swap_loan_attacker_btcb_lusd(amt3, amt4);
         withdraw_lusdpool_lusd_usdt(amt5);
         payback_usdt_owner(amt6);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -374,7 +376,7 @@ contract LUSDTest is Test, BlockLoader {
         withdraw_lusdpool_lusd_usdt(amt5);
         swap_pairub_attacker_btcb_usdt(amt6, amt7);
         payback_usdt_owner(amt8);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -394,7 +396,7 @@ contract LUSDTest is Test, BlockLoader {
         swap_pairub_attacker_usdt_btcb(amt2, amt3);
         swap_loan_attacker_btcb_lusd(amt4, amt5);
         payback_lusd_owner(amt6);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -414,7 +416,7 @@ contract LUSDTest is Test, BlockLoader {
         withdraw_lusdpool_lusd_usdt(amt3);
         swap_pairub_attacker_usdt_btcb(amt4, amt5);
         payback_btcb_owner(amt6);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -438,7 +440,7 @@ contract LUSDTest is Test, BlockLoader {
         swap_pairub_attacker_usdt_btcb(amt5, amt6);
         swap_pairub_attacker_btcb_usdt(amt7, amt8);
         payback_usdt_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -462,7 +464,7 @@ contract LUSDTest is Test, BlockLoader {
         swap_pairub_attacker_btcb_usdt(amt5, amt6);
         swap_pairub_attacker_usdt_btcb(amt7, amt8);
         payback_btcb_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -488,7 +490,7 @@ contract LUSDTest is Test, BlockLoader {
         swap_loan_attacker_btcb_lusd(amt7, amt8);
         withdraw_lusdpool_lusd_usdt(amt9);
         payback_usdt_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -514,7 +516,7 @@ contract LUSDTest is Test, BlockLoader {
         swap_pairub_attacker_usdt_btcb(amt6, amt7);
         swap_pairub_attacker_btcb_usdt(amt8, amt9);
         payback_usdt_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -540,7 +542,7 @@ contract LUSDTest is Test, BlockLoader {
         swap_pairub_attacker_usdt_btcb(amt6, amt7);
         swap_loan_attacker_btcb_lusd(amt8, amt9);
         payback_lusd_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -566,7 +568,7 @@ contract LUSDTest is Test, BlockLoader {
         withdraw_lusdpool_lusd_usdt(amt7);
         swap_pairub_attacker_usdt_btcb(amt8, amt9);
         payback_btcb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -592,7 +594,7 @@ contract LUSDTest is Test, BlockLoader {
         swap_pairub_attacker_btcb_usdt(amt6, amt7);
         swap_pairub_attacker_usdt_btcb(amt8, amt9);
         payback_btcb_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -620,7 +622,7 @@ contract LUSDTest is Test, BlockLoader {
         swap_loan_attacker_btcb_lusd(amt8, amt9);
         withdraw_lusdpool_lusd_usdt(amt10);
         payback_usdt_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -648,7 +650,7 @@ contract LUSDTest is Test, BlockLoader {
         swap_pairub_attacker_usdt_btcb(amt7, amt8);
         swap_loan_attacker_btcb_lusd(amt9, amt10);
         payback_lusd_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -676,7 +678,7 @@ contract LUSDTest is Test, BlockLoader {
         withdraw_lusdpool_lusd_usdt(amt8);
         swap_pairub_attacker_usdt_btcb(amt9, amt10);
         payback_btcb_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -735,7 +737,7 @@ contract LUSDTest is Test, BlockLoader {
         withdraw_lusdpool_lusd_usdt(amt5);
         swap_pairub_attacker_btcb_usdt(amt6, amt7);
         payback_usdt_owner(amt8);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 

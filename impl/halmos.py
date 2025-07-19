@@ -500,10 +500,10 @@ def run(
                     model.get(f"p_amt{j}_uint256", "0x1") for j in range(sketch.param_num)
                 ]
                 verifier = [(func_name, sketch, [arg_candidates])]
-                feasiable = verify_model(bmk_dir, verifier)
+                feasible = verify_model(bmk_dir, verifier)
                 timer.resume()
                 models_timer.resume()
-                if feasiable:
+                if feasible:
                     timer.stop()
                     timecost = timer.elapsed()
                     new_record = {

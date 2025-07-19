@@ -327,7 +327,7 @@ class Sketch:
         for s in self.pure_actions:
             func_body.append(f"{str(s)};")
 
-        assert_statement = "require(!attackGoal(), \"Attack failed!\");"
+        assert_statement = "require(!attackGoal(), \"Attack succeed!\");"
         if is_halmos:
             assert_statement = "assert(!attackGoal());"
 

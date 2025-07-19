@@ -142,7 +142,9 @@ contract AxiomaTest is Test, BlockLoader {
         emit log_string("");
     }
 
-    function attackGoal() public view returns (bool) {
+    function attackGoal() public returns (bool) {
+        emit log_named_uint("StartBalance", balanceOfwbnbattacker);
+        emit log_named_uint("FinalBalance", wbnb.balanceOf(attacker));
         return wbnb.balanceOf(attacker) >= 1e18 + balanceOfwbnbattacker;
     }
 
@@ -250,7 +252,7 @@ contract AxiomaTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_axt(amt1, amt2);
         swap_pair_attacker_axt_wbnb(amt3, amt4);
         payback_wbnb_owner(amt5);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -268,7 +270,7 @@ contract AxiomaTest is Test, BlockLoader {
         swap_axiomaPresale_attacker_wbnb_axt(amt1, amt2);
         swap_pair_attacker_axt_wbnb(amt3, amt4);
         payback_wbnb_owner(amt5);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -286,7 +288,7 @@ contract AxiomaTest is Test, BlockLoader {
         swap_pair_attacker_axt_wbnb(amt1, amt2);
         swap_pair_attacker_wbnb_axt(amt3, amt4);
         payback_axt_owner(amt5);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -307,7 +309,7 @@ contract AxiomaTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_axt(amt3, amt4);
         swap_axiomaPresale_attacker_wbnb_axt(amt5, amt6);
         payback_axt_owner(amt7);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -325,7 +327,7 @@ contract AxiomaTest is Test, BlockLoader {
         swap_pair_attacker_axt_wbnb(amt1, amt2);
         swap_axiomaPresale_attacker_wbnb_axt(amt3, amt4);
         payback_axt_owner(amt5);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -346,7 +348,7 @@ contract AxiomaTest is Test, BlockLoader {
         swap_axiomaPresale_attacker_wbnb_axt(amt3, amt4);
         swap_pair_attacker_wbnb_axt(amt5, amt6);
         payback_axt_owner(amt7);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -364,7 +366,7 @@ contract AxiomaTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_axt(amt1, amt2);
         swap_pair_attacker_axt_wbnb(amt3, amt4);
         payback_wbnb_axiomaPresale(amt5);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -382,7 +384,7 @@ contract AxiomaTest is Test, BlockLoader {
         swap_pair_attacker_axt_wbnb(amt1, amt2);
         swap_pair_attacker_wbnb_axt(amt3, amt4);
         payback_axt_axiomaPresale(amt5);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -403,7 +405,7 @@ contract AxiomaTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_axt(amt3, amt4);
         swap_axiomaPresale_attacker_wbnb_axt(amt5, amt6);
         payback_axt_axiomaPresale(amt7);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -427,7 +429,7 @@ contract AxiomaTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_axt(amt5, amt6);
         swap_pair_attacker_axt_wbnb(amt7, amt8);
         payback_wbnb_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -451,7 +453,7 @@ contract AxiomaTest is Test, BlockLoader {
         swap_axiomaPresale_attacker_wbnb_axt(amt5, amt6);
         swap_pair_attacker_axt_wbnb(amt7, amt8);
         payback_wbnb_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -475,7 +477,7 @@ contract AxiomaTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_axt(amt5, amt6);
         swap_pair_attacker_axt_wbnb(amt7, amt8);
         payback_wbnb_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -499,7 +501,7 @@ contract AxiomaTest is Test, BlockLoader {
         swap_axiomaPresale_attacker_wbnb_axt(amt5, amt6);
         swap_pair_attacker_axt_wbnb(amt7, amt8);
         payback_wbnb_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -523,7 +525,7 @@ contract AxiomaTest is Test, BlockLoader {
         swap_pair_attacker_axt_wbnb(amt5, amt6);
         swap_pair_attacker_wbnb_axt(amt7, amt8);
         payback_axt_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -550,7 +552,7 @@ contract AxiomaTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_axt(amt7, amt8);
         swap_axiomaPresale_attacker_wbnb_axt(amt9, amt10);
         payback_axt_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -574,7 +576,7 @@ contract AxiomaTest is Test, BlockLoader {
         swap_pair_attacker_axt_wbnb(amt5, amt6);
         swap_axiomaPresale_attacker_wbnb_axt(amt7, amt8);
         payback_axt_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -598,7 +600,7 @@ contract AxiomaTest is Test, BlockLoader {
         swap_pair_attacker_axt_wbnb(amt5, amt6);
         swap_pair_attacker_wbnb_axt(amt7, amt8);
         payback_axt_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -622,7 +624,7 @@ contract AxiomaTest is Test, BlockLoader {
         swap_pair_attacker_axt_wbnb(amt5, amt6);
         swap_axiomaPresale_attacker_wbnb_axt(amt7, amt8);
         payback_axt_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -649,7 +651,7 @@ contract AxiomaTest is Test, BlockLoader {
         swap_axiomaPresale_attacker_wbnb_axt(amt7, amt8);
         swap_pair_attacker_wbnb_axt(amt9, amt10);
         payback_axt_owner(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -673,7 +675,7 @@ contract AxiomaTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_axt(amt5, amt6);
         swap_pair_attacker_axt_wbnb(amt7, amt8);
         payback_wbnb_axiomaPresale(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -697,7 +699,7 @@ contract AxiomaTest is Test, BlockLoader {
         swap_pair_attacker_axt_wbnb(amt5, amt6);
         swap_pair_attacker_wbnb_axt(amt7, amt8);
         payback_axt_axiomaPresale(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -724,7 +726,7 @@ contract AxiomaTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_axt(amt7, amt8);
         swap_axiomaPresale_attacker_wbnb_axt(amt9, amt10);
         payback_axt_axiomaPresale(amt11);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -762,7 +764,7 @@ contract AxiomaTest is Test, BlockLoader {
         swap_axiomaPresale_attacker_wbnb_axt(amt1, amt2);
         swap_pair_attacker_axt_wbnb(amt3, amt4);
         payback_wbnb_owner(amt5);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 

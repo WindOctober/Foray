@@ -199,7 +199,9 @@ contract OneRingTestBase is Test, BlockLoader {
         emit log_string("");
     }
 
-    function attackGoal() public view returns (bool) {
+    function attackGoal() public returns (bool) {
+        emit log_named_uint("StartBalance", balanceOfusdceattacker);
+        emit log_named_uint("FinalBalance", usdce.balanceOf(attacker));
         return usdce.balanceOf(attacker) >= 1e6 + balanceOfusdceattacker;
     }
 
@@ -324,7 +326,7 @@ contract OneRingTestBase is Test, BlockLoader {
         deposit_vault_usdce_vault(amt1);
         withdraw_vault_vault_usdce(amt2);
         payback_usdce_pair(amt3);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 

@@ -266,7 +266,9 @@ contract HavenTestBase is Test, BlockLoader {
         emit log_string("");
     }
 
-    function attackGoal() public view returns (bool) {
+    function attackGoal() public returns (bool) {
+        emit log_named_uint("StartBalance", balanceOfwbnbattacker);
+        emit log_named_uint("FinalBalance", wbnb.balanceOf(attacker));
         return wbnb.balanceOf(attacker) >= 1e6 + balanceOfwbnbattacker;
     }
 
@@ -406,7 +408,7 @@ contract HavenTestBase is Test, BlockLoader {
         swap_pairbh_attacker_haven_busd(amt5, amt6);
         swap_pairbw_attacker_busd_wbnb(amt7, amt8);
         payback_wbnb_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 

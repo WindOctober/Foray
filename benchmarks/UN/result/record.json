@@ -1,5 +1,5 @@
 {
-    "sketchgen_timecost": 0.000899125006981194,
+    "sketchgen_timecost": 0.000826000003144145,
     "candidates": [
         [
             "borrow_busd_owner",
@@ -130,6 +130,6 @@
             "payback_un_owner"
         ]
     ],
-    "eurus__solve_timecost": 0.07946274999994785,
-    "eurus__all_timecost": 0.08086058399931062
+    "eurus__solve_timecost": 0.03912687487900257,
+    "eurus__all_timecost": 0.039952874882146716
 }

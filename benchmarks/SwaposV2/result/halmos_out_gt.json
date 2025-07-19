@@ -1,0 +1,41 @@
+{
+    "exitcode": 0,
+    "test_results": {
+        "benchmarks/SwaposV2/SwaposV2_candidates.t.sol:SwaposV2Test": [
+            {
+                "name": "check_gt_halmos(uint256,uint256,uint256,uint256,uint256,uint256)",
+                "exitcode": 1,
+                "num_models": 2,
+                "models": [
+                    {
+                        "p_amt2_uint256": "0x1b1024acab6a9adfca1a",
+                        "p_amt0_uint256": "0x1c03f580fd4df238df5fa",
+                        "p_amt5_uint256": "0x1c03f710d5b6f9c906a45",
+                        "p_amt4_uint256": "0xcf104c60aaa088b3",
+                        "p_amt1_uint256": "0x7f9ca67ffd9871f4",
+                        "p_amt3_uint256": "0x13e691824b158233ffe3"
+                    },
+                    {
+                        "p_amt2_uint256": "0x1c35ece258aa1bce4e32",
+                        "p_amt0_uint256": "0xfffe3dddcdb11f9187f0",
+                        "p_amt5_uint256": "0xffffc82c000000000000",
+                        "p_amt4_uint256": "0x3457dc2d401ee3ac5",
+                        "p_amt1_uint256": "0x19d3b4677d17b4242",
+                        "p_amt3_uint256": "0x1aba97589caef64c5cb0"
+                    }
+                ],
+                "num_paths": [
+                    52,
+                    2,
+                    0
+                ],
+                "time": [
+                    1009.0674386661267,
+                    127.18523883400485,
+                    881.8821871249238
+                ],
+                "num_bounded_loops": 0
+            }
+        ]
+    }
+}

