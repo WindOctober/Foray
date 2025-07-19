@@ -76,7 +76,11 @@ def gen_result_paths(result_path: str, only_gt: bool, tool_name: str, sketch_num
         output = path.join(result_path, f"{tool_name}_out_{idx}{suffix}.json")
         err_output = path.join(result_path, f"{tool_name}_err_{idx}{suffix}.json")
         smt_output = path.join(result_path, f"{tool_name}_smt_{idx}{suffix}")
-        result_paths = [("check_gt", output, err_output, smt_output)]
+        if tool_name == "halmos":
+            func_name = "check_gt_halmos"
+        else:
+            func_name = "check_gt"
+        result_paths = [(func_name, output, err_output, smt_output)]
     else:
         for i in range(sketch_num):
             idx = str(i).zfill(ZFILL_SIZE)

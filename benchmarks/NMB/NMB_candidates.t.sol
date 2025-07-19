@@ -392,7 +392,7 @@ contract NMBTest is Test, BlockLoader {
         swap_pairnbunimb_attacker_nbu_nimb(amt1, amt2);
         swap_pairnbunimb_attacker_nimb_nbu(amt3, amt4);
         payback_nbu_owner(amt5);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -410,7 +410,7 @@ contract NMBTest is Test, BlockLoader {
         swap_pairnbugnimb_attacker_nbu_gnimb(amt1, amt2);
         swap_pairnbugnimb_attacker_gnimb_nbu(amt3, amt4);
         payback_nbu_owner(amt5);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -428,7 +428,7 @@ contract NMBTest is Test, BlockLoader {
         swap_pairnbunimb_attacker_nimb_nbu(amt1, amt2);
         swap_pairnbunimb_attacker_nbu_nimb(amt3, amt4);
         payback_nimb_owner(amt5);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -446,7 +446,7 @@ contract NMBTest is Test, BlockLoader {
         swap_pairnbugnimb_attacker_gnimb_nbu(amt1, amt2);
         swap_pairnbugnimb_attacker_nbu_gnimb(amt3, amt4);
         payback_gnimb_owner(amt5);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -464,7 +464,7 @@ contract NMBTest is Test, BlockLoader {
         swap_pairnbugnimb_attacker_nbu_gnimb(amt1, amt2);
         swap_pairnbugnimb_attacker_gnimb_nbu(amt3, amt4);
         payback_nbu_pairnbunimb(amt5);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -482,7 +482,7 @@ contract NMBTest is Test, BlockLoader {
         swap_pairnbugnimb_attacker_gnimb_nbu(amt1, amt2);
         swap_pairnbugnimb_attacker_nbu_gnimb(amt3, amt4);
         payback_gnimb_pairnbunimb(amt5);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -500,7 +500,7 @@ contract NMBTest is Test, BlockLoader {
         swap_pairnbunimb_attacker_nbu_nimb(amt1, amt2);
         swap_pairnbunimb_attacker_nimb_nbu(amt3, amt4);
         payback_nbu_pairnbugnimb(amt5);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -524,7 +524,7 @@ contract NMBTest is Test, BlockLoader {
         payback_gnimb_pairnbugnimb(amt4);
         swap_pairnbugnimb_attacker_gnimb_nbu(amt5, amt6);
         payback_gnimb_owner(amt7);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -542,7 +542,7 @@ contract NMBTest is Test, BlockLoader {
         swap_pairnbunimb_attacker_nimb_nbu(amt1, amt2);
         swap_pairnbunimb_attacker_nbu_nimb(amt3, amt4);
         payback_nimb_pairnbugnimb(amt5);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -566,7 +566,7 @@ contract NMBTest is Test, BlockLoader {
         swap_pairnbunimb_attacker_nbu_nimb(amt5, amt6);
         swap_pairnbunimb_attacker_nimb_nbu(amt7, amt8);
         payback_nbu_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -590,7 +590,7 @@ contract NMBTest is Test, BlockLoader {
         swap_pairnbugnimb_attacker_nbu_gnimb(amt5, amt6);
         swap_pairnbugnimb_attacker_gnimb_nbu(amt7, amt8);
         payback_nbu_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -614,7 +614,7 @@ contract NMBTest is Test, BlockLoader {
         swap_pairnbunimb_attacker_nbu_nimb(amt5, amt6);
         swap_pairnbunimb_attacker_nimb_nbu(amt7, amt8);
         payback_nbu_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -638,7 +638,7 @@ contract NMBTest is Test, BlockLoader {
         swap_pairnbugnimb_attacker_nbu_gnimb(amt5, amt6);
         swap_pairnbugnimb_attacker_gnimb_nbu(amt7, amt8);
         payback_nbu_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -662,7 +662,7 @@ contract NMBTest is Test, BlockLoader {
         swap_pairnbunimb_attacker_nimb_nbu(amt5, amt6);
         swap_pairnbunimb_attacker_nbu_nimb(amt7, amt8);
         payback_nimb_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -686,7 +686,7 @@ contract NMBTest is Test, BlockLoader {
         swap_pairnbugnimb_attacker_gnimb_nbu(amt5, amt6);
         swap_pairnbunimb_attacker_nbu_nimb(amt7, amt8);
         payback_nimb_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -710,7 +710,7 @@ contract NMBTest is Test, BlockLoader {
         swap_pairnbunimb_attacker_nimb_nbu(amt5, amt6);
         swap_pairnbugnimb_attacker_nbu_gnimb(amt7, amt8);
         payback_gnimb_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -734,7 +734,7 @@ contract NMBTest is Test, BlockLoader {
         swap_pairnbugnimb_attacker_gnimb_nbu(amt5, amt6);
         swap_pairnbugnimb_attacker_nbu_gnimb(amt7, amt8);
         payback_gnimb_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -758,7 +758,7 @@ contract NMBTest is Test, BlockLoader {
         swap_pairnbugnimb_attacker_nbu_gnimb(amt5, amt6);
         swap_pairnbugnimb_attacker_gnimb_nbu(amt7, amt8);
         payback_nbu_pairnbunimb(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -782,7 +782,7 @@ contract NMBTest is Test, BlockLoader {
         swap_pairnbugnimb_attacker_gnimb_nbu(amt5, amt6);
         swap_pairnbugnimb_attacker_nbu_gnimb(amt7, amt8);
         payback_gnimb_pairnbunimb(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -806,7 +806,7 @@ contract NMBTest is Test, BlockLoader {
         swap_pairnbunimb_attacker_nbu_nimb(amt5, amt6);
         swap_pairnbunimb_attacker_nimb_nbu(amt7, amt8);
         payback_nbu_pairnbugnimb(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -830,7 +830,7 @@ contract NMBTest is Test, BlockLoader {
         swap_pairnbunimb_attacker_nimb_nbu(amt5, amt6);
         swap_pairnbunimb_attacker_nbu_nimb(amt7, amt8);
         payback_nimb_pairnbugnimb(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -897,7 +897,31 @@ contract NMBTest is Test, BlockLoader {
         payback_gnimb_pairnbugnimb(amt4);
         swap_pairnbugnimb_attacker_gnimb_nbu(amt5, amt6);
         payback_gnimb_owner(amt7);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
+        vm.stopPrank();
+    }
+
+    function check_gt_halmos(
+        uint256 amt0,
+        uint256 amt1,
+        uint256 amt2,
+        uint256 amt3,
+        uint256 amt4,
+        uint256 amt5,
+        uint256 amt6,
+        uint256 amt7
+    ) public {
+        vm.startPrank(attacker);
+        vm.assume(amt7 >= amt0);
+        vm.assume(amt4 >= amt2);
+        borrow_gnimb_owner(amt0);
+        deposit_gslp_gnimb_gslp(amt1);
+        borrow_gnimb_pairnbugnimb(amt2);
+        withdraw_gslp_gslp_gnimb(amt3);
+        payback_gnimb_pairnbugnimb(amt4);
+        swap_pairnbugnimb_attacker_gnimb_nbu(amt5, amt6);
+        payback_gnimb_owner(amt7);
+        assert(!attackGoal());
         vm.stopPrank();
     }
 }

@@ -279,7 +279,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_pair_attacker_weth_swapos(amt1, amt2);
         swap_pair_attacker_swapos_weth(amt3, amt4);
         payback_weth_owner(amt5);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -300,7 +300,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_pair_attacker_swapos_weth(amt3, amt4);
         swap_spair_attacker_swapos_weth(amt5, amt6);
         payback_weth_owner(amt7);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -318,7 +318,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_pair_attacker_weth_swapos(amt1, amt2);
         swap_spair_attacker_swapos_weth(amt3, amt4);
         payback_weth_owner(amt5);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -339,7 +339,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_spair_attacker_swapos_weth(amt3, amt4);
         swap_pair_attacker_swapos_weth(amt5, amt6);
         payback_weth_owner(amt7);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -357,7 +357,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_spair_attacker_weth_swapos(amt1, amt2);
         swap_pair_attacker_swapos_weth(amt3, amt4);
         payback_weth_owner(amt5);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -378,7 +378,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_pair_attacker_swapos_weth(amt3, amt4);
         swap_spair_attacker_swapos_weth(amt5, amt6);
         payback_weth_owner(amt7);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -396,7 +396,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_spair_attacker_weth_swapos(amt1, amt2);
         swap_spair_attacker_swapos_weth(amt3, amt4);
         payback_weth_owner(amt5);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -417,7 +417,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_spair_attacker_swapos_weth(amt3, amt4);
         swap_pair_attacker_swapos_weth(amt5, amt6);
         payback_weth_owner(amt7);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -435,7 +435,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_pair_attacker_swapos_weth(amt1, amt2);
         swap_pair_attacker_weth_swapos(amt3, amt4);
         payback_swapos_owner(amt5);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -456,7 +456,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_pair_attacker_weth_swapos(amt3, amt4);
         swap_spair_attacker_weth_swapos(amt5, amt6);
         payback_swapos_owner(amt7);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -474,7 +474,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_pair_attacker_swapos_weth(amt1, amt2);
         swap_spair_attacker_weth_swapos(amt3, amt4);
         payback_swapos_owner(amt5);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -495,7 +495,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_spair_attacker_weth_swapos(amt3, amt4);
         swap_pair_attacker_weth_swapos(amt5, amt6);
         payback_swapos_owner(amt7);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -513,7 +513,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_spair_attacker_swapos_weth(amt1, amt2);
         swap_pair_attacker_weth_swapos(amt3, amt4);
         payback_swapos_owner(amt5);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -534,7 +534,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_pair_attacker_weth_swapos(amt3, amt4);
         swap_spair_attacker_weth_swapos(amt5, amt6);
         payback_swapos_owner(amt7);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -552,7 +552,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_spair_attacker_swapos_weth(amt1, amt2);
         swap_spair_attacker_weth_swapos(amt3, amt4);
         payback_swapos_owner(amt5);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -573,7 +573,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_spair_attacker_weth_swapos(amt3, amt4);
         swap_pair_attacker_weth_swapos(amt5, amt6);
         payback_swapos_owner(amt7);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -591,7 +591,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_spair_attacker_weth_swapos(amt1, amt2);
         swap_spair_attacker_swapos_weth(amt3, amt4);
         payback_weth_pair(amt5);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -612,7 +612,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_spair_attacker_swapos_weth(amt3, amt4);
         swap_pair_attacker_swapos_weth(amt5, amt6);
         payback_weth_pair(amt7);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -630,7 +630,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_spair_attacker_swapos_weth(amt1, amt2);
         swap_spair_attacker_weth_swapos(amt3, amt4);
         payback_swapos_pair(amt5);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -651,7 +651,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_spair_attacker_weth_swapos(amt3, amt4);
         swap_pair_attacker_weth_swapos(amt5, amt6);
         payback_swapos_pair(amt7);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -669,7 +669,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_pair_attacker_weth_swapos(amt1, amt2);
         swap_pair_attacker_swapos_weth(amt3, amt4);
         payback_weth_spair(amt5);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -690,7 +690,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_pair_attacker_swapos_weth(amt3, amt4);
         swap_spair_attacker_swapos_weth(amt5, amt6);
         payback_weth_spair(amt7);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -708,7 +708,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_pair_attacker_swapos_weth(amt1, amt2);
         swap_pair_attacker_weth_swapos(amt3, amt4);
         payback_swapos_spair(amt5);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -729,7 +729,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_pair_attacker_weth_swapos(amt3, amt4);
         swap_spair_attacker_weth_swapos(amt5, amt6);
         payback_swapos_spair(amt7);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -753,7 +753,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_pair_attacker_weth_swapos(amt5, amt6);
         swap_pair_attacker_swapos_weth(amt7, amt8);
         payback_weth_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -780,7 +780,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_pair_attacker_swapos_weth(amt7, amt8);
         swap_spair_attacker_swapos_weth(amt9, amt10);
         payback_weth_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -804,7 +804,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_pair_attacker_weth_swapos(amt5, amt6);
         swap_spair_attacker_swapos_weth(amt7, amt8);
         payback_weth_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -828,7 +828,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_spair_attacker_weth_swapos(amt5, amt6);
         swap_pair_attacker_swapos_weth(amt7, amt8);
         payback_weth_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -855,7 +855,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_pair_attacker_swapos_weth(amt7, amt8);
         swap_spair_attacker_swapos_weth(amt9, amt10);
         payback_weth_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -879,7 +879,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_spair_attacker_weth_swapos(amt5, amt6);
         swap_spair_attacker_swapos_weth(amt7, amt8);
         payback_weth_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -903,7 +903,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_pair_attacker_weth_swapos(amt5, amt6);
         swap_pair_attacker_swapos_weth(amt7, amt8);
         payback_weth_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -927,7 +927,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_pair_attacker_weth_swapos(amt5, amt6);
         swap_spair_attacker_swapos_weth(amt7, amt8);
         payback_weth_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -954,7 +954,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_spair_attacker_swapos_weth(amt7, amt8);
         swap_pair_attacker_swapos_weth(amt9, amt10);
         payback_weth_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -978,7 +978,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_spair_attacker_weth_swapos(amt5, amt6);
         swap_pair_attacker_swapos_weth(amt7, amt8);
         payback_weth_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1002,7 +1002,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_spair_attacker_weth_swapos(amt5, amt6);
         swap_spair_attacker_swapos_weth(amt7, amt8);
         payback_weth_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1029,7 +1029,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_spair_attacker_swapos_weth(amt7, amt8);
         swap_pair_attacker_swapos_weth(amt9, amt10);
         payback_weth_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1053,7 +1053,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_pair_attacker_weth_swapos(amt5, amt6);
         swap_pair_attacker_swapos_weth(amt7, amt8);
         payback_weth_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1080,7 +1080,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_pair_attacker_swapos_weth(amt7, amt8);
         swap_spair_attacker_swapos_weth(amt9, amt10);
         payback_weth_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1104,7 +1104,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_pair_attacker_weth_swapos(amt5, amt6);
         swap_spair_attacker_swapos_weth(amt7, amt8);
         payback_weth_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1128,7 +1128,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_spair_attacker_weth_swapos(amt5, amt6);
         swap_pair_attacker_swapos_weth(amt7, amt8);
         payback_weth_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1155,7 +1155,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_pair_attacker_swapos_weth(amt7, amt8);
         swap_spair_attacker_swapos_weth(amt9, amt10);
         payback_weth_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1179,7 +1179,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_spair_attacker_weth_swapos(amt5, amt6);
         swap_spair_attacker_swapos_weth(amt7, amt8);
         payback_weth_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1203,7 +1203,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_pair_attacker_weth_swapos(amt5, amt6);
         swap_pair_attacker_swapos_weth(amt7, amt8);
         payback_weth_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1227,7 +1227,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_pair_attacker_weth_swapos(amt5, amt6);
         swap_spair_attacker_swapos_weth(amt7, amt8);
         payback_weth_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1254,7 +1254,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_spair_attacker_swapos_weth(amt7, amt8);
         swap_pair_attacker_swapos_weth(amt9, amt10);
         payback_weth_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1278,7 +1278,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_spair_attacker_weth_swapos(amt5, amt6);
         swap_pair_attacker_swapos_weth(amt7, amt8);
         payback_weth_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1302,7 +1302,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_spair_attacker_weth_swapos(amt5, amt6);
         swap_spair_attacker_swapos_weth(amt7, amt8);
         payback_weth_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1329,7 +1329,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_spair_attacker_swapos_weth(amt7, amt8);
         swap_pair_attacker_swapos_weth(amt9, amt10);
         payback_weth_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1353,7 +1353,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_pair_attacker_swapos_weth(amt5, amt6);
         swap_pair_attacker_weth_swapos(amt7, amt8);
         payback_swapos_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1380,7 +1380,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_pair_attacker_weth_swapos(amt7, amt8);
         swap_spair_attacker_weth_swapos(amt9, amt10);
         payback_swapos_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1404,7 +1404,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_pair_attacker_swapos_weth(amt5, amt6);
         swap_spair_attacker_weth_swapos(amt7, amt8);
         payback_swapos_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1428,7 +1428,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_spair_attacker_swapos_weth(amt5, amt6);
         swap_pair_attacker_weth_swapos(amt7, amt8);
         payback_swapos_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1455,7 +1455,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_pair_attacker_weth_swapos(amt7, amt8);
         swap_spair_attacker_weth_swapos(amt9, amt10);
         payback_swapos_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1479,7 +1479,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_spair_attacker_swapos_weth(amt5, amt6);
         swap_spair_attacker_weth_swapos(amt7, amt8);
         payback_swapos_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1503,7 +1503,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_pair_attacker_swapos_weth(amt5, amt6);
         swap_pair_attacker_weth_swapos(amt7, amt8);
         payback_swapos_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1527,7 +1527,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_pair_attacker_swapos_weth(amt5, amt6);
         swap_spair_attacker_weth_swapos(amt7, amt8);
         payback_swapos_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1554,7 +1554,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_spair_attacker_weth_swapos(amt7, amt8);
         swap_pair_attacker_weth_swapos(amt9, amt10);
         payback_swapos_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1578,7 +1578,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_spair_attacker_swapos_weth(amt5, amt6);
         swap_pair_attacker_weth_swapos(amt7, amt8);
         payback_swapos_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1602,7 +1602,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_spair_attacker_swapos_weth(amt5, amt6);
         swap_spair_attacker_weth_swapos(amt7, amt8);
         payback_swapos_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1629,7 +1629,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_spair_attacker_weth_swapos(amt7, amt8);
         swap_pair_attacker_weth_swapos(amt9, amt10);
         payback_swapos_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1653,7 +1653,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_pair_attacker_swapos_weth(amt5, amt6);
         swap_pair_attacker_weth_swapos(amt7, amt8);
         payback_swapos_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1680,7 +1680,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_pair_attacker_weth_swapos(amt7, amt8);
         swap_spair_attacker_weth_swapos(amt9, amt10);
         payback_swapos_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1704,7 +1704,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_pair_attacker_swapos_weth(amt5, amt6);
         swap_spair_attacker_weth_swapos(amt7, amt8);
         payback_swapos_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1728,7 +1728,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_spair_attacker_swapos_weth(amt5, amt6);
         swap_pair_attacker_weth_swapos(amt7, amt8);
         payback_swapos_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1755,7 +1755,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_pair_attacker_weth_swapos(amt7, amt8);
         swap_spair_attacker_weth_swapos(amt9, amt10);
         payback_swapos_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1779,7 +1779,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_spair_attacker_swapos_weth(amt5, amt6);
         swap_spair_attacker_weth_swapos(amt7, amt8);
         payback_swapos_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1803,7 +1803,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_pair_attacker_swapos_weth(amt5, amt6);
         swap_pair_attacker_weth_swapos(amt7, amt8);
         payback_swapos_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1827,7 +1827,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_pair_attacker_swapos_weth(amt5, amt6);
         swap_spair_attacker_weth_swapos(amt7, amt8);
         payback_swapos_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1854,7 +1854,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_spair_attacker_weth_swapos(amt7, amt8);
         swap_pair_attacker_weth_swapos(amt9, amt10);
         payback_swapos_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1878,7 +1878,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_spair_attacker_swapos_weth(amt5, amt6);
         swap_pair_attacker_weth_swapos(amt7, amt8);
         payback_swapos_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1902,7 +1902,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_spair_attacker_swapos_weth(amt5, amt6);
         swap_spair_attacker_weth_swapos(amt7, amt8);
         payback_swapos_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1929,7 +1929,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_spair_attacker_weth_swapos(amt7, amt8);
         swap_pair_attacker_weth_swapos(amt9, amt10);
         payback_swapos_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1953,7 +1953,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_spair_attacker_weth_swapos(amt5, amt6);
         swap_spair_attacker_swapos_weth(amt7, amt8);
         payback_weth_pair(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1980,7 +1980,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_spair_attacker_swapos_weth(amt7, amt8);
         swap_pair_attacker_swapos_weth(amt9, amt10);
         payback_weth_pair(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2004,7 +2004,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_spair_attacker_swapos_weth(amt5, amt6);
         swap_spair_attacker_weth_swapos(amt7, amt8);
         payback_swapos_pair(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2031,7 +2031,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_spair_attacker_weth_swapos(amt7, amt8);
         swap_pair_attacker_weth_swapos(amt9, amt10);
         payback_swapos_pair(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2055,7 +2055,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_pair_attacker_weth_swapos(amt5, amt6);
         swap_pair_attacker_swapos_weth(amt7, amt8);
         payback_weth_spair(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2082,7 +2082,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_pair_attacker_swapos_weth(amt7, amt8);
         swap_spair_attacker_swapos_weth(amt9, amt10);
         payback_weth_spair(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2106,7 +2106,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_pair_attacker_swapos_weth(amt5, amt6);
         swap_pair_attacker_weth_swapos(amt7, amt8);
         payback_swapos_spair(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2133,7 +2133,7 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_pair_attacker_weth_swapos(amt7, amt8);
         swap_spair_attacker_weth_swapos(amt9, amt10);
         payback_swapos_spair(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2183,7 +2183,25 @@ contract SwaposV2Test is Test, BlockLoader {
         swap_spair_attacker_weth_swapos(amt1, amt2);
         swap_pair_attacker_swapos_weth(amt3, amt4);
         payback_weth_owner(amt5);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
+        vm.stopPrank();
+    }
+
+    function check_gt_halmos(
+        uint256 amt0,
+        uint256 amt1,
+        uint256 amt2,
+        uint256 amt3,
+        uint256 amt4,
+        uint256 amt5
+    ) public {
+        vm.startPrank(attacker);
+        vm.assume(amt5 >= amt0);
+        borrow_weth_owner(amt0);
+        swap_spair_attacker_weth_swapos(amt1, amt2);
+        swap_pair_attacker_swapos_weth(amt3, amt4);
+        payback_weth_owner(amt5);
+        assert(!attackGoal());
         vm.stopPrank();
     }
 }

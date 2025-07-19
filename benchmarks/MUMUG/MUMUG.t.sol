@@ -241,7 +241,25 @@ contract MUMUGTestBase is Test, BlockLoader {
         swap_pair_attacker_mu_usdce(amt1, amt2);
         swap_mubank_attacker_usdce_mu(amt3, amt4);
         payback_mu_owner(amt5);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
+        vm.stopPrank();
+    }
+
+    function check_gt_halmos(
+        uint256 amt0,
+        uint256 amt1,
+        uint256 amt2,
+        uint256 amt3,
+        uint256 amt4,
+        uint256 amt5
+    ) public {
+        vm.startPrank(attacker);
+        vm.assume(amt5 >= amt0);
+        borrow_mu_owner(amt0);
+        swap_pair_attacker_mu_usdce(amt1, amt2);
+        swap_mubank_attacker_usdce_mu(amt3, amt4);
+        payback_mu_owner(amt5);
+        assert(!attackGoal());
         vm.stopPrank();
     }
 }

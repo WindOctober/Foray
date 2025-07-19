@@ -406,7 +406,31 @@ contract HavenTestBase is Test, BlockLoader {
         swap_pairbh_attacker_haven_busd(amt5, amt6);
         swap_pairbw_attacker_busd_wbnb(amt7, amt8);
         payback_wbnb_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
+        vm.stopPrank();
+    }
+
+    function check_gt_halmos(
+        uint256 amt0,
+        uint256 amt1,
+        uint256 amt2,
+        uint256 amt3,
+        uint256 amt4,
+        uint256 amt5,
+        uint256 amt6,
+        uint256 amt7,
+        uint256 amt8,
+        uint256 amt9
+    ) public {
+        vm.startPrank(attacker);
+        vm.assume(amt9 >= amt0);
+        borrow_wbnb_owner(amt0);
+        swap_pairhw_haven_haven_wbnb(amt1, amt2);
+        swap_pairhw_attacker_wbnb_haven(amt3, amt4);
+        swap_pairbh_attacker_haven_busd(amt5, amt6);
+        swap_pairbw_attacker_busd_wbnb(amt7, amt8);
+        payback_wbnb_owner(amt9);
+        assert(!attackGoal());
         vm.stopPrank();
     }
 }

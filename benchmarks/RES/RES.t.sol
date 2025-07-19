@@ -290,7 +290,26 @@ contract RESTestBase is Test, BlockLoader {
         addliquidity_resA_pair_resA_usdt();
         swap_pair_attacker_usdt_resA(amt3, amt4);
         payback_resA_owner(amt5);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
+        vm.stopPrank();
+    }
+
+    function check_gt_halmos(
+        uint256 amt0,
+        uint256 amt1,
+        uint256 amt2,
+        uint256 amt3,
+        uint256 amt4,
+        uint256 amt5
+    ) public {
+        vm.startPrank(attacker);
+        vm.assume(amt5 >= amt0);
+        borrow_resA_owner(amt0);
+        swap_pair_attacker_resA_usdt(amt1, amt2);
+        addliquidity_resA_pair_resA_usdt();
+        swap_pair_attacker_usdt_resA(amt3, amt4);
+        payback_resA_owner(amt5);
+        assert(!attackGoal());
         vm.stopPrank();
     }
 }

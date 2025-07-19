@@ -390,7 +390,26 @@ contract ZoomproTestBase is Test, BlockLoader {
         addliquidity_controller_pair_fusdt_fusdt();
         swap_trader_attacker_zoom_usdt(amt3, amt4);
         payback_usdt_owner(amt5);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
+        vm.stopPrank();
+    }
+
+    function check_gt_halmos(
+        uint256 amt0,
+        uint256 amt1,
+        uint256 amt2,
+        uint256 amt3,
+        uint256 amt4,
+        uint256 amt5
+    ) public {
+        vm.startPrank(attacker);
+        vm.assume(amt5 >= amt0);
+        borrow_usdt_owner(amt0);
+        swap_trader_attacker_usdt_zoom(amt1, amt2);
+        addliquidity_controller_pair_fusdt_fusdt();
+        swap_trader_attacker_zoom_usdt(amt3, amt4);
+        payback_usdt_owner(amt5);
+        assert(!attackGoal());
         vm.stopPrank();
     }
 }

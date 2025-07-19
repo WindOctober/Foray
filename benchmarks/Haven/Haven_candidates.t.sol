@@ -372,7 +372,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairbw_attacker_wbnb_busd(amt1, amt2);
         swap_pairbw_attacker_busd_wbnb(amt3, amt4);
         payback_wbnb_owner(amt5);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -390,7 +390,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairhw_attacker_wbnb_haven(amt1, amt2);
         swap_pairhw_attacker_haven_wbnb(amt3, amt4);
         payback_wbnb_owner(amt5);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -411,7 +411,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairhw_attacker_wbnb_haven(amt3, amt4);
         swap_pairhw_attacker_haven_wbnb(amt5, amt6);
         payback_wbnb_owner(amt7);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -432,7 +432,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairhw_haven_haven_wbnb(amt3, amt4);
         swap_pairhw_attacker_haven_wbnb(amt5, amt6);
         payback_wbnb_owner(amt7);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -453,7 +453,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairhw_attacker_haven_wbnb(amt3, amt4);
         swap_pairhw_haven_haven_wbnb(amt5, amt6);
         payback_wbnb_owner(amt7);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -471,7 +471,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairbw_attacker_busd_wbnb(amt1, amt2);
         swap_pairbw_attacker_wbnb_busd(amt3, amt4);
         payback_busd_owner(amt5);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -489,7 +489,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairhw_attacker_haven_wbnb(amt1, amt2);
         swap_pairhw_attacker_wbnb_haven(amt3, amt4);
         payback_haven_owner(amt5);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -510,7 +510,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairhw_attacker_haven_wbnb(amt3, amt4);
         swap_pairhw_attacker_wbnb_haven(amt5, amt6);
         payback_haven_owner(amt7);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -531,7 +531,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairhw_haven_haven_wbnb(amt3, amt4);
         swap_pairhw_attacker_wbnb_haven(amt5, amt6);
         payback_haven_owner(amt7);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -552,7 +552,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairbh_attacker_busd_haven(amt3, amt4);
         swap_pairhw_attacker_haven_wbnb(amt5, amt6);
         payback_wbnb_owner(amt7);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -576,7 +576,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairhw_haven_haven_wbnb(amt5, amt6);
         swap_pairhw_attacker_haven_wbnb(amt7, amt8);
         payback_wbnb_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -600,7 +600,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairhw_attacker_haven_wbnb(amt5, amt6);
         swap_pairhw_haven_haven_wbnb(amt7, amt8);
         payback_wbnb_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -624,7 +624,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairhw_attacker_haven_wbnb(amt5, amt6);
         swap_pairbw_attacker_busd_wbnb(amt7, amt8);
         payback_wbnb_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -645,7 +645,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairbh_attacker_haven_busd(amt3, amt4);
         swap_pairbw_attacker_busd_wbnb(amt5, amt6);
         payback_wbnb_owner(amt7);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -669,7 +669,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairbh_attacker_haven_busd(amt5, amt6);
         swap_pairbw_attacker_busd_wbnb(amt7, amt8);
         payback_wbnb_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -693,7 +693,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairbw_attacker_busd_wbnb(amt5, amt6);
         swap_pairhw_attacker_haven_wbnb(amt7, amt8);
         payback_wbnb_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -717,7 +717,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairbw_attacker_busd_wbnb(amt5, amt6);
         swap_pairhw_haven_haven_wbnb(amt7, amt8);
         payback_wbnb_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -738,7 +738,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairhw_attacker_wbnb_haven(amt3, amt4);
         swap_pairbh_attacker_haven_busd(amt5, amt6);
         payback_busd_owner(amt7);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -762,7 +762,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairhw_attacker_wbnb_haven(amt5, amt6);
         swap_pairbh_attacker_haven_busd(amt7, amt8);
         payback_busd_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -786,7 +786,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairbh_attacker_haven_busd(amt5, amt6);
         swap_pairbw_attacker_wbnb_busd(amt7, amt8);
         payback_busd_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -807,7 +807,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairhw_attacker_haven_wbnb(amt3, amt4);
         swap_pairbw_attacker_wbnb_busd(amt5, amt6);
         payback_busd_owner(amt7);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -831,7 +831,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairhw_attacker_haven_wbnb(amt5, amt6);
         swap_pairbw_attacker_wbnb_busd(amt7, amt8);
         payback_busd_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -855,7 +855,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairbw_attacker_wbnb_busd(amt5, amt6);
         swap_pairbh_attacker_haven_busd(amt7, amt8);
         payback_busd_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -876,7 +876,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairbw_attacker_busd_wbnb(amt3, amt4);
         swap_pairhw_attacker_wbnb_haven(amt5, amt6);
         payback_haven_owner(amt7);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -900,7 +900,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairhw_haven_haven_wbnb(amt5, amt6);
         swap_pairhw_attacker_wbnb_haven(amt7, amt8);
         payback_haven_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -924,7 +924,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairhw_attacker_wbnb_haven(amt5, amt6);
         swap_pairbh_attacker_busd_haven(amt7, amt8);
         payback_haven_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -945,7 +945,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairbw_attacker_wbnb_busd(amt3, amt4);
         swap_pairbh_attacker_busd_haven(amt5, amt6);
         payback_haven_owner(amt7);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -969,7 +969,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairbw_attacker_wbnb_busd(amt5, amt6);
         swap_pairbh_attacker_busd_haven(amt7, amt8);
         payback_haven_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -993,7 +993,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairbh_attacker_busd_haven(amt5, amt6);
         swap_pairhw_attacker_wbnb_haven(amt7, amt8);
         payback_haven_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1017,7 +1017,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairbw_attacker_wbnb_busd(amt5, amt6);
         swap_pairbw_attacker_busd_wbnb(amt7, amt8);
         payback_wbnb_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1041,7 +1041,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairhw_attacker_wbnb_haven(amt5, amt6);
         swap_pairhw_attacker_haven_wbnb(amt7, amt8);
         payback_wbnb_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1068,7 +1068,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairhw_attacker_wbnb_haven(amt7, amt8);
         swap_pairhw_attacker_haven_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1095,7 +1095,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairhw_haven_haven_wbnb(amt7, amt8);
         swap_pairhw_attacker_haven_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1122,7 +1122,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairhw_attacker_haven_wbnb(amt7, amt8);
         swap_pairhw_haven_haven_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1146,7 +1146,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairbh_attacker_haven_busd(amt5, amt6);
         swap_pairbw_attacker_busd_wbnb(amt7, amt8);
         payback_wbnb_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1173,7 +1173,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairbw_attacker_busd_wbnb(amt7, amt8);
         swap_pairhw_attacker_haven_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1200,7 +1200,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairbw_attacker_busd_wbnb(amt7, amt8);
         swap_pairhw_haven_haven_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1224,7 +1224,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairbh_attacker_busd_haven(amt5, amt6);
         swap_pairhw_attacker_haven_wbnb(amt7, amt8);
         payback_wbnb_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1251,7 +1251,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairbh_attacker_busd_haven(amt7, amt8);
         swap_pairhw_attacker_haven_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1278,7 +1278,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairhw_haven_haven_wbnb(amt7, amt8);
         swap_pairhw_attacker_haven_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1305,7 +1305,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairhw_attacker_haven_wbnb(amt7, amt8);
         swap_pairhw_haven_haven_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1332,7 +1332,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairhw_attacker_haven_wbnb(amt7, amt8);
         swap_pairbw_attacker_busd_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1356,7 +1356,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairbw_attacker_wbnb_busd(amt5, amt6);
         swap_pairbw_attacker_busd_wbnb(amt7, amt8);
         payback_wbnb_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1383,7 +1383,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairbw_attacker_wbnb_busd(amt7, amt8);
         swap_pairbw_attacker_busd_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1410,7 +1410,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairbw_attacker_wbnb_busd(amt7, amt8);
         swap_pairbw_attacker_busd_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1437,7 +1437,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairbw_attacker_busd_wbnb(amt7, amt8);
         swap_pairhw_haven_haven_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1461,7 +1461,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairhw_attacker_wbnb_haven(amt5, amt6);
         swap_pairhw_attacker_haven_wbnb(amt7, amt8);
         payback_wbnb_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1488,7 +1488,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairhw_attacker_wbnb_haven(amt7, amt8);
         swap_pairhw_attacker_haven_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1515,7 +1515,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairhw_attacker_wbnb_haven(amt7, amt8);
         swap_pairhw_attacker_haven_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1542,7 +1542,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairhw_attacker_wbnb_haven(amt7, amt8);
         swap_pairhw_attacker_haven_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1569,7 +1569,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairhw_haven_haven_wbnb(amt7, amt8);
         swap_pairhw_attacker_haven_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1596,7 +1596,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairhw_attacker_haven_wbnb(amt7, amt8);
         swap_pairhw_haven_haven_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1620,7 +1620,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairbw_attacker_busd_wbnb(amt5, amt6);
         swap_pairbw_attacker_wbnb_busd(amt7, amt8);
         payback_busd_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1644,7 +1644,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairbh_attacker_busd_haven(amt5, amt6);
         swap_pairbh_attacker_haven_busd(amt7, amt8);
         payback_busd_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1668,7 +1668,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairhw_attacker_haven_wbnb(amt5, amt6);
         swap_pairbw_attacker_wbnb_busd(amt7, amt8);
         payback_busd_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1695,7 +1695,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairhw_attacker_haven_wbnb(amt7, amt8);
         swap_pairbw_attacker_wbnb_busd(amt9, amt10);
         payback_busd_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1722,7 +1722,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairhw_attacker_haven_wbnb(amt7, amt8);
         swap_pairbw_attacker_wbnb_busd(amt9, amt10);
         payback_busd_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1749,7 +1749,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairbw_attacker_wbnb_busd(amt7, amt8);
         swap_pairbh_attacker_haven_busd(amt9, amt10);
         payback_busd_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1773,7 +1773,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairbw_attacker_busd_wbnb(amt5, amt6);
         swap_pairbw_attacker_wbnb_busd(amt7, amt8);
         payback_busd_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1797,7 +1797,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairhw_attacker_wbnb_haven(amt5, amt6);
         swap_pairbh_attacker_haven_busd(amt7, amt8);
         payback_busd_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1824,7 +1824,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairhw_attacker_wbnb_haven(amt7, amt8);
         swap_pairbh_attacker_haven_busd(amt9, amt10);
         payback_busd_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1851,7 +1851,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairhw_attacker_wbnb_haven(amt7, amt8);
         swap_pairbh_attacker_haven_busd(amt9, amt10);
         payback_busd_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1878,7 +1878,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairbh_attacker_haven_busd(amt7, amt8);
         swap_pairbw_attacker_wbnb_busd(amt9, amt10);
         payback_busd_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1902,7 +1902,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairbw_attacker_wbnb_busd(amt5, amt6);
         swap_pairbh_attacker_busd_haven(amt7, amt8);
         payback_haven_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1929,7 +1929,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairbh_attacker_busd_haven(amt7, amt8);
         swap_pairhw_attacker_wbnb_haven(amt9, amt10);
         payback_haven_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1953,7 +1953,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairhw_attacker_haven_wbnb(amt5, amt6);
         swap_pairhw_attacker_wbnb_haven(amt7, amt8);
         payback_haven_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1980,7 +1980,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairhw_attacker_haven_wbnb(amt7, amt8);
         swap_pairhw_attacker_wbnb_haven(amt9, amt10);
         payback_haven_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2007,7 +2007,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairhw_haven_haven_wbnb(amt7, amt8);
         swap_pairhw_attacker_wbnb_haven(amt9, amt10);
         payback_haven_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2031,7 +2031,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairbw_attacker_busd_wbnb(amt5, amt6);
         swap_pairhw_attacker_wbnb_haven(amt7, amt8);
         payback_haven_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2058,7 +2058,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairbw_attacker_busd_wbnb(amt7, amt8);
         swap_pairhw_attacker_wbnb_haven(amt9, amt10);
         payback_haven_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2085,7 +2085,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairhw_haven_haven_wbnb(amt7, amt8);
         swap_pairhw_attacker_wbnb_haven(amt9, amt10);
         payback_haven_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2112,7 +2112,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairhw_attacker_wbnb_haven(amt7, amt8);
         swap_pairbh_attacker_busd_haven(amt9, amt10);
         payback_haven_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2136,7 +2136,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairbh_attacker_haven_busd(amt5, amt6);
         swap_pairbh_attacker_busd_haven(amt7, amt8);
         payback_haven_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2163,7 +2163,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairbh_attacker_haven_busd(amt7, amt8);
         swap_pairbh_attacker_busd_haven(amt9, amt10);
         payback_haven_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2190,7 +2190,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairbh_attacker_haven_busd(amt7, amt8);
         swap_pairbh_attacker_busd_haven(amt9, amt10);
         payback_haven_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2214,7 +2214,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairhw_attacker_haven_wbnb(amt5, amt6);
         swap_pairhw_attacker_wbnb_haven(amt7, amt8);
         payback_haven_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2241,7 +2241,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairhw_attacker_haven_wbnb(amt7, amt8);
         swap_pairhw_attacker_wbnb_haven(amt9, amt10);
         payback_haven_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2268,7 +2268,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairhw_attacker_haven_wbnb(amt7, amt8);
         swap_pairhw_attacker_wbnb_haven(amt9, amt10);
         payback_haven_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2295,7 +2295,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairhw_attacker_haven_wbnb(amt7, amt8);
         swap_pairhw_attacker_wbnb_haven(amt9, amt10);
         payback_haven_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2322,7 +2322,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairhw_haven_haven_wbnb(amt7, amt8);
         swap_pairhw_attacker_wbnb_haven(amt9, amt10);
         payback_haven_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2349,7 +2349,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairbh_attacker_busd_haven(amt7, amt8);
         swap_pairhw_attacker_haven_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2376,7 +2376,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairbh_attacker_haven_busd(amt7, amt8);
         swap_pairbw_attacker_busd_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2403,7 +2403,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairbh_attacker_busd_haven(amt7, amt8);
         swap_pairhw_attacker_haven_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2430,7 +2430,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairbw_attacker_wbnb_busd(amt7, amt8);
         swap_pairbw_attacker_busd_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2457,7 +2457,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairhw_attacker_wbnb_haven(amt7, amt8);
         swap_pairhw_attacker_haven_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2484,7 +2484,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairbw_attacker_wbnb_busd(amt7, amt8);
         swap_pairbw_attacker_busd_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2511,7 +2511,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairhw_attacker_wbnb_haven(amt7, amt8);
         swap_pairhw_attacker_haven_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2538,7 +2538,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairbh_attacker_haven_busd(amt7, amt8);
         swap_pairbw_attacker_busd_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2565,7 +2565,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairbh_attacker_busd_haven(amt7, amt8);
         swap_pairhw_attacker_haven_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2592,7 +2592,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairbh_attacker_haven_busd(amt7, amt8);
         swap_pairbw_attacker_busd_wbnb(amt9, amt10);
         payback_wbnb_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2619,7 +2619,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairhw_attacker_wbnb_haven(amt7, amt8);
         swap_pairbh_attacker_haven_busd(amt9, amt10);
         payback_busd_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2646,7 +2646,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairhw_attacker_haven_wbnb(amt7, amt8);
         swap_pairbw_attacker_wbnb_busd(amt9, amt10);
         payback_busd_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2673,7 +2673,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairbw_attacker_busd_wbnb(amt7, amt8);
         swap_pairbw_attacker_wbnb_busd(amt9, amt10);
         payback_busd_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2700,7 +2700,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairbh_attacker_busd_haven(amt7, amt8);
         swap_pairbh_attacker_haven_busd(amt9, amt10);
         payback_busd_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2727,7 +2727,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairhw_attacker_wbnb_haven(amt7, amt8);
         swap_pairbh_attacker_haven_busd(amt9, amt10);
         payback_busd_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2754,7 +2754,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairhw_attacker_wbnb_haven(amt7, amt8);
         swap_pairbh_attacker_haven_busd(amt9, amt10);
         payback_busd_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2781,7 +2781,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairhw_attacker_haven_wbnb(amt7, amt8);
         swap_pairbw_attacker_wbnb_busd(amt9, amt10);
         payback_busd_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2808,7 +2808,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairbw_attacker_busd_wbnb(amt7, amt8);
         swap_pairbw_attacker_wbnb_busd(amt9, amt10);
         payback_busd_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2835,7 +2835,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairbh_attacker_busd_haven(amt7, amt8);
         swap_pairbh_attacker_haven_busd(amt9, amt10);
         payback_busd_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2862,7 +2862,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairhw_attacker_haven_wbnb(amt7, amt8);
         swap_pairbw_attacker_wbnb_busd(amt9, amt10);
         payback_busd_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2889,7 +2889,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairbw_attacker_busd_wbnb(amt7, amt8);
         swap_pairhw_attacker_wbnb_haven(amt9, amt10);
         payback_haven_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2916,7 +2916,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairbh_attacker_haven_busd(amt7, amt8);
         swap_pairbh_attacker_busd_haven(amt9, amt10);
         payback_haven_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2943,7 +2943,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairhw_attacker_haven_wbnb(amt7, amt8);
         swap_pairhw_attacker_wbnb_haven(amt9, amt10);
         payback_haven_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2970,7 +2970,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairbw_attacker_busd_wbnb(amt7, amt8);
         swap_pairhw_attacker_wbnb_haven(amt9, amt10);
         payback_haven_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2997,7 +2997,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairbw_attacker_wbnb_busd(amt7, amt8);
         swap_pairbh_attacker_busd_haven(amt9, amt10);
         payback_haven_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -3024,7 +3024,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairbw_attacker_wbnb_busd(amt7, amt8);
         swap_pairbh_attacker_busd_haven(amt9, amt10);
         payback_haven_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -3051,7 +3051,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairbh_attacker_haven_busd(amt7, amt8);
         swap_pairbh_attacker_busd_haven(amt9, amt10);
         payback_haven_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -3078,7 +3078,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairhw_attacker_haven_wbnb(amt7, amt8);
         swap_pairhw_attacker_wbnb_haven(amt9, amt10);
         payback_haven_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -3105,7 +3105,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairbw_attacker_busd_wbnb(amt7, amt8);
         swap_pairhw_attacker_wbnb_haven(amt9, amt10);
         payback_haven_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -3132,7 +3132,7 @@ contract HavenTest is Test, BlockLoader {
         swap_pairbw_attacker_wbnb_busd(amt7, amt8);
         swap_pairbh_attacker_busd_haven(amt9, amt10);
         payback_haven_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -3184,7 +3184,31 @@ contract HavenTest is Test, BlockLoader {
         swap_pairbh_attacker_haven_busd(amt5, amt6);
         swap_pairbw_attacker_busd_wbnb(amt7, amt8);
         payback_wbnb_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
+        vm.stopPrank();
+    }
+
+    function check_gt_halmos(
+        uint256 amt0,
+        uint256 amt1,
+        uint256 amt2,
+        uint256 amt3,
+        uint256 amt4,
+        uint256 amt5,
+        uint256 amt6,
+        uint256 amt7,
+        uint256 amt8,
+        uint256 amt9
+    ) public {
+        vm.startPrank(attacker);
+        vm.assume(amt9 >= amt0);
+        borrow_wbnb_owner(amt0);
+        swap_pairhw_haven_haven_wbnb(amt1, amt2);
+        swap_pairhw_attacker_wbnb_haven(amt3, amt4);
+        swap_pairbh_attacker_haven_busd(amt5, amt6);
+        swap_pairbw_attacker_busd_wbnb(amt7, amt8);
+        payback_wbnb_owner(amt9);
+        assert(!attackGoal());
         vm.stopPrank();
     }
 }

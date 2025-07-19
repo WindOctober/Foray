@@ -307,7 +307,7 @@ class Sketch:
                 return i
         return -1
 
-    def output(self, func_name: str, pre_statements: List[str] = None) -> List[str]:
+    def output(self, func_name: str, pre_statements: List[str] = None, is_halmos: bool = False) -> List[str]:
         if pre_statements is None:
             pre_statements = []
         else:
@@ -327,12 +327,16 @@ class Sketch:
         for s in self.pure_actions:
             func_body.append(f"{str(s)};")
 
+        assert_statement = "require(!attackGoal(), \"Attack failed!\");"
+        if is_halmos:
+            assert_statement = "assert(!attackGoal());"
+
         checker = [
             f"function {func_name}({param_str}) public " + "{",
             f"vm.startPrank(attacker);",
             *pre_statements,
             *func_body,
-            "require(!attackGoal(), \"Attack succeed!\");",
+            assert_statement,
             f"vm.stopPrank();",
             "}",
         ]

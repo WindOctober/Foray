@@ -203,7 +203,7 @@ contract ShadowFiTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sdf(amt1, amt2);
         swap_pair_attacker_sdf_wbnb(amt3, amt4);
         payback_wbnb_owner(amt5);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -224,7 +224,7 @@ contract ShadowFiTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sdf(amt2, amt3);
         swap_pair_attacker_sdf_wbnb(amt4, amt5);
         payback_wbnb_owner(amt6);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -245,7 +245,7 @@ contract ShadowFiTest is Test, BlockLoader {
         burn_sdf_pair(amt3);
         swap_pair_attacker_sdf_wbnb(amt4, amt5);
         payback_wbnb_owner(amt6);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -264,7 +264,7 @@ contract ShadowFiTest is Test, BlockLoader {
         swap_pair_attacker_sdf_wbnb(amt1, amt2);
         swap_pair_attacker_wbnb_sdf(amt3, amt4);
         payback_sdf_owner(amt5);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -285,7 +285,7 @@ contract ShadowFiTest is Test, BlockLoader {
         swap_pair_attacker_sdf_wbnb(amt2, amt3);
         swap_pair_attacker_wbnb_sdf(amt4, amt5);
         payback_sdf_owner(amt6);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -306,7 +306,7 @@ contract ShadowFiTest is Test, BlockLoader {
         burn_sdf_pair(amt3);
         swap_pair_attacker_wbnb_sdf(amt4, amt5);
         payback_sdf_owner(amt6);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -331,7 +331,7 @@ contract ShadowFiTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sdf(amt5, amt6);
         swap_pair_attacker_sdf_wbnb(amt7, amt8);
         payback_wbnb_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -358,7 +358,7 @@ contract ShadowFiTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sdf(amt6, amt7);
         swap_pair_attacker_sdf_wbnb(amt8, amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -385,7 +385,7 @@ contract ShadowFiTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sdf(amt6, amt7);
         swap_pair_attacker_sdf_wbnb(amt8, amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -412,7 +412,7 @@ contract ShadowFiTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_sdf(amt6, amt7);
         swap_pair_attacker_sdf_wbnb(amt8, amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -439,7 +439,7 @@ contract ShadowFiTest is Test, BlockLoader {
         burn_sdf_pair(amt7);
         swap_pair_attacker_sdf_wbnb(amt8, amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -464,7 +464,7 @@ contract ShadowFiTest is Test, BlockLoader {
         swap_pair_attacker_sdf_wbnb(amt5, amt6);
         swap_pair_attacker_wbnb_sdf(amt7, amt8);
         payback_sdf_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -491,7 +491,7 @@ contract ShadowFiTest is Test, BlockLoader {
         swap_pair_attacker_sdf_wbnb(amt6, amt7);
         swap_pair_attacker_wbnb_sdf(amt8, amt9);
         payback_sdf_owner(amt10);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -518,7 +518,7 @@ contract ShadowFiTest is Test, BlockLoader {
         swap_pair_attacker_sdf_wbnb(amt6, amt7);
         swap_pair_attacker_wbnb_sdf(amt8, amt9);
         payback_sdf_owner(amt10);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -545,7 +545,7 @@ contract ShadowFiTest is Test, BlockLoader {
         swap_pair_attacker_sdf_wbnb(amt6, amt7);
         swap_pair_attacker_wbnb_sdf(amt8, amt9);
         payback_sdf_owner(amt10);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -572,7 +572,7 @@ contract ShadowFiTest is Test, BlockLoader {
         burn_sdf_pair(amt7);
         swap_pair_attacker_wbnb_sdf(amt8, amt9);
         payback_sdf_owner(amt10);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -626,7 +626,28 @@ contract ShadowFiTest is Test, BlockLoader {
         burn_sdf_pair(amt3);
         swap_pair_attacker_sdf_wbnb(amt4, amt5);
         payback_wbnb_owner(amt6);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
+        vm.stopPrank();
+    }
+
+    function check_gt_halmos(
+        uint256 amt0,
+        uint256 amt1,
+        uint256 amt2,
+        uint256 amt3,
+        uint256 amt4,
+        uint256 amt5,
+        uint256 amt6
+    ) public {
+        vm.startPrank(attacker);
+        vm.warp(blockTimestamp);
+        vm.assume(amt6 >= amt0);
+        borrow_wbnb_owner(amt0);
+        swap_pair_attacker_wbnb_sdf(amt1, amt2);
+        burn_sdf_pair(amt3);
+        swap_pair_attacker_sdf_wbnb(amt4, amt5);
+        payback_wbnb_owner(amt6);
+        assert(!attackGoal());
         vm.stopPrank();
     }
 }

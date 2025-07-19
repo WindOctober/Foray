@@ -34,6 +34,7 @@ class BenchmarkBuilder:
 
     check_cand_prefix = "check_cand"
     check_gt_prefix = "check_gt"
+    check_gt_halmos_prefix = "check_gt_halmos"
     test_gt_prefix = "test_gt"
 
     def __init__(self, bmk_dir: str, sketch_generation: bool = False) -> None:
@@ -348,8 +349,9 @@ class BenchmarkBuilder:
     def gen_gt(self) -> List[str]:
         # Build groundtruth test for forge
         test_gt = self.gt_sketch.output_verify("test_gt", self.extra_statements, print_balance=True)
-        check_gt = self.gt_sketch.symbolic_copy().output("check_gt", self.extra_statements)
-        all = [*test_gt, *check_gt]
+        check_gt = self.gt_sketch.symbolic_copy().output(self.check_gt_prefix, self.extra_statements)
+        check_gt_halmos = self.gt_sketch.symbolic_copy().output(self.check_gt_halmos_prefix, self.extra_statements, is_halmos=True)
+        all = [*test_gt, *check_gt, *check_gt_halmos]
         return all
 
     def output(self, output_path: str):
@@ -415,7 +417,7 @@ class BenchmarkBuilder:
                 f.write("\n")
 
     def get_sketch_by_func_name(self, func_name: str, candidates: List[Sketch]):
-        if func_name == self.check_gt_prefix:
+        if func_name == self.check_gt_prefix or func_name == self.check_gt_halmos_prefix:
             idx = -1
         else:
             idx = int(func_name.removeprefix("check_cand"))

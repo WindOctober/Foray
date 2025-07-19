@@ -216,7 +216,7 @@ contract BGLDTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_bgld(amt1, amt2);
         swap_pair_attacker_bgld_wbnb(amt3, amt4);
         payback_wbnb_owner(amt5);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -236,7 +236,7 @@ contract BGLDTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_bgld(amt2, amt3);
         swap_pair_attacker_bgld_wbnb(amt4, amt5);
         payback_wbnb_owner(amt6);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -256,7 +256,7 @@ contract BGLDTest is Test, BlockLoader {
         burn_bgld_pair(amt3);
         swap_pair_attacker_bgld_wbnb(amt4, amt5);
         payback_wbnb_owner(amt6);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -274,7 +274,7 @@ contract BGLDTest is Test, BlockLoader {
         swap_pair_attacker_bgld_wbnb(amt1, amt2);
         swap_pair_attacker_wbnb_bgld(amt3, amt4);
         payback_bgld_owner(amt5);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -294,7 +294,7 @@ contract BGLDTest is Test, BlockLoader {
         swap_pair_attacker_bgld_wbnb(amt2, amt3);
         swap_pair_attacker_wbnb_bgld(amt4, amt5);
         payback_bgld_owner(amt6);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -314,7 +314,7 @@ contract BGLDTest is Test, BlockLoader {
         burn_bgld_pair(amt3);
         swap_pair_attacker_wbnb_bgld(amt4, amt5);
         payback_bgld_owner(amt6);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -338,7 +338,7 @@ contract BGLDTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_bgld(amt5, amt6);
         swap_pair_attacker_bgld_wbnb(amt7, amt8);
         payback_wbnb_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -364,7 +364,7 @@ contract BGLDTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_bgld(amt6, amt7);
         swap_pair_attacker_bgld_wbnb(amt8, amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -390,7 +390,7 @@ contract BGLDTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_bgld(amt6, amt7);
         swap_pair_attacker_bgld_wbnb(amt8, amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -416,7 +416,7 @@ contract BGLDTest is Test, BlockLoader {
         swap_pair_attacker_wbnb_bgld(amt6, amt7);
         swap_pair_attacker_bgld_wbnb(amt8, amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -442,7 +442,7 @@ contract BGLDTest is Test, BlockLoader {
         burn_bgld_pair(amt7);
         swap_pair_attacker_bgld_wbnb(amt8, amt9);
         payback_wbnb_owner(amt10);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -466,7 +466,7 @@ contract BGLDTest is Test, BlockLoader {
         swap_pair_attacker_bgld_wbnb(amt5, amt6);
         swap_pair_attacker_wbnb_bgld(amt7, amt8);
         payback_bgld_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -492,7 +492,7 @@ contract BGLDTest is Test, BlockLoader {
         swap_pair_attacker_bgld_wbnb(amt6, amt7);
         swap_pair_attacker_wbnb_bgld(amt8, amt9);
         payback_bgld_owner(amt10);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -518,7 +518,7 @@ contract BGLDTest is Test, BlockLoader {
         swap_pair_attacker_bgld_wbnb(amt6, amt7);
         swap_pair_attacker_wbnb_bgld(amt8, amt9);
         payback_bgld_owner(amt10);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -544,7 +544,7 @@ contract BGLDTest is Test, BlockLoader {
         swap_pair_attacker_bgld_wbnb(amt6, amt7);
         swap_pair_attacker_wbnb_bgld(amt8, amt9);
         payback_bgld_owner(amt10);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -570,7 +570,7 @@ contract BGLDTest is Test, BlockLoader {
         burn_bgld_pair(amt7);
         swap_pair_attacker_wbnb_bgld(amt8, amt9);
         payback_bgld_owner(amt10);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -627,7 +627,27 @@ contract BGLDTest is Test, BlockLoader {
         burn_bgld_pair(amt3);
         swap_pair_attacker_bgld_wbnb(amt4, amt5);
         payback_wbnb_owner(amt6);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
+        vm.stopPrank();
+    }
+
+    function check_gt_halmos(
+        uint256 amt0,
+        uint256 amt1,
+        uint256 amt2,
+        uint256 amt3,
+        uint256 amt4,
+        uint256 amt5,
+        uint256 amt6
+    ) public {
+        vm.startPrank(attacker);
+        vm.assume(amt6 >= amt0);
+        borrow_wbnb_owner(amt0);
+        swap_pair_attacker_wbnb_bgld(amt1, amt2);
+        burn_bgld_pair(amt3);
+        swap_pair_attacker_bgld_wbnb(amt4, amt5);
+        payback_wbnb_owner(amt6);
+        assert(!attackGoal());
         vm.stopPrank();
     }
 }

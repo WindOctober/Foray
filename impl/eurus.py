@@ -1,9 +1,9 @@
 import time
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Union, Literal, Tuple
 import json
 # import gurobipy as gp
 import re
-from z3 import *
+from z3 import Solver, sat, unsat, Real
 
 from impl.dsl import Sketch
 from .foundry_toolset import LazyStorage, deploy_contract, init_anvil, verify_model_on_anvil, verify_model_on_forge_debug
@@ -301,7 +301,7 @@ def eurus_solve(
     output_path: str,
     exec: FinancialExecution,
     refine_loop: int,
-) -> bool:
+) -> Tuple[Union[bool, Literal["UNSAT"]], float]:
     start_time = time.perf_counter()
     if Z3_OR_GB:
         res = solver.check()

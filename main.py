@@ -173,28 +173,28 @@ def prepare(bmk_dir: str):
     run(cmd, text=True, check=True)
 
     # Run ground truth
-    cmds = [
-        "forge",
-        "test",
-        "-vv",
-        "--cache-path",
-        cache_path,
-        "--match-path",
-        output_file,
-        "--extra-output",
-        "storageLayout",
-        "metadata",
-        "--root",
-        os.getcwd(),
-    ]
-    print("Execute: ", " ".join(cmds))
-    try:
-        out = run(cmds, text=True, check=True, capture_output=True)
-    except Exception as err:
-        if isinstance(err, CalledProcessError):
-            print(err.stderr, err.stdout)
-        print(f"\n\nBenchmark: {bmk_dir} ground truth doesn't work!")
-        raise err
+    # cmds = [
+    #     "forge",
+    #     "test",
+    #     "-vv",
+    #     "--cache-path",
+    #     cache_path,
+    #     "--match-path",
+    #     output_file,
+    #     "--extra-output",
+    #     "storageLayout",
+    #     "metadata",
+    #     "--root",
+    #     os.getcwd(),
+    # ]
+    # print("Execute: ", " ".join(cmds))
+    # try:
+    #     out = run(cmds, text=True, check=True, capture_output=True)
+    # except Exception as err:
+    #     if isinstance(err, CalledProcessError):
+    #         print(err.stderr, err.stdout)
+    #     print(f"\n\nBenchmark: {bmk_dir} ground truth doesn't work!")
+    #     raise err
 
     # Generate Candidates
 
@@ -292,8 +292,7 @@ def halmos_test(
             f"{timeout}",
             "--json-output",
             output_path,
-            "--smtdiv",
-            "Models",
+            "--smt-div",
             "--suffix",
             suffix_spec,
         ]

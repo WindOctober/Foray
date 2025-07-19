@@ -16,9 +16,15 @@ pip3 install -q --upgrade pip && pip3 install -q -r ./requirements.txt && \
 solc-select install 0.8.21 && solc-select use 0.8.21 && npm install --quiet --save-dev
 ```
 
-Install Foundry 0.2.0.
+Install Local Foundry
 ```bash
-curl -L https://foundry.paradigm.xyz | bash
+cd foundry-nightly-3c048be05726218c405d5d4deec4d3f1ab515f6f
+cargo build --release
+```
+
+Add built forge to $PATH
+```bash
+export PATH="$(pwd)/target/release:$PATH"
 ```
 
 ## Evaluation

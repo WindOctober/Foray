@@ -70,7 +70,7 @@ contract GPUTest is Test, BlockLoader {
         // Initialize balances and mock flashloan.
         busd.transfer(address(pair), balanceOfbusdpair);
         gpu.transfer(address(pair), balanceOfgpupair);
-        // vm.warp(30 days);
+        vm.warp(30 days);
         gpu.afterDeploy(address(router), address(pair));
     }
 
@@ -198,7 +198,7 @@ contract GPUTest is Test, BlockLoader {
         swap_pair_attacker_busd_gpu(amt1, amt2);
         swap_pair_attacker_gpu_busd(amt3, amt4);
         payback_busd_owner(amt5);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -216,7 +216,7 @@ contract GPUTest is Test, BlockLoader {
         swap_pair_attacker_gpu_busd(amt1, amt2);
         swap_pair_attacker_busd_gpu(amt3, amt4);
         payback_gpu_owner(amt5);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -235,7 +235,7 @@ contract GPUTest is Test, BlockLoader {
         payback_busd_owner(amt3);
         mint_gpu_attacker(amt4);
         payback_gpu_owner(amt5);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -254,7 +254,7 @@ contract GPUTest is Test, BlockLoader {
         payback_busd_pair(amt3);
         mint_gpu_attacker(amt4);
         payback_gpu_owner(amt5);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -276,7 +276,7 @@ contract GPUTest is Test, BlockLoader {
         mint_gpu_attacker(amt4);
         swap_pair_attacker_gpu_busd(amt5, amt6);
         payback_busd_owner(amt7);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -298,7 +298,7 @@ contract GPUTest is Test, BlockLoader {
         mint_gpu_attacker(amt4);
         swap_pair_attacker_gpu_busd(amt5, amt6);
         payback_busd_owner(amt7);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -322,7 +322,7 @@ contract GPUTest is Test, BlockLoader {
         swap_pair_attacker_busd_gpu(amt5, amt6);
         swap_pair_attacker_gpu_busd(amt7, amt8);
         payback_busd_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -344,7 +344,7 @@ contract GPUTest is Test, BlockLoader {
         payback_gpu_owner(amt5);
         mint_gpu_attacker(amt6);
         payback_gpu_owner(amt7);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -366,7 +366,7 @@ contract GPUTest is Test, BlockLoader {
         payback_gpu_pair(amt5);
         mint_gpu_attacker(amt6);
         payback_gpu_owner(amt7);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -390,7 +390,7 @@ contract GPUTest is Test, BlockLoader {
         swap_pair_attacker_gpu_busd(amt5, amt6);
         swap_pair_attacker_busd_gpu(amt7, amt8);
         payback_gpu_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -415,7 +415,7 @@ contract GPUTest is Test, BlockLoader {
         mint_gpu_attacker(amt6);
         swap_pair_attacker_gpu_busd(amt7, amt8);
         payback_busd_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -440,7 +440,7 @@ contract GPUTest is Test, BlockLoader {
         mint_gpu_attacker(amt6);
         swap_pair_attacker_gpu_busd(amt7, amt8);
         payback_busd_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -463,7 +463,7 @@ contract GPUTest is Test, BlockLoader {
         payback_gpu_owner(amt5);
         mint_gpu_attacker(amt6);
         payback_gpu_owner(amt7);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -486,7 +486,7 @@ contract GPUTest is Test, BlockLoader {
         payback_gpu_pair(amt5);
         mint_gpu_attacker(amt6);
         payback_gpu_owner(amt7);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -511,7 +511,7 @@ contract GPUTest is Test, BlockLoader {
         swap_pair_attacker_gpu_busd(amt5, amt6);
         swap_pair_attacker_busd_gpu(amt7, amt8);
         payback_gpu_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -534,7 +534,7 @@ contract GPUTest is Test, BlockLoader {
         payback_gpu_owner(amt5);
         mint_gpu_attacker(amt6);
         payback_gpu_owner(amt7);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -557,7 +557,7 @@ contract GPUTest is Test, BlockLoader {
         payback_gpu_pair(amt5);
         mint_gpu_attacker(amt6);
         payback_gpu_owner(amt7);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -582,7 +582,7 @@ contract GPUTest is Test, BlockLoader {
         swap_pair_attacker_gpu_busd(amt5, amt6);
         swap_pair_attacker_busd_gpu(amt7, amt8);
         payback_gpu_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -607,7 +607,7 @@ contract GPUTest is Test, BlockLoader {
         payback_busd_owner(amt7);
         mint_gpu_attacker(amt8);
         payback_gpu_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -632,7 +632,7 @@ contract GPUTest is Test, BlockLoader {
         payback_busd_pair(amt7);
         mint_gpu_attacker(amt8);
         payback_gpu_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -658,7 +658,7 @@ contract GPUTest is Test, BlockLoader {
         mint_gpu_attacker(amt6);
         swap_pair_attacker_gpu_busd(amt7, amt8);
         payback_busd_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -684,7 +684,7 @@ contract GPUTest is Test, BlockLoader {
         mint_gpu_attacker(amt6);
         swap_pair_attacker_gpu_busd(amt7, amt8);
         payback_busd_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -712,7 +712,7 @@ contract GPUTest is Test, BlockLoader {
         swap_pair_attacker_busd_gpu(amt7, amt8);
         swap_pair_attacker_gpu_busd(amt9, amt10);
         payback_busd_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -738,7 +738,7 @@ contract GPUTest is Test, BlockLoader {
         mint_gpu_attacker(amt6);
         swap_pair_attacker_gpu_busd(amt7, amt8);
         payback_busd_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -764,7 +764,7 @@ contract GPUTest is Test, BlockLoader {
         mint_gpu_attacker(amt6);
         swap_pair_attacker_gpu_busd(amt7, amt8);
         payback_busd_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -792,7 +792,7 @@ contract GPUTest is Test, BlockLoader {
         swap_pair_attacker_busd_gpu(amt7, amt8);
         swap_pair_attacker_gpu_busd(amt9, amt10);
         payback_busd_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -820,7 +820,7 @@ contract GPUTest is Test, BlockLoader {
         mint_gpu_attacker(amt8);
         swap_pair_attacker_gpu_busd(amt9, amt10);
         payback_busd_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -848,7 +848,7 @@ contract GPUTest is Test, BlockLoader {
         mint_gpu_attacker(amt8);
         swap_pair_attacker_gpu_busd(amt9, amt10);
         payback_busd_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -874,7 +874,7 @@ contract GPUTest is Test, BlockLoader {
         payback_busd_owner(amt7);
         mint_gpu_attacker(amt8);
         payback_gpu_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -900,7 +900,7 @@ contract GPUTest is Test, BlockLoader {
         payback_busd_pair(amt7);
         mint_gpu_attacker(amt8);
         payback_gpu_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -926,7 +926,7 @@ contract GPUTest is Test, BlockLoader {
         payback_busd_owner(amt7);
         mint_gpu_attacker(amt8);
         payback_gpu_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -952,7 +952,7 @@ contract GPUTest is Test, BlockLoader {
         payback_busd_pair(amt7);
         mint_gpu_attacker(amt8);
         payback_gpu_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -978,7 +978,7 @@ contract GPUTest is Test, BlockLoader {
         payback_gpu_owner(amt7);
         mint_gpu_attacker(amt8);
         payback_gpu_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1004,7 +1004,7 @@ contract GPUTest is Test, BlockLoader {
         payback_gpu_pair(amt7);
         mint_gpu_attacker(amt8);
         payback_gpu_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1032,7 +1032,7 @@ contract GPUTest is Test, BlockLoader {
         swap_pair_attacker_gpu_busd(amt7, amt8);
         swap_pair_attacker_busd_gpu(amt9, amt10);
         payback_gpu_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1058,7 +1058,7 @@ contract GPUTest is Test, BlockLoader {
         payback_gpu_owner(amt7);
         mint_gpu_attacker(amt8);
         payback_gpu_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1084,7 +1084,7 @@ contract GPUTest is Test, BlockLoader {
         payback_gpu_pair(amt7);
         mint_gpu_attacker(amt8);
         payback_gpu_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1112,7 +1112,7 @@ contract GPUTest is Test, BlockLoader {
         swap_pair_attacker_gpu_busd(amt7, amt8);
         swap_pair_attacker_busd_gpu(amt9, amt10);
         payback_gpu_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1140,7 +1140,7 @@ contract GPUTest is Test, BlockLoader {
         payback_gpu_owner(amt9);
         mint_gpu_attacker(amt10);
         payback_gpu_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1168,7 +1168,7 @@ contract GPUTest is Test, BlockLoader {
         payback_gpu_pair(amt9);
         mint_gpu_attacker(amt10);
         payback_gpu_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1225,7 +1225,27 @@ contract GPUTest is Test, BlockLoader {
         mint_gpu_attacker(amt3);
         swap_pair_attacker_gpu_busd(amt4, amt5);
         payback_busd_owner(amt6);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
+        vm.stopPrank();
+    }
+
+    function check_gt_halmos(
+        uint256 amt0,
+        uint256 amt1,
+        uint256 amt2,
+        uint256 amt3,
+        uint256 amt4,
+        uint256 amt5,
+        uint256 amt6
+    ) public {
+        vm.startPrank(attacker);
+        vm.assume(amt6 >= amt0);
+        borrow_busd_owner(amt0);
+        swap_pair_attacker_busd_gpu(amt1, amt2);
+        mint_gpu_attacker(amt3);
+        swap_pair_attacker_gpu_busd(amt4, amt5);
+        payback_busd_owner(amt6);
+        assert(!attackGoal());
         vm.stopPrank();
     }
 }

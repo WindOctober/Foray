@@ -354,7 +354,30 @@ contract LUSDTestBase is Test, BlockLoader {
         withdraw_lusdpool_lusd_usdt(amt5);
         swap_pairub_attacker_btcb_usdt(amt6, amt7);
         payback_usdt_owner(amt8);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
+        vm.stopPrank();
+    }
+
+    function check_gt_halmos(
+        uint256 amt0,
+        uint256 amt1,
+        uint256 amt2,
+        uint256 amt3,
+        uint256 amt4,
+        uint256 amt5,
+        uint256 amt6,
+        uint256 amt7,
+        uint256 amt8
+    ) public {
+        vm.startPrank(attacker);
+        vm.assume(amt8 >= amt0);
+        borrow_usdt_owner(amt0);
+        swap_pairub_attacker_usdt_btcb(amt1, amt2);
+        swap_loan_attacker_btcb_lusd(amt3, amt4);
+        withdraw_lusdpool_lusd_usdt(amt5);
+        swap_pairub_attacker_btcb_usdt(amt6, amt7);
+        payback_usdt_owner(amt8);
+        assert(!attackGoal());
         vm.stopPrank();
     }
 }

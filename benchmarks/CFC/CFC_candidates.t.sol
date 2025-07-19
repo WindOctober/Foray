@@ -343,7 +343,7 @@ contract CFCTest is Test, BlockLoader {
         swap_safeusdtPair_attacker_usdt_safe(amt1, amt2);
         swap_safeusdtPair_attacker_safe_usdt(amt3, amt4);
         payback_usdt_owner(amt5);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -363,7 +363,7 @@ contract CFCTest is Test, BlockLoader {
         swap_usdtcfc_attacker_usdt_cfc(amt1, amt2);
         swap_usdtcfc_attacker_cfc_usdt(amt3, amt4);
         payback_usdt_owner(amt5);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -383,7 +383,7 @@ contract CFCTest is Test, BlockLoader {
         swap_safeusdtPair_attacker_safe_usdt(amt1, amt2);
         swap_safeusdtPair_attacker_usdt_safe(amt3, amt4);
         payback_safe_owner(amt5);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -403,7 +403,7 @@ contract CFCTest is Test, BlockLoader {
         swap_usdtcfc_attacker_cfc_usdt(amt1, amt2);
         swap_usdtcfc_attacker_usdt_cfc(amt3, amt4);
         payback_cfc_owner(amt5);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -426,7 +426,7 @@ contract CFCTest is Test, BlockLoader {
         swap_pair_attacker_safe_cfc(amt3, amt4);
         swap_usdtcfc_attacker_cfc_usdt(amt5, amt6);
         payback_usdt_owner(amt7);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -451,7 +451,7 @@ contract CFCTest is Test, BlockLoader {
         swap_pair_attacker_safe_cfc(amt4, amt5);
         swap_usdtcfc_attacker_cfc_usdt(amt6, amt7);
         payback_usdt_owner(amt8);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -477,7 +477,7 @@ contract CFCTest is Test, BlockLoader {
         swap_usdtcfc_attacker_cfc_usdt(amt5, amt6);
         swap_safeusdtPair_attacker_safe_usdt(amt7, amt8);
         payback_usdt_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -500,7 +500,7 @@ contract CFCTest is Test, BlockLoader {
         swap_pair_attacker_cfc_safe(amt3, amt4);
         swap_safeusdtPair_attacker_safe_usdt(amt5, amt6);
         payback_usdt_owner(amt7);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -525,7 +525,7 @@ contract CFCTest is Test, BlockLoader {
         swap_pair_attacker_cfc_safe(amt4, amt5);
         swap_safeusdtPair_attacker_safe_usdt(amt6, amt7);
         payback_usdt_owner(amt8);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -551,7 +551,7 @@ contract CFCTest is Test, BlockLoader {
         swap_safeusdtPair_attacker_safe_usdt(amt5, amt6);
         swap_usdtcfc_attacker_cfc_usdt(amt7, amt8);
         payback_usdt_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -574,7 +574,7 @@ contract CFCTest is Test, BlockLoader {
         swap_usdtcfc_attacker_usdt_cfc(amt3, amt4);
         swap_pair_attacker_cfc_safe(amt5, amt6);
         payback_safe_owner(amt7);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -599,7 +599,7 @@ contract CFCTest is Test, BlockLoader {
         burn_cfc_pair(amt5);
         swap_pair_attacker_cfc_safe(amt6, amt7);
         payback_safe_owner(amt8);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -625,7 +625,7 @@ contract CFCTest is Test, BlockLoader {
         swap_pair_attacker_cfc_safe(amt5, amt6);
         swap_safeusdtPair_attacker_usdt_safe(amt7, amt8);
         payback_safe_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -648,7 +648,7 @@ contract CFCTest is Test, BlockLoader {
         swap_usdtcfc_attacker_cfc_usdt(amt3, amt4);
         swap_safeusdtPair_attacker_usdt_safe(amt5, amt6);
         payback_safe_owner(amt7);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -673,7 +673,7 @@ contract CFCTest is Test, BlockLoader {
         swap_usdtcfc_attacker_cfc_usdt(amt4, amt5);
         swap_safeusdtPair_attacker_usdt_safe(amt6, amt7);
         payback_safe_owner(amt8);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -699,7 +699,7 @@ contract CFCTest is Test, BlockLoader {
         swap_safeusdtPair_attacker_usdt_safe(amt5, amt6);
         swap_pair_attacker_cfc_safe(amt7, amt8);
         payback_safe_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -722,7 +722,7 @@ contract CFCTest is Test, BlockLoader {
         swap_safeusdtPair_attacker_safe_usdt(amt3, amt4);
         swap_usdtcfc_attacker_usdt_cfc(amt5, amt6);
         payback_cfc_owner(amt7);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -747,7 +747,7 @@ contract CFCTest is Test, BlockLoader {
         swap_safeusdtPair_attacker_safe_usdt(amt4, amt5);
         swap_usdtcfc_attacker_usdt_cfc(amt6, amt7);
         payback_cfc_owner(amt8);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -773,7 +773,7 @@ contract CFCTest is Test, BlockLoader {
         swap_usdtcfc_attacker_usdt_cfc(amt5, amt6);
         swap_pair_attacker_safe_cfc(amt7, amt8);
         payback_cfc_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -796,7 +796,7 @@ contract CFCTest is Test, BlockLoader {
         swap_safeusdtPair_attacker_usdt_safe(amt3, amt4);
         swap_pair_attacker_safe_cfc(amt5, amt6);
         payback_cfc_owner(amt7);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -821,7 +821,7 @@ contract CFCTest is Test, BlockLoader {
         burn_cfc_pair(amt5);
         swap_pair_attacker_safe_cfc(amt6, amt7);
         payback_cfc_owner(amt8);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -847,7 +847,7 @@ contract CFCTest is Test, BlockLoader {
         swap_pair_attacker_safe_cfc(amt5, amt6);
         swap_usdtcfc_attacker_usdt_cfc(amt7, amt8);
         payback_cfc_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -873,7 +873,7 @@ contract CFCTest is Test, BlockLoader {
         swap_safeusdtPair_attacker_usdt_safe(amt5, amt6);
         swap_safeusdtPair_attacker_safe_usdt(amt7, amt8);
         payback_usdt_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -899,7 +899,7 @@ contract CFCTest is Test, BlockLoader {
         swap_usdtcfc_attacker_usdt_cfc(amt5, amt6);
         swap_usdtcfc_attacker_cfc_usdt(amt7, amt8);
         payback_usdt_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -925,7 +925,7 @@ contract CFCTest is Test, BlockLoader {
         swap_pair_attacker_cfc_safe(amt5, amt6);
         swap_safeusdtPair_attacker_safe_usdt(amt7, amt8);
         payback_usdt_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -953,7 +953,7 @@ contract CFCTest is Test, BlockLoader {
         swap_pair_attacker_cfc_safe(amt6, amt7);
         swap_safeusdtPair_attacker_safe_usdt(amt8, amt9);
         payback_usdt_owner(amt10);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -981,7 +981,7 @@ contract CFCTest is Test, BlockLoader {
         swap_pair_attacker_cfc_safe(amt6, amt7);
         swap_safeusdtPair_attacker_safe_usdt(amt8, amt9);
         payback_usdt_owner(amt10);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1010,7 +1010,7 @@ contract CFCTest is Test, BlockLoader {
         swap_safeusdtPair_attacker_safe_usdt(amt7, amt8);
         swap_usdtcfc_attacker_cfc_usdt(amt9, amt10);
         payback_usdt_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1036,7 +1036,7 @@ contract CFCTest is Test, BlockLoader {
         swap_pair_attacker_safe_cfc(amt5, amt6);
         swap_usdtcfc_attacker_cfc_usdt(amt7, amt8);
         payback_usdt_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1064,7 +1064,7 @@ contract CFCTest is Test, BlockLoader {
         swap_pair_attacker_safe_cfc(amt6, amt7);
         swap_usdtcfc_attacker_cfc_usdt(amt8, amt9);
         payback_usdt_owner(amt10);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1092,7 +1092,7 @@ contract CFCTest is Test, BlockLoader {
         swap_pair_attacker_safe_cfc(amt6, amt7);
         swap_usdtcfc_attacker_cfc_usdt(amt8, amt9);
         payback_usdt_owner(amt10);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1121,7 +1121,7 @@ contract CFCTest is Test, BlockLoader {
         swap_usdtcfc_attacker_cfc_usdt(amt7, amt8);
         swap_safeusdtPair_attacker_safe_usdt(amt9, amt10);
         payback_usdt_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1147,7 +1147,7 @@ contract CFCTest is Test, BlockLoader {
         swap_safeusdtPair_attacker_usdt_safe(amt5, amt6);
         swap_safeusdtPair_attacker_safe_usdt(amt7, amt8);
         payback_usdt_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1173,7 +1173,7 @@ contract CFCTest is Test, BlockLoader {
         swap_usdtcfc_attacker_usdt_cfc(amt5, amt6);
         swap_usdtcfc_attacker_cfc_usdt(amt7, amt8);
         payback_usdt_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1199,7 +1199,7 @@ contract CFCTest is Test, BlockLoader {
         swap_safeusdtPair_attacker_safe_usdt(amt5, amt6);
         swap_safeusdtPair_attacker_usdt_safe(amt7, amt8);
         payback_safe_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1225,7 +1225,7 @@ contract CFCTest is Test, BlockLoader {
         swap_pair_attacker_safe_cfc(amt5, amt6);
         swap_pair_attacker_cfc_safe(amt7, amt8);
         payback_safe_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1253,7 +1253,7 @@ contract CFCTest is Test, BlockLoader {
         swap_pair_attacker_safe_cfc(amt6, amt7);
         swap_pair_attacker_cfc_safe(amt8, amt9);
         payback_safe_owner(amt10);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1281,7 +1281,7 @@ contract CFCTest is Test, BlockLoader {
         burn_cfc_pair(amt7);
         swap_pair_attacker_cfc_safe(amt8, amt9);
         payback_safe_owner(amt10);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1307,7 +1307,7 @@ contract CFCTest is Test, BlockLoader {
         swap_usdtcfc_attacker_cfc_usdt(amt5, amt6);
         swap_safeusdtPair_attacker_usdt_safe(amt7, amt8);
         payback_safe_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1336,7 +1336,7 @@ contract CFCTest is Test, BlockLoader {
         swap_safeusdtPair_attacker_usdt_safe(amt7, amt8);
         swap_pair_attacker_cfc_safe(amt9, amt10);
         payback_safe_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1362,7 +1362,7 @@ contract CFCTest is Test, BlockLoader {
         swap_safeusdtPair_attacker_safe_usdt(amt5, amt6);
         swap_safeusdtPair_attacker_usdt_safe(amt7, amt8);
         payback_safe_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1390,7 +1390,7 @@ contract CFCTest is Test, BlockLoader {
         swap_safeusdtPair_attacker_safe_usdt(amt6, amt7);
         swap_safeusdtPair_attacker_usdt_safe(amt8, amt9);
         payback_safe_owner(amt10);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1418,7 +1418,7 @@ contract CFCTest is Test, BlockLoader {
         swap_safeusdtPair_attacker_safe_usdt(amt6, amt7);
         swap_safeusdtPair_attacker_usdt_safe(amt8, amt9);
         payback_safe_owner(amt10);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1444,7 +1444,7 @@ contract CFCTest is Test, BlockLoader {
         swap_usdtcfc_attacker_usdt_cfc(amt5, amt6);
         swap_pair_attacker_cfc_safe(amt7, amt8);
         payback_safe_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1472,7 +1472,7 @@ contract CFCTest is Test, BlockLoader {
         swap_usdtcfc_attacker_usdt_cfc(amt6, amt7);
         swap_pair_attacker_cfc_safe(amt8, amt9);
         payback_safe_owner(amt10);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1500,7 +1500,7 @@ contract CFCTest is Test, BlockLoader {
         burn_cfc_pair(amt7);
         swap_pair_attacker_cfc_safe(amt8, amt9);
         payback_safe_owner(amt10);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1529,7 +1529,7 @@ contract CFCTest is Test, BlockLoader {
         swap_pair_attacker_cfc_safe(amt7, amt8);
         swap_safeusdtPair_attacker_usdt_safe(amt9, amt10);
         payback_safe_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1555,7 +1555,7 @@ contract CFCTest is Test, BlockLoader {
         swap_safeusdtPair_attacker_usdt_safe(amt5, amt6);
         swap_pair_attacker_safe_cfc(amt7, amt8);
         payback_cfc_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1583,7 +1583,7 @@ contract CFCTest is Test, BlockLoader {
         swap_safeusdtPair_attacker_usdt_safe(amt6, amt7);
         swap_pair_attacker_safe_cfc(amt8, amt9);
         payback_cfc_owner(amt10);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1611,7 +1611,7 @@ contract CFCTest is Test, BlockLoader {
         burn_cfc_pair(amt7);
         swap_pair_attacker_safe_cfc(amt8, amt9);
         payback_cfc_owner(amt10);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1640,7 +1640,7 @@ contract CFCTest is Test, BlockLoader {
         swap_pair_attacker_safe_cfc(amt7, amt8);
         swap_usdtcfc_attacker_usdt_cfc(amt9, amt10);
         payback_cfc_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1666,7 +1666,7 @@ contract CFCTest is Test, BlockLoader {
         swap_usdtcfc_attacker_cfc_usdt(amt5, amt6);
         swap_usdtcfc_attacker_usdt_cfc(amt7, amt8);
         payback_cfc_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1694,7 +1694,7 @@ contract CFCTest is Test, BlockLoader {
         swap_usdtcfc_attacker_cfc_usdt(amt6, amt7);
         swap_usdtcfc_attacker_usdt_cfc(amt8, amt9);
         payback_cfc_owner(amt10);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1722,7 +1722,7 @@ contract CFCTest is Test, BlockLoader {
         swap_usdtcfc_attacker_cfc_usdt(amt6, amt7);
         swap_usdtcfc_attacker_usdt_cfc(amt8, amt9);
         payback_cfc_owner(amt10);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1748,7 +1748,7 @@ contract CFCTest is Test, BlockLoader {
         swap_safeusdtPair_attacker_safe_usdt(amt5, amt6);
         swap_usdtcfc_attacker_usdt_cfc(amt7, amt8);
         payback_cfc_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1777,7 +1777,7 @@ contract CFCTest is Test, BlockLoader {
         swap_usdtcfc_attacker_usdt_cfc(amt7, amt8);
         swap_pair_attacker_safe_cfc(amt9, amt10);
         payback_cfc_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1803,7 +1803,7 @@ contract CFCTest is Test, BlockLoader {
         swap_pair_attacker_cfc_safe(amt5, amt6);
         swap_pair_attacker_safe_cfc(amt7, amt8);
         payback_cfc_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1831,7 +1831,7 @@ contract CFCTest is Test, BlockLoader {
         swap_pair_attacker_cfc_safe(amt6, amt7);
         swap_pair_attacker_safe_cfc(amt8, amt9);
         payback_cfc_owner(amt10);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1859,7 +1859,7 @@ contract CFCTest is Test, BlockLoader {
         burn_cfc_pair(amt7);
         swap_pair_attacker_safe_cfc(amt8, amt9);
         payback_cfc_owner(amt10);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1885,7 +1885,7 @@ contract CFCTest is Test, BlockLoader {
         swap_usdtcfc_attacker_cfc_usdt(amt5, amt6);
         swap_usdtcfc_attacker_usdt_cfc(amt7, amt8);
         payback_cfc_owner(amt9);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1914,7 +1914,7 @@ contract CFCTest is Test, BlockLoader {
         swap_pair_attacker_safe_cfc(amt7, amt8);
         swap_usdtcfc_attacker_cfc_usdt(amt9, amt10);
         payback_usdt_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1943,7 +1943,7 @@ contract CFCTest is Test, BlockLoader {
         swap_pair_attacker_cfc_safe(amt7, amt8);
         swap_safeusdtPair_attacker_safe_usdt(amt9, amt10);
         payback_usdt_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -1972,7 +1972,7 @@ contract CFCTest is Test, BlockLoader {
         swap_pair_attacker_safe_cfc(amt7, amt8);
         swap_usdtcfc_attacker_cfc_usdt(amt9, amt10);
         payback_usdt_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2001,7 +2001,7 @@ contract CFCTest is Test, BlockLoader {
         swap_safeusdtPair_attacker_usdt_safe(amt7, amt8);
         swap_safeusdtPair_attacker_safe_usdt(amt9, amt10);
         payback_usdt_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2030,7 +2030,7 @@ contract CFCTest is Test, BlockLoader {
         swap_usdtcfc_attacker_usdt_cfc(amt7, amt8);
         swap_usdtcfc_attacker_cfc_usdt(amt9, amt10);
         payback_usdt_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2059,7 +2059,7 @@ contract CFCTest is Test, BlockLoader {
         swap_safeusdtPair_attacker_usdt_safe(amt7, amt8);
         swap_safeusdtPair_attacker_safe_usdt(amt9, amt10);
         payback_usdt_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2088,7 +2088,7 @@ contract CFCTest is Test, BlockLoader {
         swap_usdtcfc_attacker_usdt_cfc(amt7, amt8);
         swap_usdtcfc_attacker_cfc_usdt(amt9, amt10);
         payback_usdt_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2117,7 +2117,7 @@ contract CFCTest is Test, BlockLoader {
         swap_pair_attacker_cfc_safe(amt7, amt8);
         swap_safeusdtPair_attacker_safe_usdt(amt9, amt10);
         payback_usdt_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2146,7 +2146,7 @@ contract CFCTest is Test, BlockLoader {
         swap_pair_attacker_safe_cfc(amt7, amt8);
         swap_usdtcfc_attacker_cfc_usdt(amt9, amt10);
         payback_usdt_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2175,7 +2175,7 @@ contract CFCTest is Test, BlockLoader {
         swap_pair_attacker_cfc_safe(amt7, amt8);
         swap_safeusdtPair_attacker_safe_usdt(amt9, amt10);
         payback_usdt_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2204,7 +2204,7 @@ contract CFCTest is Test, BlockLoader {
         swap_usdtcfc_attacker_usdt_cfc(amt7, amt8);
         swap_pair_attacker_cfc_safe(amt9, amt10);
         payback_safe_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2233,7 +2233,7 @@ contract CFCTest is Test, BlockLoader {
         swap_usdtcfc_attacker_cfc_usdt(amt7, amt8);
         swap_safeusdtPair_attacker_usdt_safe(amt9, amt10);
         payback_safe_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2262,7 +2262,7 @@ contract CFCTest is Test, BlockLoader {
         swap_safeusdtPair_attacker_safe_usdt(amt7, amt8);
         swap_safeusdtPair_attacker_usdt_safe(amt9, amt10);
         payback_safe_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2291,7 +2291,7 @@ contract CFCTest is Test, BlockLoader {
         swap_pair_attacker_safe_cfc(amt7, amt8);
         swap_pair_attacker_cfc_safe(amt9, amt10);
         payback_safe_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2320,7 +2320,7 @@ contract CFCTest is Test, BlockLoader {
         swap_usdtcfc_attacker_usdt_cfc(amt7, amt8);
         swap_pair_attacker_cfc_safe(amt9, amt10);
         payback_safe_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2349,7 +2349,7 @@ contract CFCTest is Test, BlockLoader {
         swap_usdtcfc_attacker_usdt_cfc(amt7, amt8);
         swap_pair_attacker_cfc_safe(amt9, amt10);
         payback_safe_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2378,7 +2378,7 @@ contract CFCTest is Test, BlockLoader {
         swap_usdtcfc_attacker_cfc_usdt(amt7, amt8);
         swap_safeusdtPair_attacker_usdt_safe(amt9, amt10);
         payback_safe_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2407,7 +2407,7 @@ contract CFCTest is Test, BlockLoader {
         swap_safeusdtPair_attacker_safe_usdt(amt7, amt8);
         swap_safeusdtPair_attacker_usdt_safe(amt9, amt10);
         payback_safe_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2436,7 +2436,7 @@ contract CFCTest is Test, BlockLoader {
         swap_pair_attacker_safe_cfc(amt7, amt8);
         swap_pair_attacker_cfc_safe(amt9, amt10);
         payback_safe_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2465,7 +2465,7 @@ contract CFCTest is Test, BlockLoader {
         swap_usdtcfc_attacker_cfc_usdt(amt7, amt8);
         swap_safeusdtPair_attacker_usdt_safe(amt9, amt10);
         payback_safe_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2494,7 +2494,7 @@ contract CFCTest is Test, BlockLoader {
         swap_safeusdtPair_attacker_safe_usdt(amt7, amt8);
         swap_usdtcfc_attacker_usdt_cfc(amt9, amt10);
         payback_cfc_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2523,7 +2523,7 @@ contract CFCTest is Test, BlockLoader {
         swap_pair_attacker_cfc_safe(amt7, amt8);
         swap_pair_attacker_safe_cfc(amt9, amt10);
         payback_cfc_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2552,7 +2552,7 @@ contract CFCTest is Test, BlockLoader {
         swap_usdtcfc_attacker_cfc_usdt(amt7, amt8);
         swap_usdtcfc_attacker_usdt_cfc(amt9, amt10);
         payback_cfc_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2581,7 +2581,7 @@ contract CFCTest is Test, BlockLoader {
         swap_safeusdtPair_attacker_safe_usdt(amt7, amt8);
         swap_usdtcfc_attacker_usdt_cfc(amt9, amt10);
         payback_cfc_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2610,7 +2610,7 @@ contract CFCTest is Test, BlockLoader {
         swap_safeusdtPair_attacker_usdt_safe(amt7, amt8);
         swap_pair_attacker_safe_cfc(amt9, amt10);
         payback_cfc_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2639,7 +2639,7 @@ contract CFCTest is Test, BlockLoader {
         swap_safeusdtPair_attacker_usdt_safe(amt7, amt8);
         swap_pair_attacker_safe_cfc(amt9, amt10);
         payback_cfc_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2668,7 +2668,7 @@ contract CFCTest is Test, BlockLoader {
         swap_pair_attacker_cfc_safe(amt7, amt8);
         swap_pair_attacker_safe_cfc(amt9, amt10);
         payback_cfc_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2697,7 +2697,7 @@ contract CFCTest is Test, BlockLoader {
         swap_usdtcfc_attacker_cfc_usdt(amt7, amt8);
         swap_usdtcfc_attacker_usdt_cfc(amt9, amt10);
         payback_cfc_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2726,7 +2726,7 @@ contract CFCTest is Test, BlockLoader {
         swap_safeusdtPair_attacker_safe_usdt(amt7, amt8);
         swap_usdtcfc_attacker_usdt_cfc(amt9, amt10);
         payback_cfc_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2755,7 +2755,7 @@ contract CFCTest is Test, BlockLoader {
         swap_safeusdtPair_attacker_usdt_safe(amt7, amt8);
         swap_pair_attacker_safe_cfc(amt9, amt10);
         payback_cfc_owner(amt11);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
         vm.stopPrank();
     }
 
@@ -2814,7 +2814,29 @@ contract CFCTest is Test, BlockLoader {
         burn_cfc_pair(amt3);
         swap_usdtcfc_attacker_cfc_usdt(amt4, amt5);
         payback_usdt_owner(amt6);
-        require(!attackGoal(), "Attack succeed!");
+        require(!attackGoal(), "Attack failed!");
+        vm.stopPrank();
+    }
+
+    function check_gt_halmos(
+        uint256 amt0,
+        uint256 amt1,
+        uint256 amt2,
+        uint256 amt3,
+        uint256 amt4,
+        uint256 amt5,
+        uint256 amt6
+    ) public {
+        vm.startPrank(attacker);
+        vm.warp(blockTimestamp);
+        vm.roll(29668034);
+        vm.assume(amt6 >= amt0);
+        borrow_usdt_owner(amt0);
+        swap_usdtcfc_attacker_usdt_cfc(amt1, amt2);
+        burn_cfc_pair(amt3);
+        swap_usdtcfc_attacker_cfc_usdt(amt4, amt5);
+        payback_usdt_owner(amt6);
+        assert(!attackGoal());
         vm.stopPrank();
     }
 }
