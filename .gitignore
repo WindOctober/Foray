@@ -121,6 +121,7 @@ celerybeat.pid
 # Environments
 .env
 .venv
+.venv_wsl
 env/
 venv/
 ENV/
@@ -169,4 +170,6 @@ work_dir
 
 node_modules
 benchmarks/**/.cache
+benchmarks/**/*_tfg.json
+benchmarks/**/*.bak
 package-lock.json

@@ -103,7 +103,7 @@ class BenchmarkBuilder:
         if path.exists(cache_file):
             with open(cache_file, "r") as f:
                 outputs = f.readlines()
-                outputs = [l.removesuffix("\n") for l in outputs]
+                outputs = [l.rstrip("\n") for l in outputs]
         else:
             cmd = [
                 "forge",
@@ -149,8 +149,8 @@ class BenchmarkBuilder:
             if len(result) != 3:
                 continue
             type_str, sv_name, sv_val = result
-            type_str = type_str.removeprefix(" ")
-            sv_name = sv_name.removesuffix(":")
+            type_str = type_str[1:] if type_str.startswith(" ") else type_str
+            sv_name = sv_name[:-1] if sv_name.endswith(":") else sv_name
             self.init_state[sv_name] = (type_str, sv_val)
 
     def _init_ava_action_names(self):

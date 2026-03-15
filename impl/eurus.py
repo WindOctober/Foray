@@ -73,7 +73,9 @@ class VAR:
             if model[self.var_obj] is None:
                 r = 0
             else:
-                r = float(model[self.var_obj].as_decimal(DECIMAL).removesuffix("?")) * SCALE
+                decimal_str = model[self.var_obj].as_decimal(DECIMAL)
+                decimal_str = decimal_str[:-1] if decimal_str.endswith("?") else decimal_str
+                r = float(decimal_str) * SCALE
             return r
         else:
             return self.var_obj.x * SCALE
@@ -112,23 +114,23 @@ class VarGetter:
     def get(self, __name: str) -> Any:
         idx = self.idx
         if __name.startswith("old_"):
-            key = __name.removeprefix("old_")
+            key = __name[4:] if __name.startswith("old_") else __name
             r = self.pre_state[key].var_obj
             return r
         elif __name.startswith("new_"):
-            key = __name.removeprefix("new_")
+            key = __name[4:] if __name.startswith("new_") else __name
             r = self.post_state[key].var_obj
             return r
         elif __name.startswith("arg_"):
-            key = __name.removeprefix("arg_")
+            key = __name[4:] if __name.startswith("arg_") else __name
             r = self.params[key].var_obj
             return r
         elif __name.startswith("init_"):
-            key = __name.removeprefix("init_")
+            key = __name[5:] if __name.startswith("init_") else __name
             r = self.init_state[key].var_obj
             return r
         elif __name.startswith("alias_"):
-            key = __name.removeprefix("alias_")
+            key = __name[6:] if __name.startswith("alias_") else __name
             r = self.param_alias[key].var_obj
             return r
         else:

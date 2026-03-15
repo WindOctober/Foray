@@ -94,7 +94,7 @@ class TFGManager:
             self.sub_graphs[a] = sub_graph
 
         self.main_graph = self.sub_graphs["attacker"]
-        self.start_node: TFGNode = sub_graph.get_node(VOID)
+        self.start_node: TFGNode = self.main_graph.get_node(VOID)
 
         for f in func_summarys:
             if f.action_name in ("swap", "deposit", "withdraw"):
@@ -116,33 +116,70 @@ class TFGManager:
                     e1 = sub_graph1.add_edge(VOID, flow.token, f)
 
     def prune(self, trace: TRACE) -> bool:
+        def trace_sig(t):
+            try:
+                return ' | '.join([f"{e.label.action_name}:{e.start.token}->{e.end.token}" for e in t])
+            except Exception:
+                return str([getattr(e, 'name', repr(e)) for e in t])
+
+        # 1) last edge must end in VOID (flashloan completion)
         if trace[-1].end.token != VOID:
+            print(f"[prune] reason=last_end_not_VOID trace={trace_sig(trace)}")
             return True
+
+        # 2) first edge end token should match last edge start token
         if trace[0].end.token != trace[-1].start.token:
+            print(f"[prune] reason=start_end_mismatch trace={trace_sig(trace)}")
             return True
-        if trace[0].label.lender != trace[-1].label.lender:
+
+        def _safe_get(obj, name):
+            try:
+                return getattr(obj, name)
+            except (AttributeError, NotImplementedError, IndexError):
+                return None
+
+        # 3) lender must match for flashloan sequences
+        if _safe_get(trace[0].label, 'lender') != _safe_get(trace[-1].label, 'lender'):
+            print(f"[prune] reason=lender_mismatch trace={trace_sig(trace)} lenders=({_safe_get(trace[0].label,'lender')},{_safe_get(trace[-1].label,'lender')})")
             return True
+
         has_attack_goal_token = False
         for idx, e in enumerate(trace):
             action = e.label
-            if e.end.token == self.attack_goal and action.action_name != "borrow":
-                has_attack_goal_token = True
+            # check attack goal token presence
+            try:
+                if e.end.token == self.attack_goal and action.action_name != "borrow":
+                    has_attack_goal_token = True
+            except Exception:
+                pass
+
             if idx >= 1:
                 last_e = trace[idx - 1]
                 last_action = last_e.label
                 if action.action_name == "borrow" and last_action.action_name == "payback":
+                    print(f"[prune] reason=borrow_after_payback trace={trace_sig(trace)} idx={idx}")
                     return True
                 if action.action_name == "payback" and last_action.action_name == "borrow":
+                    print(f"[prune] reason=payback_after_borrow trace={trace_sig(trace)} idx={idx}")
                     return True
-            # Avoid do swap inside flashloan
+
+            # Avoid swap inside flashloan when lender == swap_pair
             if action.action_name == "swap":
                 for jdx, e1 in enumerate(trace[:idx]):
                     e1_action = e1.label
-                    if e1_action.action_name == "borrow":
-                        if e1_action.lender == action.swap_pair:
-                            return True
+                    try:
+                        if e1_action.action_name == "borrow":
+                            if _safe_get(e1_action, 'lender') == _safe_get(action, 'swap_pair'):
+                                print(f"[prune] reason=swap_inside_flashloan trace={trace_sig(trace)} idx={idx} borrow_idx={jdx}")
+                                return True
+                    except Exception:
+                        continue
+
         if not has_attack_goal_token:
+            print(f"[prune] reason=no_attack_goal_token trace={trace_sig(trace)}")
             return True
+
+        return False
 
     def mutation(self, sketch: Sketch):
         # Heuristics
@@ -262,3 +299,86 @@ class TFGManager:
 
             i += 1
         return candidates
+
+
+def load_tfg_manager_from_json(json_path: str) -> TFGManager:
+    """Load TFGManager from a Flare_submit-exported JSON file."""
+    import json
+
+    with open(json_path, 'r') as f:
+        data = json.load(f)
+
+    tokens = data['tokens']
+    accounts = data['accounts']
+    func_summaries = [AFLAction.from_dict(action_data) for action_data in data['func_summaries']]
+
+    ag = data.get('attack_goal', {})
+    if isinstance(ag, dict):
+        attack_goal = ag.get('profit_token', None)
+    else:
+        attack_goal = ag
+
+    if attack_goal is None or attack_goal not in tokens:
+        for token in tokens:
+            if token != VOID:
+                attack_goal = token
+                break
+
+    manager = TFGManager(tokens, accounts, func_summaries, attack_goal)
+
+    for account, tfg_data in data['sub_graphs'].items():
+        sub_graph = manager.sub_graphs[account]
+
+        # TFGManager.__init__ constructs edges from func_summaries using Foray's
+        # internal graph-building logic. When loading from JSON we must fully
+        # replace that structure with the exported graph rather than layering on
+        # top of it, otherwise node edge lists keep stale inferred edges.
+        sub_graph.edges.clear()
+        for node in sub_graph.nodes.values():
+            node.outcome_edges.clear()
+            node.income_edges.clear()
+
+        for node_data in tfg_data.get('nodes', {}).values():
+            token = node_data.get('token')
+            if token is None:
+                continue
+            node_key = f"{account}-{token}"
+            if node_key not in sub_graph.nodes:
+                sub_graph.add_node(token)
+
+        for edge_data in tfg_data.get('edges', {}).values():
+            start_token = edge_data['start'].split('-', 1)[1]
+            end_token = edge_data['end'].split('-', 1)[1]
+            label = AFLAction.from_dict(edge_data['label'])
+
+            if f"{account}-{start_token}" not in sub_graph.nodes:
+                sub_graph.add_node(start_token)
+            if f"{account}-{end_token}" not in sub_graph.nodes:
+                sub_graph.add_node(end_token)
+
+            sub_graph.add_edge(start_token, end_token, label)
+
+    manager.address_to_role = data.get('address_to_role', {})
+
+    try:
+        print(f"[load_tfg_manager_from_json] tokens={manager.tokens}")
+        print(f"[load_tfg_manager_from_json] accounts={manager.accounts}")
+        print(f"[load_tfg_manager_from_json] attack_goal={manager.attack_goal}")
+        if hasattr(manager, 'start_node') and manager.start_node is not None:
+            print(f"[load_tfg_manager_from_json] start_node={manager.start_node.name} outcomes={len(manager.start_node.outcome_edges)}")
+            print(f"[load_tfg_manager_from_json] start_outcome_names={[e.name for e in manager.start_node.outcome_edges]}")
+    except Exception:
+        pass
+
+    try:
+        main = manager.sub_graphs.get('attacker', None)
+        if main is not None and (manager.start_node is None or len(manager.start_node.outcome_edges) == 0):
+            for node in main.nodes.values():
+                if len(node.outcome_edges) > 0:
+                    manager.start_node = node
+                    print(f"[load_tfg_manager_from_json] switched start_node to {node.name}")
+                    break
+    except Exception:
+        pass
+
+    return manager

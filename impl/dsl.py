@@ -147,6 +147,27 @@ class AFLAction:
         self.token_flows = token_flows
         self.constraints = constraints
 
+    @classmethod
+    def from_dict(cls, data: dict) -> "AFLAction":
+        """Create AFLAction from dict (for loading from JSON)."""
+        action_name = data['action_name']
+        func_sig = data['func_sig']
+        # Parse args_in_name from func_sig, e.g., "swap_pair_token0_token1" -> ["pair", "token0", "token1"]
+        parts = func_sig.split('_')
+        if len(parts) > 1:
+            args_in_name = parts[1:]
+        else:
+            args_in_name = []
+        # Assume args are symbolic or empty for now
+        args = [f"amt{i}" for i in range(len(args_in_name))] if args_in_name else []
+        action = cls(action_name, args_in_name, args)
+        # Set additional fields if present
+        if 'token_flows' in data:
+            action.token_flows = data['token_flows']
+        if 'constraints' in data:
+            action.constraints = data['constraints']
+        return action
+
 
 class NOP(AFLAction):
     def __init__(self, concrete: bool = False) -> None:

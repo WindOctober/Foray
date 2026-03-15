@@ -41,7 +41,10 @@ def init_anvil(timestamp: int):
         "--gas-limit",
         str(10**8),
     ]
-    return Popen(cmd, stdout=DEVNULL)
+    import time
+    proc = Popen(cmd, stdout=DEVNULL)
+    time.sleep(2)  # Wait for anvil to start
+    return proc
 
 
 def create_snapshot() -> str:
@@ -137,6 +140,8 @@ def deploy_contract(bmk_dir: str):
         f"{DEFAULT_HOST}:{DEFAULT_PORT}",
         "--private-key",
         DEFAULT_PK,
+        "--broadcast",
+        "--via-ir",
         "--cache-path",
         cache_path,
         "--extra-output",
@@ -153,10 +158,16 @@ def deploy_contract(bmk_dir: str):
         raise err
     lines = out.stdout.splitlines(keepends=False)
     address = None
-    # print(lines)
+    print("=== Deploy Command Output ===")
+    print("STDOUT:")
+    print(out.stdout)
+    print("STDERR:")
+    print(out.stderr)
+    print("=== End Output ===")
     for l in lines:
         if l.startswith("Deployed to: "):
-            address = l.removeprefix("Deployed to: ").strip()
+            address = l[13:] if l.startswith("Deployed to: ") else l
+            address = address.strip()
     if address is None:
         raise ValueError("Unknown address for deployment.")
 
@@ -172,10 +183,14 @@ def deploy_contract(bmk_dir: str):
         str(10**8),
         address,
         "setUp()",
-        "",
     ]
     try:
         out = run(cmd, text=True, capture_output=True)
+        print("=== setUp() Output ===")
+        print("STDOUT:", out.stdout)
+        print("STDERR:", out.stderr)
+        print("Return code:", out.returncode)
+        print("=== End setUp() ===")
     except Exception as err:
         print(f"Setup contract:{project_name} failed!")
         raise err
@@ -183,30 +198,34 @@ def deploy_contract(bmk_dir: str):
     # Run snapshot
     snapshot_id = create_snapshot()
 
-    # Query storage to get the address of contracts
-    cmd = [
-        "cast",
-        "storage",
-        "--silent",
-        address,
-    ]
-    try:
-        out = run(cmd, text=True, capture_output=True)
-    except Exception as err:
-        print(f"Query storage contract:{project_name} failed!")
-        raise err
-
-    lines = out.stdout.splitlines(keepends=False)
-    
-    init_storage = parse_cast_storage_info(lines)
+    # Get contract addresses by calling the contract instance getters
     ctrt_name2addr: Dict[str, str] = {}
-
-    for role, _ in config.ctrt_name2cls:
-        addr_var = init_storage[f"{role}Addr"]
-        ctrt_name2addr[role] = int2address(int(addr_var.value))
-    ctrt_name2addr["attacker"] = int2address(int(init_storage["attacker"].value))
+    
+    print("=== Retrieving contract addresses ===")
+    cmd_all = [
+        "cast",
+        "call",
+        "--rpc-url",
+        f"{DEFAULT_HOST}:{DEFAULT_PORT}",
+        address,
+        "addresses()(address,address,address,address,address,address)",
+    ]
+    out = run(cmd_all, text=True, capture_output=True)
+    decoded = [line.strip() for line in out.stdout.splitlines() if line.strip()]
+    if len(decoded) == 6:
+        order = ["aes", "usdt", "pair", "factory", "router", "attacker"]
+        for i, role in enumerate(order):
+            ctrt_name2addr[role] = decoded[i]
+            print(f"  {role}: {decoded[i]}")
+    else:
+        print("Failed to decode addresses() output")
+        print("STDOUT:", out.stdout)
+        print("STDERR:", out.stderr)
+        raise ValueError("addresses() did not return 6 values")
+    
     ctrt_name2addr["owner"] = address
     ctrt_name2addr["dead"] = "0x000000000000000000000000000000000000dEaD"
+    print("=== End retrieval ===")
     return snapshot_id, ctrt_name2addr
 
 
@@ -247,6 +266,10 @@ class LazyStorage:
             else:
                 key = f"benchmarks/{self.project_name}/{ctrt_filename}.sol"
             compiled_file = list(sol_file_cache[key]["artifacts"][ctrt_filename].values())[0]
+            # Foundry cache format can wrap artifact under profiles like 'default'
+            # Handle both: {'path': ...} and {'default': {'path': ...}}
+            if isinstance(compiled_file, dict) and 'path' not in compiled_file and 'default' in compiled_file:
+                compiled_file = compiled_file['default']
             print(compiled_file)
             source_output = path.join(
                 ".cache",
@@ -271,8 +294,12 @@ class LazyStorage:
             return self.ctrt_name2addr[value_str]
         elif value_str.startswith("uint256"):
             # uint256(0)
-            v = value_str.removeprefix("uint256(").removesuffix(")")
-            v = "0x" + hex(int(v)).removeprefix("0x").zfill(64)
+            v = value_str
+            v = v[8:] if v.startswith("uint256(") else v
+            v = v[:-1] if v.endswith(")") else v
+            h = hex(int(v))
+            h = h[2:] if h.startswith("0x") else h
+            v = "0x" + h.zfill(64)
             return v
         else:
             return value_str

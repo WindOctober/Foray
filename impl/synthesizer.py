@@ -3,20 +3,20 @@ from typing import List, Set, Optional, Union, Dict, Iterable, Callable, Any
 import time
 
 from .config import Config, init_config
+import os
 from .dsl import *
 from .financial_constraints import *
 from .token_flow_graph import TFGManager, VOID
 from .utils import *
 from .utils_slither import *
 
+# 1. Type aliases
+TRACE = List[Tuple[SliFunction, SliCallExpression]]  # Function call trace
+TRANS_SUMMARY = List[Tuple[TRACE, Tokenflow]]  # Token transfer summary
 
-TRACE = List[Tuple[SliFunction, SliCallExpression]]
-TRANS_SUMMARY = List[Tuple[TRACE, Tokenflow]]
-
-
+# 2. Initialization functions
 def init_default_token_transfer(ctrt: SliContract, func: SliFunction) -> Tokenflow:
     return Tokenflow(ctrt, Tokenflow.SENDER, *func.parameters)
-
 
 def init_default_token_transferFrom(ctrt: SliContract, func: SliFunction) -> Tokenflow:
     return Tokenflow(ctrt, *func.parameters)
@@ -30,7 +30,8 @@ def init_default_token_mint(ctrt: SliContract, func: SliFunction) -> Tokenflow:
     return Tokenflow(ctrt, Tokenflow.ZERO, func.parameters[0], func.parameters[1])
 
 
-# All possible variables related to this expr
+# 3. Expression destruct function
+# Extract all possible variables related to this expr
 def destruct_expr(expr: SliExpression) -> Set[SliVariable]:
     # token0.transfer(xxx, xxx, xxx);
     if isinstance(expr, SliVariable):
@@ -65,6 +66,7 @@ def destruct_expr(expr: SliExpression) -> Set[SliVariable]:
 DSL_FUNC_GEN = Callable[[Tuple[str, ...]], str]
 
 
+# 4. Store operations of ERC20 contract
 class ERC20Summary:
     def __init__(
         self,
@@ -72,11 +74,12 @@ class ERC20Summary:
         transfer: List[Tokenflow],
         transferFrom: List[Tokenflow],
     ) -> None:
-        self.ctrt = ctrt
-        self.transfer = transfer
+        self.ctrt = ctrt  # ERC20 contract
+        self.transfer = transfer  # opertion list of transfer
         self.transferFrom = transferFrom
 
 
+# 5. infer actions of attackers
 class Synthesizer:
     def __init__(self, bmk_dir: str, record: dict = None) -> None:
         self.config: Config = init_config(bmk_dir)
@@ -93,6 +96,22 @@ class Synthesizer:
         self.timecost: float = 0
         self.func_summarys: Dict[str, AFLAction] = {}
         self.candidates: List[Sketch] = []
+        # If Flare_submit already produced a TFG JSON file for this benchmark,
+        # prefer loading it and skip the internal Solidity->TFG generation.
+        flare_json_path = os.path.join(bmk_dir, "aes_tfg.json")
+        if os.path.exists(flare_json_path):
+            from .token_flow_graph import load_tfg_manager_from_json
+
+            manager = load_tfg_manager_from_json(flare_json_path)
+            # Ensure func_summarys is a dict mapping func_sig -> AFLAction
+            self.func_summarys = {f.func_sig: f for f in manager.func_summarys}
+            # Generate candidates from manager
+            timer = time.perf_counter()
+            self.candidates = manager.gen_candidates()
+            self.timecost = time.perf_counter() - timer
+            # keep a reference for downstream use if needed
+            self.tfg_manager = manager
+            return
         suffix = "TestBase"
         test_ctrt_name = f"{self.config.project_name}{suffix}"
         self.test_ctrt = self.sli.get_contract_from_name(test_ctrt_name)[0]
@@ -120,6 +139,8 @@ class Synthesizer:
                 storage.update(storage)
         return storage
 
+    # Init role -> contract name mapping
+    # 6. to track which contract corresponds to which role
     def _init_role2names(self) -> Dict[str, str]:
         role2names = {}
         for role_name, ctrt_name in self.config.ctrt_name2cls:
@@ -137,9 +158,10 @@ class Synthesizer:
         return role2ctrts
 
     @property
-    def ctrts(self) -> Iterable[SliContract]:
+    def ctrts(self) -> Iterable[SliContract]:  # All contracts in the benchmark
         return self.role2ctrt.values()
 
+    # 7. Infer all candidate attackers' sketches
     def _infer_candidates(self):
         # # Infer the behaviors of functions in ERC20.
         # self.func_trans_summary: Dict[str, TRANS_SUMMARY] = {}
@@ -171,10 +193,19 @@ class Synthesizer:
         accounts = ["owner", "dead"] + list(self.role2ctrt.keys())
         func_summarys = list(self.func_summarys.values())
         attack_goal, _ = self.config.attack_goal
-        tfg = TFGManager(tokens, accounts, func_summarys, attack_goal)
+        
+        # Create TFG manager directly from inferred function summaries
+        from .token_flow_graph import TFGManager
+        tfg = TFGManager(
+            tokens=tokens,
+            accounts=accounts,
+            func_summarys=func_summarys,
+            attack_goal=attack_goal
+        )
 
         candidates = tfg.gen_candidates()
-        # Hardcode
+        # Hardcode: Ensure the groundtruth is in the candidates.
+        # groundtruth is the real attack sketch(automated generate algorithm may miss it)
         if self.config.project_name == "NMB":
             candidates = candidates[:7] + [self.gt_sketch.symbolic_copy()] + candidates[7:]
         # Remove all candidates after the groundtruth.
@@ -199,6 +230,68 @@ class Synthesizer:
             res.append(c)
         return res
 
+    def _export_tfg_to_dot(self, tfg: TFGManager, project_name: str):
+        """导出 TFG 为 DOT 格式文件"""
+        dot_content = "digraph TFG {\n"
+        dot_content += "  rankdir=LR;\n"
+        dot_content += "  node [shape=box];\n"
+
+        # 添加节点
+        for account, sub_graph in tfg.sub_graphs.items():
+            for node_name, node in sub_graph.nodes.items():
+                label = f"{node_name}\\n({len(node.income_edges)} in, {len(node.outcome_edges)} out)"
+                dot_content += f'  "{node_name}" [label="{label}"];\n'
+
+        # 添加边
+        for account, sub_graph in tfg.sub_graphs.items():
+            for edge_name, edge in sub_graph.edges.items():
+                start = edge.start
+                end = edge.end
+                label = edge.label.action_name
+                dot_content += f'  "{start}" -> "{end}" [label="{label}"];\n'
+
+        dot_content += "}\n"
+
+        # 输出到文件
+        filename = f"{project_name}_tfg.dot"
+        with open(filename, "w") as f:
+            f.write(dot_content)
+        print(f"TFG DOT file exported: {filename}")
+
+    def _convert_auto_tfg_to_manager(self, tfg_builder, attack_goal):
+        """Convert AutomaticTFGBuilder to TFGManager format"""
+        # Create a basic TFGManager with the function summaries
+        tfg_manager = TFGManager()
+        tfg_manager.func_summarys = tfg_builder.func_summarys
+        tfg_manager.attack_goal = attack_goal
+
+        # Initialize basic structure - this would be more complex in a full implementation
+        # For now, create a minimal structure that allows gen_candidates to work
+        from .token_flow_graph import TFGNode, TFGEdge, TFG
+
+        # Create subgraphs for each account
+        for account in tfg_builder.accounts:
+            tfg = TFG(account)
+            # Add basic nodes
+            for token in tfg_builder.tokens:
+                if token != "VOID":  # VOID is special
+                    tfg.add_node(token)
+            tfg_manager.sub_graphs[account] = tfg
+
+        # Add start node and basic edges - simplified implementation
+        if tfg_builder.accounts and tfg_manager.sub_graphs:
+            first_account = tfg_builder.accounts[0]
+            tfg = tfg_manager.sub_graphs[first_account]
+
+            # Create a start node if tokens exist
+            if tfg_builder.tokens:
+                start_token = tfg_builder.tokens[0]
+                if start_token in tfg.nodes:
+                    tfg_manager.start_node = tfg.nodes[start_token]
+
+        return tfg_manager
+
+    # 8. reload candidates from record (for performance optimization)
     def _load_candidates(self, record: dict):
         for func in self.test_ctrt.functions:
             eurus_func = any(m.full_name == "eurus()" for m in func.modifiers)
@@ -214,22 +307,25 @@ class Synthesizer:
             candidates.append(sketch)
         return candidates
 
+    # 9. Infer function summary
     def infer_func_summary(self, func: SliFunction) -> AFLAction:
         action = self.map_func_to_action(func)
-        token_flows = self.infer_token_flows(action)
-        constraints = self.infer_constraints(action)
+        token_flows = self.infer_token_flows(action)  # infer token flows
+        constraints = self.infer_constraints(action)  # infer financial constraints
         action.update(token_flows, constraints)
         return action
 
+    # 10. Infer token flows(return Tokenflow list according to action type)
     # Hardcode
     def infer_token_flows(self, action: AFLAction) -> List[Tokenflow]:
         cur_hack_token_flows = hack_token_flows.get(self.config.project_name, {})
+        # Is there any specific hardcode for current action? (hack_token_flows stores special rules for every project)
         if action.func_sig in cur_hack_token_flows:
             return cur_hack_token_flows[action.func_sig]
         if action.action_name == "nop":
-            return []
+            return [] 
         elif action.action_name == "burn":
-            return [Tokenflow(action.token0, action.account, DEAD, "")]
+            return [Tokenflow(action.token0, action.account, DEAD, "")]  # token0:type of token; "":amount of balance
         elif action.action_name == "mint":
             return [Tokenflow(action.token0, DEAD, action.account, "")]
         elif action.action_name == "swap":
@@ -442,6 +538,33 @@ class Synthesizer:
         res = self.partial_eval(func, binding, expr)
         return res
 
+    def _convert_auto_tfg_to_manager(self, tfg_builder, attack_goal: str) -> TFGManager:
+        """
+        将自动生成的 TFG 转换为 TFGManager 格式（保持向后兼容）
+        
+        这个适配层允许使用新的自动 TFG 生成器，但保持现有的候选生成逻辑
+        """
+        # 创建 TFGManager 的空实例
+        tfg_manager = object.__new__(TFGManager)
+        
+        # 复制必要的属性
+        tfg_manager.sub_graphs = tfg_builder.sub_graphs
+        tfg_manager.main_graph = tfg_builder.get_main_graph()
+        tfg_manager.start_node = tfg_manager.main_graph.get_node(VOID)
+        tfg_manager.tokens = tfg_builder.tokens
+        tfg_manager.accounts = tfg_builder.accounts
+        tfg_manager.func_summarys = tfg_builder.func_summarys
+        tfg_manager.func_sigs = {f.func_sig for f in tfg_builder.func_summarys}
+        tfg_manager.attack_goal = attack_goal
+        tfg_manager.MAX_STEP = TFGManager.MAX_STEP
+        
+        # 绑定方法
+        tfg_manager.prune = TFGManager.prune.__get__(tfg_manager, TFGManager)
+        tfg_manager.mutation = TFGManager.mutation.__get__(tfg_manager, TFGManager)
+        tfg_manager.gen_candidates = TFGManager.gen_candidates.__get__(tfg_manager, TFGManager)
+        
+        return tfg_manager
+
     def is_erc20(self, ctrt: SliContract) -> bool:
         for ctrt in ctrt.inheritance:
             if ctrt.name in ("ERC20", "IERC20"):
@@ -574,7 +697,7 @@ class Synthesizer:
             "IERC20",
         ):
             # Hardcode for interface matching
-            name = name.removeprefix("I")
+            name = name[1:] if name.startswith("I") else name
         possible_funcs = []
         for ctrt in self.ctrts:
             possible_names = [ctrt.name] + [i.name for i in ctrt.inheritance]

@@ -2,6 +2,18 @@
 
 Attack Synthesis for DeFi Apps
 
+## Workspace layout
+
+When reproducing the Flare + Foray pipeline, keep the repositories side by side instead of nesting one inside the other:
+
+```text
+<workspace>/
+  Flare/
+  Foray/
+```
+
+Flare writes the TFG JSON into this repository's benchmark directory, and Foray consumes it from there.
+
 ## Initial Benchmark Collection
 
 We use [DeFiHackLabs](https://github.com/SunWeb3Sec/DeFiHackLabs/tree/main) as the benchmark records.
@@ -24,7 +36,7 @@ solc-select install 0.8.21 && solc-select use 0.8.21 && npm install --quiet --sa
 Install Local Foundry
 
 ```bash
-cd foundry-nightly-3c048be05726218c405d5d4deec4d3f1ab515f6f
+cd foundry-nightly-20b3da1f22e9f62f6e3406a5d582ad4aa509122c
 cargo build --release
 ```
 
@@ -35,6 +47,37 @@ export PATH="$(pwd)/target/release:$PATH"
 ```
 
 ## Evaluation
+
+### Flare + Foray AES example
+
+From `Flare/`:
+
+```bash
+FLARE_SOLC_PATH=.solc-select/artifacts/solc-0.8.22 \
+cargo run -- \
+  ../Foray/benchmarks/AES/AES.sol \
+  --output-tfg ../Foray/benchmarks/AES/aes_tfg.json \
+  --extra-compiler-arg=--base-path \
+  --extra-compiler-arg="$(cd .. && pwd)" \
+  --extra-compiler-arg=--allow-paths \
+  --extra-compiler-arg="$(cd .. && pwd)" \
+  --extra-compiler-arg=@utils=Flare/benchmark/lib/contracts/@utils \
+  --extra-compiler-arg=@openzeppelin=Flare/benchmark/lib/contracts/@openzeppelin \
+  --extra-compiler-arg=@uniswapv2=Flare/benchmark/lib/contracts/@uniswapv2 \
+  --extra-compiler-arg=@halmos=Flare/benchmark/lib/contracts/@halmos/src \
+  --extra-compiler-arg=forge-std=Flare/benchmark/lib/forge-std/src \
+  --extra-compiler-arg=ds-test=Flare/benchmark/lib/forge-std/lib/ds-test/src \
+  --extra-compiler-arg=benchmarks=Foray/benchmarks
+```
+
+From `Foray/`:
+
+```bash
+python3 main.py \
+  -i benchmarks/AES \
+  --tfg benchmarks/AES/aes_tfg.json \
+  --tfg-output-bmk benchmarks/AES
+```
 
 ### Foray eval
 

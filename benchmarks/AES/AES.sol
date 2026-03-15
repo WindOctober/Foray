@@ -2,7 +2,7 @@
  *Submitted for verification at BscScan.com on 2022-12-06
  */
 
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.4;
 
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol";
@@ -35,7 +35,7 @@ abstract contract Context {
 
 // OpenZeppelin Contracts (last updated v4.6.0) (token/ERC20/ERC20.sol)
 
-// pragma solidity ^0.8.0;
+// pragma solidity ^0.8.4;
 
 // import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 // import "@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol";
@@ -446,7 +446,7 @@ contract ERC20 is Context, IERC20, IERC20Metadata {
 
 // OpenZeppelin Contracts v4.4.1 (access/Ownable.sol)
 
-// pragma solidity ^0.8.0;
+// pragma solidity ^0.8.4;
 
 // import "@openzeppelin/contracts/utils/Context.sol";
 

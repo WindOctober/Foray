@@ -888,7 +888,8 @@ def gen_model(args: Namespace, idx: int, ex: Exec) -> ModelWithContext:
                 unsat_core_strs = []
                 related_params = set()
                 for c in main_solver.unsat_core():
-                    f_idx = int(str(c).removeprefix("f"))
+                    c_str = str(c)
+                    f_idx = int(c_str[1:] if c_str.startswith("f") else c_str)
                     unsat_constraint = old_formulas[f_idx]
                     unsat_core.append(unsat_constraint)
                     unsat_core_strs.append(unsat_constraint.sexpr())

@@ -7,14 +7,18 @@ def slot_num2bytes(slot_num: str) -> bytes:
 
 
 def str2bytes(data: str) -> bytes:
-    data = data.removeprefix("0x")
+    data = data[2:] if data.startswith("0x") else data
     return bytes.fromhex(data)
 
 def int2address(data: int) -> str:
-    return "0x" + hex(data).removeprefix("0x").zfill(ADDR_SIZE * 2)
+    h = hex(data)
+    h = h[2:] if h.startswith("0x") else h
+    return "0x" + h.zfill(ADDR_SIZE * 2)
 
 def bytes2address(data: bytes) -> str:
-    return "0x" + hex(data).removeprefix("0x").zfill(ADDR_SIZE * 2)
+    h = hex(int.from_bytes(data, "big"))
+    h = h[2:] if h.startswith("0x") else h
+    return "0x" + h.zfill(ADDR_SIZE * 2)
 
 def pad_string(s: str, length: int, c: str = '0', left: bool = True) -> str:
     if len(s) >= length:

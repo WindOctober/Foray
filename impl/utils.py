@@ -42,7 +42,9 @@ def parse_smt_output(key: str, lines: List[str]) -> Optional[str]:
     result = None
     for idx, l in enumerate(lines):
         if key in l:
-            result = lines[idx + 1].strip().removesuffix(")").replace("#", "0")
+            result = lines[idx + 1].strip()
+            result = result[:-1] if result.endswith(")") else result
+            result = result.replace("#", "0")
             break
     return result
 
@@ -180,6 +182,40 @@ def prepare_subfolder(bmk_dir: str) -> Tuple[str, str]:
     return cache_path, result_path
 
 
+def prepare_subfolder_with_versioning(bmk_dir: str) -> Tuple[str, str]:
+    """
+    Create or retrieve versioned result subfolder.
+    If 'result' doesn't exist, create it.
+    If 'result' exists, create 'result copy', 'result copy (2)', etc.
+    This follows Windows naming convention for duplicate directories.
+    """
+    cache_path = path.join(bmk_dir, ".cache")
+    if not path.exists(cache_path):
+        os.mkdir(cache_path)
+    
+    result_path = path.join(bmk_dir, "result")
+    
+    # If result doesn't exist, create it
+    if not path.exists(result_path):
+        os.mkdir(result_path)
+        return cache_path, result_path
+    
+    # If result exists, create versioned copy directories
+    version_path = path.join(bmk_dir, "result copy")
+    if not path.exists(version_path):
+        os.mkdir(version_path)
+        return cache_path, version_path
+    
+    # Find next available version number
+    version_num = 2
+    while True:
+        version_path = path.join(bmk_dir, f"result copy ({version_num})")
+        if not path.exists(version_path):
+            os.mkdir(version_path)
+            return cache_path, version_path
+        version_num += 1
+
+
 def get_bmk_dirs(i_bmk_dirs: str) -> List[str]:
     # Don't use an absolute path, because Foundry doesn't support it.
     benmark_folder = "./benchmarks"
@@ -220,7 +256,7 @@ def load_smt_model(file_path: str) -> List[List[str]]:
         arg_candidates = []
         for model in result["models"]:
             if isinstance(model, str):
-                smtout = model.removeprefix("see ")
+                smtout = model[4:] if model.startswith("see ") else model
                 arg_candidates.extend(load_smt_model(smtout))
             else:
                 arg_candidates.append([model[f"p_amt{j}_uint256"] for j in range(len(model))])

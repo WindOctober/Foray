@@ -3,6 +3,7 @@ import os
 from os import path
 import shutil
 from subprocess import CalledProcessError, run
+import time
 
 from impl.eurus import eurus_test
 
@@ -12,8 +13,10 @@ from impl.utils import (
     get_bmk_dirs,
     load_smt_model,
     prepare_subfolder,
+    prepare_subfolder_with_versioning,
     resolve_project_name,
     update_record,
+    ZFILL_SIZE,
 )
 from impl.verifier import verify_model
 from impl.halmos import exec_halmos
@@ -93,6 +96,20 @@ parser.add_argument(
     action="store_true",
 )
 
+parser.add_argument(
+    "--tfg",
+    help="Path to a single TFG JSON file to process.",
+    type=str,
+    default="",
+)
+
+parser.add_argument(
+    "--tfg-output-bmk",
+    help="Optional benchmark dir to write candidates/record when using --tfg (e.g. benchmarks/AES).",
+    type=str,
+    default="",
+)
+
 # Parameters for evaluation.
 parser.add_argument(
     "--timeout",
@@ -152,9 +169,12 @@ parser.add_argument(
 )
 
 
-def prepare(bmk_dir: str):
+def prepare(bmk_dir: str, use_versioning: bool = True):
     project_name = resolve_project_name(bmk_dir)
-    cache_path, result_path = prepare_subfolder(bmk_dir)
+    if use_versioning:
+        cache_path, result_path = prepare_subfolder_with_versioning(bmk_dir)
+    else:
+        cache_path, result_path = prepare_subfolder(bmk_dir)
     output_file = path.join(bmk_dir, f"{project_name}.t.sol")
     print(f"Output path is: {output_file}")
     if path.exists(output_file):
@@ -302,6 +322,72 @@ def halmos_test(
 
 def _main():
     args = parser.parse_args()
+
+    # Handle single TFG file
+    if args.tfg:
+        print(f"Processing single TFG file: {args.tfg}")
+        if not path.exists(args.tfg):
+            print(f"Error: TFG file {args.tfg} does not exist")
+            return
+
+        try:
+            from impl.token_flow_graph import load_tfg_manager_from_json
+            manager = load_tfg_manager_from_json(args.tfg)
+            timer = time.perf_counter()
+            candidates = manager.gen_candidates()
+            timecost = time.perf_counter() - timer
+
+            print(f"Generated {len(candidates)} candidates from TFG:")
+            for i, candidate in enumerate(candidates[:10]):  # Show first 10
+                print(f"  {i+1}. {candidate}")
+            if len(candidates) > 10:
+                print(f"  ... and {len(candidates) - 10} more")
+
+            # Optional: write candidates and record into a benchmark folder,
+            # so users don't need to manually copy TFG JSON into bmk dir.
+            if args.tfg_output_bmk:
+                bmk_dir = args.tfg_output_bmk
+                project_name = resolve_project_name(bmk_dir)
+                _, result_path = prepare_subfolder_with_versioning(bmk_dir)
+
+                builder = BenchmarkBuilder(bmk_dir, sketch_generation=True)
+                func_bodys = []
+                for idx, c in enumerate(candidates):
+                    suffix = str(idx).zfill(ZFILL_SIZE)
+                    func_name = builder.check_cand_prefix + suffix
+                    func_bodys.extend(c.output(func_name, builder.extra_statements))
+
+                output_file = path.join(bmk_dir, f"{project_name}_candidates.t.sol")
+                results = [
+                    *builder.gen_imports(),
+                    *builder.gen_contract_header("Test"),
+                    *builder.gen_state_varibles(),
+                    *builder.gen_setup(),
+                    *builder.gen_helper_funcs(),
+                    *builder.gen_actions(),
+                    *func_bodys,
+                    *builder.gen_gt(),
+                    "}",
+                ]
+                with open(output_file, "w") as f:
+                    for l in results:
+                        f.write(l)
+                        f.write("\n")
+
+                candidate_strs = [c.func_sigs for c in candidates]
+                update_record(
+                    result_path,
+                    {"sketchgen_timecost": timecost, "candidates": candidate_strs},
+                )
+                print(f"Wrote candidates to: {output_file}")
+                print(f"Updated record: {path.join(result_path, 'record.json')}")
+
+        except Exception as e:
+            print(f"Error processing TFG: {e}")
+            import traceback
+            traceback.print_exc()
+        return
+
     bmk_dirs = get_bmk_dirs(args.input)
     for bmk_dir in bmk_dirs:
         if args.prepare:
