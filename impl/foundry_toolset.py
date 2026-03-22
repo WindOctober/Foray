@@ -16,6 +16,7 @@ from .storage.read import StorageDescriber, StorageLayout, TypeDescriber, get_va
 from .storage.utils import int2address
 
 from .config import init_config
+from .foundry_bins import forge_skip_args, resolve_foundry_bin
 
 from .utils import *
 
@@ -29,7 +30,7 @@ DEFAULT_PORT = "8545"
 
 def init_anvil(timestamp: int):
     cmd = [
-        "anvil",
+        resolve_foundry_bin("anvil"),
         "--timestamp",
         str(timestamp),
         "--base-fee",
@@ -84,7 +85,7 @@ def recover_snapshot(idx: str):
 def set_nomining():
     # Run setup
     cmd = [
-        "cast",
+        resolve_foundry_bin("cast"),
         "rpc",
         "evm_setAutomine",
         "false",
@@ -125,6 +126,38 @@ def parse_cast_storage_info(lines: List[str]) -> Dict[str, CastStorageInfo]:
     return results
 
 
+def _load_storage_layout(cache_path: str, source_key: str, contract_name: str) -> StorageLayout:
+    with open(path.join(cache_path, "solidity-files-cache.json"), "r") as f:
+        sol_file_cache = json.load(f)["files"]
+
+    if source_key not in sol_file_cache:
+        raise ValueError(f"Unknown compiled source: {source_key}")
+
+    artifact_info = sol_file_cache[source_key]["artifacts"][contract_name]
+    compiled_file = list(artifact_info.values())[0]
+    if isinstance(compiled_file, dict) and "path" not in compiled_file and "default" in compiled_file:
+        compiled_file = compiled_file["default"]
+
+    source_output = path.join(".cache", compiled_file["path"])
+    with open(source_output, "r") as f:
+        compile_output = json.load(f)
+
+    contract_layout = compile_output["storageLayout"]
+    label_defs = [StorageDescriber(storage_describer) for storage_describer in contract_layout["storage"]]
+    type_def_mapping = {
+        type_name: TypeDescriber(type_name, contract_layout["types"])
+        for type_name in contract_layout["types"]
+    }
+    return (label_defs, type_def_mapping)
+
+
+def _read_contract_address(storage_layout: StorageLayout, deployed_test_addr: str, var_name: str) -> str:
+    value = get_var(deployed_test_addr, var_name, [], storage_layout)
+    if not isinstance(value, str) or not value.startswith("0x") or len(value) != 42:
+        raise ValueError(f"Failed to decode address variable `{var_name}` from deployed test contract")
+    return value
+
+
 def deploy_contract(bmk_dir: str):
     project_name = resolve_project_name(bmk_dir)
     cache_path, _ = prepare_subfolder(bmk_dir)
@@ -134,8 +167,11 @@ def deploy_contract(bmk_dir: str):
 
     # Deploy
     cmd = [
-        "forge",
+        resolve_foundry_bin("forge"),
         "create",
+        *forge_skip_args(),
+        "--contracts",
+        bmk_dir,
         "--rpc-url",
         f"{DEFAULT_HOST}:{DEFAULT_PORT}",
         "--private-key",
@@ -173,7 +209,7 @@ def deploy_contract(bmk_dir: str):
 
     # Run setup
     cmd = [
-        "cast",
+        resolve_foundry_bin("cast"),
         "send",
         "--rpc-url",
         f"{DEFAULT_HOST}:{DEFAULT_PORT}",
@@ -198,32 +234,25 @@ def deploy_contract(bmk_dir: str):
     # Run snapshot
     snapshot_id = create_snapshot()
 
-    # Get contract addresses by calling the contract instance getters
+    # Get contract addresses from the deployed test contract storage layout.
     ctrt_name2addr: Dict[str, str] = {}
-    
     print("=== Retrieving contract addresses ===")
-    cmd_all = [
-        "cast",
-        "call",
-        "--rpc-url",
-        f"{DEFAULT_HOST}:{DEFAULT_PORT}",
-        address,
-        "addresses()(address,address,address,address,address,address)",
-    ]
-    out = run(cmd_all, text=True, capture_output=True)
-    decoded = [line.strip() for line in out.stdout.splitlines() if line.strip()]
-    if len(decoded) == 6:
-        order = ["aes", "usdt", "pair", "factory", "router", "attacker"]
-        for i, role in enumerate(order):
-            ctrt_name2addr[role] = decoded[i]
-            print(f"  {role}: {decoded[i]}")
-    else:
-        print("Failed to decode addresses() output")
-        print("STDOUT:", out.stdout)
-        print("STDERR:", out.stderr)
-        raise ValueError("addresses() did not return 6 values")
-    
-    ctrt_name2addr["owner"] = address
+    test_contract_name = f"{project_name}Test"
+    source_key = path.join(bmk_dir, f"{project_name}_candidates.t.sol")
+    storage_layout = _load_storage_layout(cache_path, source_key, test_contract_name)
+
+    ctrt_name2addr["owner"] = _read_contract_address(storage_layout, address, "owner")
+    print(f"  owner: {ctrt_name2addr['owner']}")
+    ctrt_name2addr["attacker"] = _read_contract_address(storage_layout, address, "attacker")
+    print(f"  attacker: {ctrt_name2addr['attacker']}")
+
+    for ctrt_name, _ in config.ctrt_name2cls:
+        if ctrt_name == "attacker":
+            continue
+        addr_var_name = f"{ctrt_name}Addr"
+        ctrt_name2addr[ctrt_name] = _read_contract_address(storage_layout, address, addr_var_name)
+        print(f"  {ctrt_name}: {ctrt_name2addr[ctrt_name]}")
+
     ctrt_name2addr["dead"] = "0x000000000000000000000000000000000000dEaD"
     print("=== End retrieval ===")
     return snapshot_id, ctrt_name2addr
@@ -363,7 +392,15 @@ class LazyStorage:
             if ctrt_name not in self.ctrt_name2addr:
                 raise ValueError(f"Unknown contract: {ctrt_name}")
             ctrt_addr = self.ctrt_name2addr[ctrt_name]
-            cmd = ["cast", "call", ctrt_addr, func_sig, *func_args]
+            cmd = [
+                resolve_foundry_bin("cast"),
+                "call",
+                "--rpc-url",
+                f"{DEFAULT_HOST}:{DEFAULT_PORT}",
+                ctrt_addr,
+                func_sig,
+                *func_args,
+            ]
             output = run(cmd, capture_output=True, text=True)
             value = output.stdout.strip().removesuffix("\n")
             # To deal with the case in Anvil 0.2.0
@@ -390,7 +427,7 @@ def verify_model_on_anvil(ctrt_name2addr: Dict[str, str], func_name: str, params
     param_types = ",".join(["uint256"] * len(params))
     func_name = f"{func_name}({param_types})"
     cmd = [
-        "cast",
+        resolve_foundry_bin("cast"),
         "call",
         "--trace",
         # cast 0.2.0 doesn't support
@@ -430,17 +467,53 @@ def parse_balances(output: str):
             final = val
     return start, final
 
+
+def _write_if_changed(file_path: str, content: str):
+    current = None
+    if path.exists(file_path):
+        with open(file_path, "r") as f:
+            current = f.read()
+    if current == content:
+        return
+    with open(file_path, "w") as f:
+        f.write(content)
+
 def verify_model_on_forge_debug(bmk_dir: str, bmk_name: str, func_name: str, params: List[str]) -> bool:
-    param_types = ",".join(["uint256"] * len(params))
-    func_sig = f"{func_name}({param_types})"
+    cache_path, _ = prepare_subfolder(bmk_dir)
+    verify_path = path.join(bmk_dir, "_eurus_verify.t.sol")
+    verify_contract_name = f"{bmk_name}EurusVerify"
+    args = ",".join(params)
+    verify_content = "\n".join(
+        [
+            "// SPDX-License-Identifier: MIT",
+            "pragma solidity ^0.8.0;",
+            f'import "./{bmk_name}_candidates.t.sol";',
+            f"contract {verify_contract_name} is {bmk_name}Test " + "{",
+            "function test_verify() public {",
+            f"    {func_name}({args});",
+            "}",
+            "}",
+            "",
+        ]
+    )
+    _write_if_changed(verify_path, verify_content)
+
     cmd = [
-        "forge",
-        "script",
-        "-vvvv",
-        f"{bmk_dir}/{bmk_name}_candidates.t.sol",
-        "--sig",
-        f"{func_sig}",
-        *params,
+        resolve_foundry_bin("forge"),
+        "test",
+        *forge_skip_args(),
+        "-vv",
+        "--contracts",
+        bmk_dir,
+        "--cache-path",
+        cache_path,
+        verify_path,
+        "--match-contract",
+        verify_contract_name,
+        "--match-test",
+        "test_verify",
+        "--root",
+        os.getcwd(),
     ]
     print(" ".join(cmd))
     try:
@@ -448,8 +521,9 @@ def verify_model_on_forge_debug(bmk_dir: str, bmk_name: str, func_name: str, par
     except Exception as err:
         print(err)
         return False
-    
-    feasible = "Attack succeed!" in out.stderr
-    start, final = parse_balances(out.stdout)
+
+    combined_output = out.stdout + "\n" + out.stderr
+    feasible = "Attack succeed!" in combined_output
+    start, final = parse_balances(combined_output)
     profit = final - start
     return feasible, profit

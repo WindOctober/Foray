@@ -83,23 +83,22 @@ class ERC20Summary:
 class Synthesizer:
     def __init__(self, bmk_dir: str, record: dict = None) -> None:
         self.config: Config = init_config(bmk_dir)
-        self.sli = gen_slither(bmk_dir)
         self.candidates: List[Sketch] = []
         self.candidates_signs: Set[str] = set()
-        actions = [init_action_from_list(a, True) for a in self.config.groundtruth]
-        self.gt_sketch = Sketch(actions).symbolic_copy()
-
-        self.role2ctrt_names = self._init_role2names()
-        self.role2ctrt = self._init_role2ctrts()
-        self.init_storage = self._init_storage_var_mapping()
 
         self.timecost: float = 0
         self.func_summarys: Dict[str, AFLAction] = {}
         self.candidates: List[Sketch] = []
-        # If Flare_submit already produced a TFG JSON file for this benchmark,
+        # If Flare already produced a TFG JSON file for this benchmark,
         # prefer loading it and skip the internal Solidity->TFG generation.
-        flare_json_path = os.path.join(bmk_dir, "aes_tfg.json")
-        if os.path.exists(flare_json_path):
+        flare_json_candidates = [
+            os.path.join(bmk_dir, "flare_tfg.json"),
+            os.path.join(bmk_dir, f"{self.config.project_name.lower()}_tfg.json"),
+            os.path.join(bmk_dir, f"{self.config.project_name}_tfg.json"),
+            os.path.join(bmk_dir, "aes_tfg.json"),
+        ]
+        flare_json_path = next((p for p in flare_json_candidates if os.path.exists(p)), None)
+        if flare_json_path is not None:
             from .token_flow_graph import load_tfg_manager_from_json
 
             manager = load_tfg_manager_from_json(flare_json_path)
@@ -112,6 +111,11 @@ class Synthesizer:
             # keep a reference for downstream use if needed
             self.tfg_manager = manager
             return
+
+        self.sli = gen_slither(bmk_dir)
+        self.role2ctrt_names = self._init_role2names()
+        self.role2ctrt = self._init_role2ctrts()
+        self.init_storage = self._init_storage_var_mapping()
         suffix = "TestBase"
         test_ctrt_name = f"{self.config.project_name}{suffix}"
         self.test_ctrt = self.sli.get_contract_from_name(test_ctrt_name)[0]
@@ -204,24 +208,6 @@ class Synthesizer:
         )
 
         candidates = tfg.gen_candidates()
-        # Hardcode: Ensure the groundtruth is in the candidates.
-        # groundtruth is the real attack sketch(automated generate algorithm may miss it)
-        if self.config.project_name == "NMB":
-            candidates = candidates[:7] + [self.gt_sketch.symbolic_copy()] + candidates[7:]
-        # Remove all candidates after the groundtruth.
-        # To allow the false-prositive ablation study, disable it.
-        # end_idx = -1
-        # for idx, c in enumerate(candidates):
-        #     if len(c) != len(self.gt_sketch):
-        #         continue
-        #     if c == self.gt_sketch:
-        #         end_idx = idx
-        #     if len(c.args) > 8:
-        #         end_idx = idx
-        # if end_idx == -1:
-        #     raise ValueError("Ground truth is not covered by the candidates!")
-        # return candidates[: end_idx + 1]
-
         # Solidity doesn't support arguments more than 12, otherwise stack too deep will raise.
         res = []
         for idx, c in enumerate(candidates):

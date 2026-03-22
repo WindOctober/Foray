@@ -32,9 +32,6 @@ class Config:
     ctrt_name2cls: List[Tuple[str, str]] = field(default_factory=list)
     ctrt_name2deploy: List[Tuple[str, str]] = field(default_factory=list)
 
-    # Manually encoded implementations for actions
-    extra_actions: List[str] = field(default_factory=list)
-
     # Manually encoded deployments for contracts, before the transferring of tokens
     extra_deployments_before: List[str] = field(default_factory=list)
 
@@ -45,6 +42,9 @@ class Config:
     extra_statements: List[str] = field(default_factory=list)
 
     attack_goal_str: str = ""
+    # Legacy benchmark metadata retained only for backward-compatible parsing.
+    # The current Flare -> Foray pipeline does not consume groundtruth in
+    # candidate generation, solving, or verification.
     groundtruth: List[List[str]] = field(default_factory=list)
 
     # Used for synthesizer
@@ -96,5 +96,9 @@ def init_config(bmk_dir: str) -> Config:
     if path.exists(config_path):
         with open(config_path, "r") as f:
             config_json = yaml.safe_load(f)
+    # Legacy manual action bodies are intentionally ignored by the current
+    # Flare -> Foray pipeline. Action enumeration now comes from the TFG, and
+    # benchmark-only helpers are supplied through structured frontend metadata.
+    config_json.pop("extra_actions", None)
     config = Config(**config_json)
     return config

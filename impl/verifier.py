@@ -7,6 +7,7 @@ from typing import List, Tuple, Dict
 
 from .dsl import Sketch
 from .benchmark_builder import BenchmarkBuilder
+from .foundry_bins import forge_skip_args, resolve_foundry_bin
 from .utils import prepare_subfolder
 
 
@@ -22,9 +23,12 @@ def verify_model(bmk_dir: str, verifiers: List[Tuple[str, Sketch, List[List[str]
     builder.output_verify(verifiers, verify_sol_path)
 
     cmds = [
-        "forge",
+        resolve_foundry_bin("forge"),
         "test",
+        *forge_skip_args(),
         "-j",
+        "--contracts",
+        bmk_dir,
         "--cache-path",
         cache_path,
         "--match-path",
@@ -48,7 +52,6 @@ def verify_model(bmk_dir: str, verifiers: List[Tuple[str, Sketch, List[List[str]
     except Exception as err:
         print(out.stderr)
         raise err
-    result.pop("test_gt()")
     verified_sketches = []
     for k, v in result.items():
         if v["status"] == "Success":

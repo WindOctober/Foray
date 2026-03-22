@@ -17,6 +17,7 @@ from halmos.sevm import *
 from halmos.utils import NamedTimer, color_good, color_warn, hexify
 from halmos.warnings import *
 
+from .foundry_bins import forge_skip_args, resolve_foundry_bin
 from .utils import prepare_subfolder, update_record
 from .benchmark_builder import BenchmarkBuilder
 from .verifier import verify_model
@@ -1188,8 +1189,9 @@ def exec_halmos(*arg_strs) -> MainResult:
     #
 
     build_cmd = [
-        "forge",  # shutil.which('forge')
+        resolve_foundry_bin("forge"),
         "build",
+        *forge_skip_args(),
         "--root",
         args.root,
         "--extra-output",

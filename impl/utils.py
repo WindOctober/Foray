@@ -67,29 +67,18 @@ class FrozenObject(RuntimeError):
     pass
 
 
-def gen_result_paths(result_path: str, only_gt: bool, tool_name: str, sketch_num: int, suffix: str):
+def gen_result_paths(result_path: str, tool_name: str, sketch_num: int, suffix: str):
     """
     returns list of func_name, output_path, err_path, smt_folder
     """
     result_paths: List[Tuple[str, str, str, str]] = []
 
-    if only_gt:
-        idx = "gt"
+    for i in range(sketch_num):
+        idx = str(i).zfill(ZFILL_SIZE)
         output = path.join(result_path, f"{tool_name}_out_{idx}{suffix}.json")
         err_output = path.join(result_path, f"{tool_name}_err_{idx}{suffix}.json")
         smt_output = path.join(result_path, f"{tool_name}_smt_{idx}{suffix}")
-        if tool_name == "halmos":
-            func_name = "check_gt_halmos"
-        else:
-            func_name = "check_gt"
-        result_paths = [(func_name, output, err_output, smt_output)]
-    else:
-        for i in range(sketch_num):
-            idx = str(i).zfill(ZFILL_SIZE)
-            output = path.join(result_path, f"{tool_name}_out_{idx}{suffix}.json")
-            err_output = path.join(result_path, f"{tool_name}_err_{idx}{suffix}.json")
-            smt_output = path.join(result_path, f"{tool_name}_smt_{idx}{suffix}")
-            result_paths.append((f"check_cand{idx}", output, err_output, smt_output))
+        result_paths.append((f"check_cand{idx}", output, err_output, smt_output))
     return result_paths
 
 

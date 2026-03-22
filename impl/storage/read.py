@@ -1,9 +1,14 @@
 from typing import Dict, List, Tuple
 from subprocess import run
+import os
 
 from eth_utils import decode_hex, keccak
 
+from ..foundry_bins import resolve_foundry_bin
 from .utils import *
+
+
+DEFAULT_RPC_URL = os.environ.get("ETH_RPC_URL", "http://127.0.0.1:8545")
 
 
 def read_from_slot(bytes_data: bytes, offset: int, length: int) -> bytes:
@@ -14,9 +19,10 @@ def read_from_slot(bytes_data: bytes, offset: int, length: int) -> bytes:
 
 def read_from_storage(addr: str, slot: str) -> bytes:
     cmd = [
-        "cast",
+        resolve_foundry_bin("cast"),
         "storage",
-        "--silent",
+        "--rpc-url",
+        DEFAULT_RPC_URL,
         addr,
         slot,
     ]

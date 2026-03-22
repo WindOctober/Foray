@@ -5,8 +5,6 @@ import shutil
 from subprocess import CalledProcessError, run
 import time
 
-from impl.eurus import eurus_test
-
 from impl.benchmark_builder import BenchmarkBuilder
 from impl.utils import (
     gen_result_paths,
@@ -18,8 +16,6 @@ from impl.utils import (
     update_record,
     ZFILL_SIZE,
 )
-from impl.verifier import verify_model
-from impl.halmos import exec_halmos
 # from impl.ityfuzz import ityfuzz_test
 
 parser = argparse.ArgumentParser()
@@ -65,7 +61,7 @@ parser.add_argument(
 parser.add_argument(
     "-e",
     "--eurus",
-    help="Use eurus to solve the groundtruth.",
+    help="Use Eurus to solve generated candidates.",
     action="store_true",
 )
 
@@ -79,13 +75,6 @@ parser.add_argument(
     "-s",
     "--statistic",
     help="Print statistic.",
-    action="store_true",
-)
-
-parser.add_argument(
-    "-pg",
-    "--printgt",
-    help="Print GroundTruth",
     action="store_true",
 )
 
@@ -133,12 +122,6 @@ parser.add_argument(
 )
 
 parser.add_argument(
-    "--gt",
-    help="Only evaluate groundtruth",
-    action="store_true",
-)
-
-parser.add_argument(
     "--smtdiv",
     help="Apply smt-div in which phases",
     choices=[
@@ -177,8 +160,6 @@ def prepare(bmk_dir: str, use_versioning: bool = True):
         cache_path, result_path = prepare_subfolder(bmk_dir)
     output_file = path.join(bmk_dir, f"{project_name}.t.sol")
     print(f"Output path is: {output_file}")
-    if path.exists(output_file):
-        os.remove(output_file)
     builder = BenchmarkBuilder(bmk_dir, sketch_generation=True)
     builder.output(output_file)
 
@@ -238,32 +219,21 @@ def prepare(bmk_dir: str, use_versioning: bool = True):
     ]
     run(cmd, text=True, check=True)
 
+def verify_result(bmk_dir: str, smtdiv: str, verify_result_path: str, suffix_spec: str):
+    from impl.verifier import verify_model
 
-def print_groundtruth(bmk_dir: str):
-    builder = BenchmarkBuilder(bmk_dir)
-    sketch = builder.gt_sketch
-    print("----Groundtruth----\n")
-    for a in sketch.pure_actions:
-        print(str(a))
-    print("\n\n----Groundtruth Sketch----\n")
-    s_sketch = sketch.symbolic_copy()
-    for a in s_sketch.pure_actions:
-        print(str(a))
-
-
-def verify_result(bmk_dir: str, only_gt: bool, smtdiv: str, verify_result_path: str, suffix_spec: str):
     builder = BenchmarkBuilder(bmk_dir)
     synthesizer = builder.synthesizer
     _, result_path = prepare_subfolder(bmk_dir)
     project_name = resolve_project_name(bmk_dir)
 
-    result_paths = gen_result_paths(result_path, only_gt, smtdiv, len(synthesizer.candidates), suffix_spec)
+    result_paths = gen_result_paths(result_path, smtdiv, len(synthesizer.candidates), suffix_spec)
 
     verifiers = []
 
     for func_name, output_path, _, _ in result_paths:
         output_path = verify_result_path if verify_result_path != "" else output_path
-        sketch = builder.get_sketch_by_func_name(func_name)
+        sketch = builder.get_sketch_by_func_name(func_name, synthesizer.candidates)
         model = load_smt_model(output_path)
         if len(model) == 0:
             continue
@@ -271,9 +241,9 @@ def verify_result(bmk_dir: str, only_gt: bool, smtdiv: str, verify_result_path: 
 
     succeed = verify_model(bmk_dir, verifiers)
     if succeed:
-        print(f"Great! Benchmark: {project_name} is solved by setting: only_gt={only_gt}, smtdiv={smtdiv}")
+        print(f"Great! Benchmark: {project_name} is solved by setting: smtdiv={smtdiv}")
     else:
-        print(f"Benchmark: {project_name} is NOT solved by setting: only_gt={only_gt}, smtdiv={smtdiv}")
+        print(f"Benchmark: {project_name} is NOT solved by setting: smtdiv={smtdiv}")
     return succeed
 
 
@@ -281,8 +251,9 @@ def halmos_test(
     bmk_dir: str,
     args,
 ):
+    from impl.halmos import exec_halmos
+
     timeout: int = 1800 * 1000
-    only_gt: bool = args.gt
     start: int = args.start
     end: int = args.end
     suffix_spec: str = args.suffix
@@ -291,7 +262,7 @@ def halmos_test(
     project_name = resolve_project_name(bmk_dir)
     _, result_path = prepare_subfolder(bmk_dir)
 
-    result_paths = gen_result_paths(result_path, only_gt, "halmos", len(synthesizer.candidates), suffix_spec)
+    result_paths = gen_result_paths(result_path, "halmos", len(synthesizer.candidates), suffix_spec)
 
     result_paths = result_paths[start:end]
 
@@ -366,7 +337,6 @@ def _main():
                     *builder.gen_helper_funcs(),
                     *builder.gen_actions(),
                     *func_bodys,
-                    *builder.gen_gt(),
                     "}",
                 ]
                 with open(output_file, "w") as f:
@@ -392,23 +362,23 @@ def _main():
     for bmk_dir in bmk_dirs:
         if args.prepare:
             prepare(bmk_dir)
-        if args.printgt:
-            print_groundtruth(bmk_dir)
         if args.eurus:
+            from impl.eurus import eurus_test
+
             eurus_test(bmk_dir, args)
         if args.halmos:
             halmos_test(bmk_dir, args)
         # if args.fuzz:
         #     ityfuzz_test(bmk_dir, args)
         if args.verify:
-            verify_result(bmk_dir, args.gt, args.smtdiv, args.verify_result_path, args.suffix)
+            verify_result(bmk_dir, args.smtdiv, args.verify_result_path, args.suffix)
 
 
-def clean_result(bmk_dir: str, only_gt: bool, smtdiv: str, start: int, end: int, suffix_spec: str):
+def clean_result(bmk_dir: str, smtdiv: str, start: int, end: int, suffix_spec: str):
     builder = BenchmarkBuilder(bmk_dir)
     synthesizer = builder.synthesizer
     _, result_path = prepare_subfolder(bmk_dir)
-    result_paths = gen_result_paths(result_path, only_gt, smtdiv, len(synthesizer.candidates), suffix_spec)
+    result_paths = gen_result_paths(result_path, smtdiv, len(synthesizer.candidates), suffix_spec)
     result_paths = result_paths[start:end]
     for _, output_path, err_path, smt_folder in result_paths:
         if path.exists(output_path):

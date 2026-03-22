@@ -161,6 +161,9 @@ cache
 *.gv
 _rw_eval.csv
 _defi_racket.json
+.local/
+foundry-nightly-*/
+lib/
 
 temp*
 build-info
@@ -172,4 +175,12 @@ node_modules
 benchmarks/**/.cache
 benchmarks/**/*_tfg.json
 benchmarks/**/*.bak
+benchmarks/**/*.t.sol
+benchmarks/**/config.json
+benchmarks/**/config.yaml
+benchmarks/**/vendor/
+benchmarks/**/_eurus_verify.t.sol
+benchmarks/**/result/
+benchmarks/**/result/eurus_out_*.json
+benchmarks/**/result copy*/
 package-lock.json

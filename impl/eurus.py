@@ -13,7 +13,6 @@ from .utils import (
     prepare_subfolder,
     resolve_project_name,
     update_record,
-    func_name_regex
 )
 from .financial_constraints import (
     ACTION_CONSTR,
@@ -366,7 +365,6 @@ def eurus_solve(
 
 def eurus_test(bmk_dir: str, args):
     timeout: int = args.timeout
-    only_gt: bool = args.gt
     start: int = args.start
     end: int = args.end
     suffix_spec: str = args.suffix
@@ -397,18 +395,12 @@ def eurus_test(bmk_dir: str, args):
 
         init_state = LazyStorage(bmk_dir, ctrt_name2addr, timestamp)
 
-        result_paths = gen_result_paths(result_path, only_gt, "eurus", len(synthesizer.candidates), suffix_spec)
+        result_paths = gen_result_paths(result_path, "eurus", len(synthesizer.candidates), suffix_spec)
         result_paths = result_paths[start:end]
 
         vulnerable_func_name = ""
         if args.fixed:
-            # Assume this function is vulnerable.
-            vulnerable_func_str = builder.extra_actions[0]
-            m = func_name_regex.match(vulnerable_func_str)
-            if m:
-                vulnerable_func_name = m.group(1)
-            else:
-                raise ValueError(f"Unmatched function str: {vulnerable_func_str}")
+            vulnerable_func_name = builder.helper_action_names[0] if builder.helper_action_names else None
         else:
             vulnerable_func_name = None
 
@@ -495,14 +487,12 @@ def eurus_test(bmk_dir: str, args):
                 idx += 1
             if feasible:
                 break
-        if not only_gt:
-            # timecost = time.perf_counter() - timer
-            timecost = sum(timecosts)
-            new_record = {
-                f"eurus_{suffix_spec}_solve_timecost": timecost,
-                f"eurus_{suffix_spec}_all_timecost": timecost + builder.synthesizer.timecost,
-            }
-            update_record(result_path, new_record)
+        timecost = sum(timecosts)
+        new_record = {
+            f"eurus_{suffix_spec}_solve_timecost": timecost,
+            f"eurus_{suffix_spec}_all_timecost": timecost + builder.synthesizer.timecost,
+        }
+        update_record(result_path, new_record)
         anvil_proc.kill()
     except Exception as err:
         anvil_proc.kill()

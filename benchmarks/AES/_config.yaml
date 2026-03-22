@@ -20,12 +20,6 @@ ctrt_name2deploy:
   - ["factory", ""]
   - ["router", ""]
 
-extra_actions:
-  - "function burn_aes_pair(uint256 amount) internal eurus {
-    aes.distributeFee();
-    pair.sync();
-    }"
-
 extra_deployments:
   - "aes.afterDeploy(address(router), address(pair));"
 extra_statements: []

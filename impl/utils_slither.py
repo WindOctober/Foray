@@ -1,35 +1,71 @@
 from os import path
 
-from slither.core.declarations.contract import Contract as SliContract
-from slither.core.declarations.function import Function as SliFunction
-from slither.core.declarations.modifier import Modifier as SliModifier
-from slither.core.declarations.solidity_variables import SolidityVariable
-from slither.core.declarations.solidity_variables import SolidityFunction
-from slither.core.declarations.event import Event as SliEvent
-from slither.core.declarations.function_contract import FunctionContract as SliFunctionContract
-from slither.core.expressions.expression import Expression as SliExpression
-from slither.core.expressions.identifier import Identifier as SliIdentifier
-from slither.core.expressions.member_access import MemberAccess as SliMemberAccess
-from slither.core.expressions.new_elementary_type import NewElementaryType as SliNewElementaryType
-from slither.core.expressions.new_array import NewArray as SliNewArray
-from slither.core.expressions.new_contract import NewContract as SliNewContract
-from slither.core.expressions.type_conversion import TypeConversion as SliTypeConversion
-from slither.core.expressions.call_expression import CallExpression as SliCallExpression
-from slither.core.expressions.tuple_expression import TupleExpression as SliTupleExpression
-from slither.core.expressions.index_access import IndexAccess as SliIndexAccess
-from slither.core.expressions.literal import Literal as SliLiteral
-from slither.core.solidity_types import ArrayType as SliArrayType
-from slither.core.solidity_types import ElementaryType as SliElementaryType
-from slither.core.solidity_types import MappingType as SliMappingType
-from slither.core.solidity_types import UserDefinedType as SliUserDefinedType
-from slither.core.variables.state_variable import StateVariable as SliStateVariable
-from slither.core.variables.variable import Variable as SliVariable
-from slither.core.variables.local_variable import LocalVariable as SliLocalVariable
-from slither.slither import Slither
-from slither.analyses.data_dependency.data_dependency import is_dependent
+class _SlitherMissing:
+    pass
+
+try:
+    from slither.core.declarations.contract import Contract as SliContract
+    from slither.core.declarations.function import Function as SliFunction
+    from slither.core.declarations.modifier import Modifier as SliModifier
+    from slither.core.declarations.solidity_variables import SolidityVariable
+    from slither.core.declarations.solidity_variables import SolidityFunction
+    from slither.core.declarations.event import Event as SliEvent
+    from slither.core.declarations.function_contract import FunctionContract as SliFunctionContract
+    from slither.core.expressions.expression import Expression as SliExpression
+    from slither.core.expressions.identifier import Identifier as SliIdentifier
+    from slither.core.expressions.member_access import MemberAccess as SliMemberAccess
+    from slither.core.expressions.new_elementary_type import NewElementaryType as SliNewElementaryType
+    from slither.core.expressions.new_array import NewArray as SliNewArray
+    from slither.core.expressions.new_contract import NewContract as SliNewContract
+    from slither.core.expressions.type_conversion import TypeConversion as SliTypeConversion
+    from slither.core.expressions.call_expression import CallExpression as SliCallExpression
+    from slither.core.expressions.tuple_expression import TupleExpression as SliTupleExpression
+    from slither.core.expressions.index_access import IndexAccess as SliIndexAccess
+    from slither.core.expressions.literal import Literal as SliLiteral
+    from slither.core.solidity_types import ArrayType as SliArrayType
+    from slither.core.solidity_types import ElementaryType as SliElementaryType
+    from slither.core.solidity_types import MappingType as SliMappingType
+    from slither.core.solidity_types import UserDefinedType as SliUserDefinedType
+    from slither.core.variables.state_variable import StateVariable as SliStateVariable
+    from slither.core.variables.variable import Variable as SliVariable
+    from slither.core.variables.local_variable import LocalVariable as SliLocalVariable
+    from slither.slither import Slither
+    from slither.analyses.data_dependency.data_dependency import is_dependent
+except ModuleNotFoundError:
+    SliContract = _SlitherMissing
+    SliFunction = _SlitherMissing
+    SliModifier = _SlitherMissing
+    SolidityVariable = _SlitherMissing
+    SolidityFunction = _SlitherMissing
+    SliEvent = _SlitherMissing
+    SliFunctionContract = _SlitherMissing
+    SliExpression = _SlitherMissing
+    SliIdentifier = _SlitherMissing
+    SliMemberAccess = _SlitherMissing
+    SliNewElementaryType = _SlitherMissing
+    SliNewArray = _SlitherMissing
+    SliNewContract = _SlitherMissing
+    SliTypeConversion = _SlitherMissing
+    SliCallExpression = _SlitherMissing
+    SliTupleExpression = _SlitherMissing
+    SliIndexAccess = _SlitherMissing
+    SliLiteral = _SlitherMissing
+    SliArrayType = _SlitherMissing
+    SliElementaryType = _SlitherMissing
+    SliMappingType = _SlitherMissing
+    SliUserDefinedType = _SlitherMissing
+    SliStateVariable = _SlitherMissing
+    SliVariable = _SlitherMissing
+    SliLocalVariable = _SlitherMissing
+    Slither = _SlitherMissing
+
+    def is_dependent(*_args, **_kwargs):
+        return False
 
 
 def gen_slither(bmk_dir: str) -> Slither:
+    if Slither is _SlitherMissing:
+        raise ModuleNotFoundError("slither is required for source-based Foray synthesis")
     root_dir = path.abspath(path.join(__file__, "../.."))
     bmk_dir = path.abspath(bmk_dir)
     lib_dir = "./lib"
